@@ -58,11 +58,12 @@ const FormSettingStore = ({ email, detailData }) => {
             setTimeout(() => {
                 setIsLoading(false)
                 router.push("/dashboard/stores")
+                router.refresh()
             }, 3000)
         }).catch (() => {
             setIsLoading(false)
             toast.error("Yah, pengeditan gagal dilakukan 😅")
-            console.error("Pengeditan gagal dilakukan", error);
+            console.error("Pengeditan gagal dilakukan");
         })
     }
 

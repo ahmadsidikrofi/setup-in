@@ -9,7 +9,7 @@ const HeaderSection = ({ titleHeader, descHeader, linkContent, linkHeader}) => {
                 <h3>{titleHeader}</h3>
             </div>
             <div className="flex items-center justify-between gap-10 my-3 text-[18px] font-normal text-color-grey">
-                <p>{descHeader} <span className="font-medium text-color-accent">FurniCraft</span></p>
+                <p>{descHeader} <span className="font-medium text-color-accent">Setup-in</span></p>
                 <Link href={`${linkHeader}`} className="hover:text-color-accent hover:translate-x-3 transition-all ease-linear items-center gap-3 hidden md:flex">
                     {linkContent}
                     <ArrowRight size={24} />

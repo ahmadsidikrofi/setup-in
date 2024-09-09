@@ -6,7 +6,7 @@ const {
   objectEnumValues,
   makeStrictEnum,
   Public,
-  getRuntime,
+  getRuntime
 } = require('./runtime/index-browser.js')
 
 
@@ -16,12 +16,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 5.17.0
- * Query Engine version: 393aa359c9ad4a4bb28630fb5613f9c281cde053
+ * Prisma Client JS version: 5.19.1
+ * Query Engine version: 69d742ee20b815d88e17e54db4a2a7a3b30324e3
  */
 Prisma.prismaVersion = {
-  client: "5.17.0",
-  engine: "393aa359c9ad4a4bb28630fb5613f9c281cde053"
+  client: "5.19.1",
+  engine: "69d742ee20b815d88e17e54db4a2a7a3b30324e3"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -119,9 +119,9 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.FurnituresScalarFieldEnum = {
+exports.Prisma.PeripheralsScalarFieldEnum = {
   id: 'id',
-  nama_furniture: 'nama_furniture',
+  nama_peripheral: 'nama_peripheral',
   slug: 'slug',
   deskripsi: 'deskripsi',
   harga: 'harga',
@@ -134,9 +134,9 @@ exports.Prisma.FurnituresScalarFieldEnum = {
 
 exports.Prisma.CartScalarFieldEnum = {
   id: 'id',
-  id_furniture: 'id_furniture',
+  id_peripherals: 'id_peripherals',
   user_email: 'user_email',
-  nama_furniture: 'nama_furniture',
+  nama_peripheral: 'nama_peripheral',
   slug: 'slug',
   harga: 'harga',
   categories: 'categories',
@@ -164,10 +164,10 @@ exports.Prisma.OrdersScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
-exports.Prisma.OrderFurnitureScalarFieldEnum = {
+exports.Prisma.OrderPeripheralScalarFieldEnum = {
   id: 'id',
   orderId: 'orderId',
-  furnitureId: 'furnitureId',
+  peripheralId: 'peripheralId',
   storeId: 'storeId',
   created_at: 'created_at',
   updated_at: 'updated_at'
@@ -178,11 +178,6 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.QueryMode = {
-  default: 'default',
-  insensitive: 'insensitive'
-};
-
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
@@ -190,11 +185,11 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  furnitures: 'furnitures',
-  cart: 'cart',
+  Peripherals: 'Peripherals',
+  Cart: 'Cart',
   Store: 'Store',
   Orders: 'Orders',
-  OrderFurniture: 'OrderFurniture'
+  OrderPeripheral: 'OrderPeripheral'
 };
 
 /**

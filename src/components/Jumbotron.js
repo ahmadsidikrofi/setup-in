@@ -20,8 +20,8 @@ const Jumbotron = ({ authUser }) => {
                             Fork on my GitHub
                         </Link>
                     </div>
-                    <h1 className="leading-[5vw] max-sm:leading-[7vw] tracking-tight">Unleash Your Home`s Potential alongside <span className="text-color-accent2">FurniCraft</span> by Rofi</h1>
-                    <p className="text-[2vw] max-sm:text-[3vw] max-sm:font-medium text-color-secondary opacity-65 font-light my-5">Discover and shop unique furniture pieces from independent brands and stores around the globe. Transform your space effortlessly!</p>
+                    <h1 className="leading-[5vw] max-sm:leading-[7vw] tracking-tight">Unleash Your Setup Potential alongside <span className="text-color-accent2">Setup-in</span> by Rofi</h1>
+                    <p className="text-[2vw] max-sm:text-[3vw] max-sm:font-medium text-color-secondary opacity-65 font-light my-5">Discover and shop unique setup pieces from independent brands and stores around the globe. Transform your space effortlessly!</p>
                     <div className="max-sm:pb-4 flex max-sm:justify-center max-sm:items-center gap-4 text-sm font-medium items-center text-center">
                         <Link href={'/furnitures'} className="max-sm:w-[100%] py-3 px-4 text-color-primary bg-color-accent2 rounded-full hover:shadow-lg sm:hidden md:block shop-now">Shop Now</Link> 
                         <p className="font-semibold sm:hidden md:block">or</p>

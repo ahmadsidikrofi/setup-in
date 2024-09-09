@@ -44,7 +44,7 @@ const SidebarMenu = ({ setIsSidebarOpen }) => {
                             >
                                 <div className="px-7 py-5 text-sm">
                                     <div className="flex justify-between items-center">
-                                        <Link href={'/'} className="text-lg font-bold">FurniCraft</Link>
+                                        <Link href={'/'} className="text-lg font-bold">Setup-in</Link>
                                         <button onClick={handleCloseSidebar}><XCircle size={28} /></button>
                                     </div>
                                     <div onClick={() => handleWrapSidebarMenu('myDashboard')} className="cursor-pointer flex justify-between items-center" >
@@ -56,11 +56,11 @@ const SidebarMenu = ({ setIsSidebarOpen }) => {
                                     </ul>
                                     <hr className="w-[85%] opacity-20 border-color-grey" />
                                     <div onClick={() => handleWrapSidebarMenu('lobby')} className="cursor-pointer flex justify-between items-center">
-                                        <button className="font-semibold py-4 hover:underline">Lobby</button>
+                                        <button className="font-semibold py-4 hover:underline">Hallway</button>
                                         {wrapSidebarMenu.lobby ? <CaretCircleUp size={24} /> : <CaretCircleDown size={24} />}
                                     </div>
                                     <ul className={`${wrapSidebarMenu.lobby ? null : 'hidden'} opacity-95 text-color-grey pb-5`}>
-                                        <li className="pb-2"><Link href={'/furnitures'}>Furnitures</Link></li>
+                                        <li className="pb-2"><Link href={'/on-your-desk'}>On Your Desk</Link></li>
                                         <li><Link href={'/categories'}>Categories</Link></li>
                                     </ul>
                                     <hr className="w-[85%] opacity-20 border-color-grey" />
@@ -69,10 +69,10 @@ const SidebarMenu = ({ setIsSidebarOpen }) => {
                                         {wrapSidebarMenu.categories ? <CaretCircleUp size={24} /> : <CaretCircleDown size={24} />}
                                     </div>
                                     <ul className={`${wrapSidebarMenu.categories ? null : 'hidden'} opacity-95 text-color-grey pb-5`}>
-                                        <li className="pb-2 cursor-pointer"><div onClick={() => handleKeywordCategories('Ruang tamu')}>Ruang tamu</div></li>
-                                        <li className="pb-2 cursor-pointer"><div onClick={() => handleKeywordCategories('Ruang dapur')}>Ruang dapur</div></li>
-                                        <li className="pb-2 cursor-pointer"><div onClick={() => handleKeywordCategories('Kamar mandi')}>Kamar mandi</div></li>
-                                        <li className="cursor-pointer"><div onClick={() => handleKeywordCategories('Kamar tidur')}>Kamar tidur</div></li>
+                                        <li className="pb-2 cursor-pointer"><div onClick={() => handleKeywordCategories('Keyboards')}>Festival Keyboards</div></li>
+                                        <li className="pb-2 cursor-pointer"><div onClick={() => handleKeywordCategories('Mouses')}>Festival Mouses</div></li>
+                                        <li className="pb-2 cursor-pointer"><div onClick={() => handleKeywordCategories('Deskmate')}>Deskmate</div></li>
+                                        <li className="cursor-pointer"><div onClick={() => handleKeywordCategories('Deskself')}>Deskself</div></li>
                                     </ul>
                                 </div>
                             </motion.div>

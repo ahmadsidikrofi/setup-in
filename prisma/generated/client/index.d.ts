@@ -14,15 +14,15 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model furnitures
+ * Model Peripherals
  * 
  */
-export type furnitures = $Result.DefaultSelection<Prisma.$furnituresPayload>
+export type Peripherals = $Result.DefaultSelection<Prisma.$PeripheralsPayload>
 /**
- * Model cart
+ * Model Cart
  * 
  */
-export type cart = $Result.DefaultSelection<Prisma.$cartPayload>
+export type Cart = $Result.DefaultSelection<Prisma.$CartPayload>
 /**
  * Model Store
  * 
@@ -34,10 +34,10 @@ export type Store = $Result.DefaultSelection<Prisma.$StorePayload>
  */
 export type Orders = $Result.DefaultSelection<Prisma.$OrdersPayload>
 /**
- * Model OrderFurniture
+ * Model OrderPeripheral
  * 
  */
-export type OrderFurniture = $Result.DefaultSelection<Prisma.$OrderFurniturePayload>
+export type OrderPeripheral = $Result.DefaultSelection<Prisma.$OrderPeripheralPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -46,8 +46,8 @@ export type OrderFurniture = $Result.DefaultSelection<Prisma.$OrderFurniturePayl
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Furnitures
- * const furnitures = await prisma.furnitures.findMany()
+ * // Fetch zero or more Peripherals
+ * const peripherals = await prisma.peripherals.findMany()
  * ```
  *
  * 
@@ -67,8 +67,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Furnitures
-   * const furnitures = await prisma.furnitures.findMany()
+   * // Fetch zero or more Peripherals
+   * const peripherals = await prisma.peripherals.findMany()
    * ```
    *
    * 
@@ -141,6 +141,7 @@ export class PrismaClient<
    */
   $queryRawUnsafe<T = unknown>(query: string, ...values: any[]): Prisma.PrismaPromise<T>;
 
+
   /**
    * Allows the running of a sequence of read/write operations that are guaranteed to either succeed or fail as a whole.
    * @example
@@ -162,24 +163,24 @@ export class PrismaClient<
   $extends: $Extensions.ExtendsHook<"extends", Prisma.TypeMapCb, ExtArgs>
 
       /**
-   * `prisma.furnitures`: Exposes CRUD operations for the **furnitures** model.
+   * `prisma.peripherals`: Exposes CRUD operations for the **Peripherals** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Furnitures
-    * const furnitures = await prisma.furnitures.findMany()
+    * // Fetch zero or more Peripherals
+    * const peripherals = await prisma.peripherals.findMany()
     * ```
     */
-  get furnitures(): Prisma.furnituresDelegate<ExtArgs>;
+  get peripherals(): Prisma.PeripheralsDelegate<ExtArgs>;
 
   /**
-   * `prisma.cart`: Exposes CRUD operations for the **cart** model.
+   * `prisma.cart`: Exposes CRUD operations for the **Cart** model.
     * Example usage:
     * ```ts
     * // Fetch zero or more Carts
     * const carts = await prisma.cart.findMany()
     * ```
     */
-  get cart(): Prisma.cartDelegate<ExtArgs>;
+  get cart(): Prisma.CartDelegate<ExtArgs>;
 
   /**
    * `prisma.store`: Exposes CRUD operations for the **Store** model.
@@ -202,14 +203,14 @@ export class PrismaClient<
   get orders(): Prisma.OrdersDelegate<ExtArgs>;
 
   /**
-   * `prisma.orderFurniture`: Exposes CRUD operations for the **OrderFurniture** model.
+   * `prisma.orderPeripheral`: Exposes CRUD operations for the **OrderPeripheral** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more OrderFurnitures
-    * const orderFurnitures = await prisma.orderFurniture.findMany()
+    * // Fetch zero or more OrderPeripherals
+    * const orderPeripherals = await prisma.orderPeripheral.findMany()
     * ```
     */
-  get orderFurniture(): Prisma.OrderFurnitureDelegate<ExtArgs>;
+  get orderPeripheral(): Prisma.OrderPeripheralDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -267,8 +268,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 5.17.0
-   * Query Engine version: 393aa359c9ad4a4bb28630fb5613f9c281cde053
+   * Prisma Client JS version: 5.19.1
+   * Query Engine version: 69d742ee20b815d88e17e54db4a2a7a3b30324e3
    */
   export type PrismaVersion = {
     client: string
@@ -280,51 +281,13 @@ export namespace Prisma {
    * Utility Types
    */
 
-  /**
-   * From https://github.com/sindresorhus/type-fest/
-   * Matches a JSON object.
-   * This type can be useful to enforce some input to be JSON-compatible or as a super-type to be extended from. 
-   */
-  export type JsonObject = {[Key in string]?: JsonValue}
 
-  /**
-   * From https://github.com/sindresorhus/type-fest/
-   * Matches a JSON array.
-   */
-  export interface JsonArray extends Array<JsonValue> {}
-
-  /**
-   * From https://github.com/sindresorhus/type-fest/
-   * Matches any valid JSON value.
-   */
-  export type JsonValue = string | number | boolean | JsonObject | JsonArray | null
-
-  /**
-   * Matches a JSON object.
-   * Unlike `JsonObject`, this type allows undefined and read-only properties.
-   */
-  export type InputJsonObject = {readonly [Key in string]?: InputJsonValue | null}
-
-  /**
-   * Matches a JSON array.
-   * Unlike `JsonArray`, readonly arrays are assignable to this type.
-   */
-  export interface InputJsonArray extends ReadonlyArray<InputJsonValue | null> {}
-
-  /**
-   * Matches any valid value that can be used as an input for operations like
-   * create and update as the value of a JSON field. Unlike `JsonValue`, this
-   * type allows read-only arrays and read-only object properties and disallows
-   * `null` at the top level.
-   *
-   * `null` cannot be used as the value of a JSON field because its meaning
-   * would be ambiguous. Use `Prisma.JsonNull` to store the JSON null value or
-   * `Prisma.DbNull` to clear the JSON value and set the field to the database
-   * NULL value instead.
-   *
-   * @see https://www.prisma.io/docs/concepts/components/prisma-client/working-with-fields/working-with-json-fields#filtering-by-null-values
-   */
-  export type InputJsonValue = string | number | boolean | InputJsonObject | InputJsonArray | { toJSON(): unknown }
+  export import JsonObject = runtime.JsonObject
+  export import JsonArray = runtime.JsonArray
+  export import JsonValue = runtime.JsonValue
+  export import InputJsonObject = runtime.InputJsonObject
+  export import InputJsonArray = runtime.InputJsonArray
+  export import InputJsonValue = runtime.InputJsonValue
 
   /**
    * Types of the values used to represent different kinds of `null` values when working with JSON fields.
@@ -687,11 +650,11 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    furnitures: 'furnitures',
-    cart: 'cart',
+    Peripherals: 'Peripherals',
+    Cart: 'Cart',
     Store: 'Store',
     Orders: 'Orders',
-    OrderFurniture: 'OrderFurniture'
+    OrderPeripheral: 'OrderPeripheral'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -707,146 +670,138 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "furnitures" | "cart" | "store" | "orders" | "orderFurniture"
+      modelProps: "peripherals" | "cart" | "store" | "orders" | "orderPeripheral"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
-      furnitures: {
-        payload: Prisma.$furnituresPayload<ExtArgs>
-        fields: Prisma.furnituresFieldRefs
+      Peripherals: {
+        payload: Prisma.$PeripheralsPayload<ExtArgs>
+        fields: Prisma.PeripheralsFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.furnituresFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$furnituresPayload> | null
+            args: Prisma.PeripheralsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeripheralsPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.furnituresFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$furnituresPayload>
+            args: Prisma.PeripheralsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeripheralsPayload>
           }
           findFirst: {
-            args: Prisma.furnituresFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$furnituresPayload> | null
+            args: Prisma.PeripheralsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeripheralsPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.furnituresFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$furnituresPayload>
+            args: Prisma.PeripheralsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeripheralsPayload>
           }
           findMany: {
-            args: Prisma.furnituresFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$furnituresPayload>[]
+            args: Prisma.PeripheralsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeripheralsPayload>[]
           }
           create: {
-            args: Prisma.furnituresCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$furnituresPayload>
+            args: Prisma.PeripheralsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeripheralsPayload>
           }
           createMany: {
-            args: Prisma.furnituresCreateManyArgs<ExtArgs>
+            args: Prisma.PeripheralsCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
-          createManyAndReturn: {
-            args: Prisma.furnituresCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$furnituresPayload>[]
-          }
           delete: {
-            args: Prisma.furnituresDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$furnituresPayload>
+            args: Prisma.PeripheralsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeripheralsPayload>
           }
           update: {
-            args: Prisma.furnituresUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$furnituresPayload>
+            args: Prisma.PeripheralsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeripheralsPayload>
           }
           deleteMany: {
-            args: Prisma.furnituresDeleteManyArgs<ExtArgs>
+            args: Prisma.PeripheralsDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.furnituresUpdateManyArgs<ExtArgs>
+            args: Prisma.PeripheralsUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.furnituresUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$furnituresPayload>
+            args: Prisma.PeripheralsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PeripheralsPayload>
           }
           aggregate: {
-            args: Prisma.FurnituresAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateFurnitures>
+            args: Prisma.PeripheralsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePeripherals>
           }
           groupBy: {
-            args: Prisma.furnituresGroupByArgs<ExtArgs>
-            result: $Utils.Optional<FurnituresGroupByOutputType>[]
+            args: Prisma.PeripheralsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PeripheralsGroupByOutputType>[]
           }
           count: {
-            args: Prisma.furnituresCountArgs<ExtArgs>
-            result: $Utils.Optional<FurnituresCountAggregateOutputType> | number
+            args: Prisma.PeripheralsCountArgs<ExtArgs>
+            result: $Utils.Optional<PeripheralsCountAggregateOutputType> | number
           }
         }
       }
-      cart: {
-        payload: Prisma.$cartPayload<ExtArgs>
-        fields: Prisma.cartFieldRefs
+      Cart: {
+        payload: Prisma.$CartPayload<ExtArgs>
+        fields: Prisma.CartFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.cartFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cartPayload> | null
+            args: Prisma.CartFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.cartFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cartPayload>
+            args: Prisma.CartFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartPayload>
           }
           findFirst: {
-            args: Prisma.cartFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cartPayload> | null
+            args: Prisma.CartFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.cartFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cartPayload>
+            args: Prisma.CartFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartPayload>
           }
           findMany: {
-            args: Prisma.cartFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cartPayload>[]
+            args: Prisma.CartFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartPayload>[]
           }
           create: {
-            args: Prisma.cartCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cartPayload>
+            args: Prisma.CartCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartPayload>
           }
           createMany: {
-            args: Prisma.cartCreateManyArgs<ExtArgs>
+            args: Prisma.CartCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
-          createManyAndReturn: {
-            args: Prisma.cartCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cartPayload>[]
-          }
           delete: {
-            args: Prisma.cartDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cartPayload>
+            args: Prisma.CartDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartPayload>
           }
           update: {
-            args: Prisma.cartUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cartPayload>
+            args: Prisma.CartUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartPayload>
           }
           deleteMany: {
-            args: Prisma.cartDeleteManyArgs<ExtArgs>
+            args: Prisma.CartDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.cartUpdateManyArgs<ExtArgs>
+            args: Prisma.CartUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.cartUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$cartPayload>
+            args: Prisma.CartUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CartPayload>
           }
           aggregate: {
             args: Prisma.CartAggregateArgs<ExtArgs>
             result: $Utils.Optional<AggregateCart>
           }
           groupBy: {
-            args: Prisma.cartGroupByArgs<ExtArgs>
+            args: Prisma.CartGroupByArgs<ExtArgs>
             result: $Utils.Optional<CartGroupByOutputType>[]
           }
           count: {
-            args: Prisma.cartCountArgs<ExtArgs>
+            args: Prisma.CartCountArgs<ExtArgs>
             result: $Utils.Optional<CartCountAggregateOutputType> | number
           }
         }
@@ -882,10 +837,6 @@ export namespace Prisma {
           createMany: {
             args: Prisma.StoreCreateManyArgs<ExtArgs>
             result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.StoreCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$StorePayload>[]
           }
           delete: {
             args: Prisma.StoreDeleteArgs<ExtArgs>
@@ -953,10 +904,6 @@ export namespace Prisma {
             args: Prisma.OrdersCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
-          createManyAndReturn: {
-            args: Prisma.OrdersCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OrdersPayload>[]
-          }
           delete: {
             args: Prisma.OrdersDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$OrdersPayload>
@@ -991,73 +938,69 @@ export namespace Prisma {
           }
         }
       }
-      OrderFurniture: {
-        payload: Prisma.$OrderFurniturePayload<ExtArgs>
-        fields: Prisma.OrderFurnitureFieldRefs
+      OrderPeripheral: {
+        payload: Prisma.$OrderPeripheralPayload<ExtArgs>
+        fields: Prisma.OrderPeripheralFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.OrderFurnitureFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OrderFurniturePayload> | null
+            args: Prisma.OrderPeripheralFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderPeripheralPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.OrderFurnitureFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OrderFurniturePayload>
+            args: Prisma.OrderPeripheralFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderPeripheralPayload>
           }
           findFirst: {
-            args: Prisma.OrderFurnitureFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OrderFurniturePayload> | null
+            args: Prisma.OrderPeripheralFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderPeripheralPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.OrderFurnitureFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OrderFurniturePayload>
+            args: Prisma.OrderPeripheralFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderPeripheralPayload>
           }
           findMany: {
-            args: Prisma.OrderFurnitureFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OrderFurniturePayload>[]
+            args: Prisma.OrderPeripheralFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderPeripheralPayload>[]
           }
           create: {
-            args: Prisma.OrderFurnitureCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OrderFurniturePayload>
+            args: Prisma.OrderPeripheralCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderPeripheralPayload>
           }
           createMany: {
-            args: Prisma.OrderFurnitureCreateManyArgs<ExtArgs>
+            args: Prisma.OrderPeripheralCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
-          createManyAndReturn: {
-            args: Prisma.OrderFurnitureCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OrderFurniturePayload>[]
-          }
           delete: {
-            args: Prisma.OrderFurnitureDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OrderFurniturePayload>
+            args: Prisma.OrderPeripheralDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderPeripheralPayload>
           }
           update: {
-            args: Prisma.OrderFurnitureUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OrderFurniturePayload>
+            args: Prisma.OrderPeripheralUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderPeripheralPayload>
           }
           deleteMany: {
-            args: Prisma.OrderFurnitureDeleteManyArgs<ExtArgs>
+            args: Prisma.OrderPeripheralDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.OrderFurnitureUpdateManyArgs<ExtArgs>
+            args: Prisma.OrderPeripheralUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           upsert: {
-            args: Prisma.OrderFurnitureUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$OrderFurniturePayload>
+            args: Prisma.OrderPeripheralUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderPeripheralPayload>
           }
           aggregate: {
-            args: Prisma.OrderFurnitureAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateOrderFurniture>
+            args: Prisma.OrderPeripheralAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOrderPeripheral>
           }
           groupBy: {
-            args: Prisma.OrderFurnitureGroupByArgs<ExtArgs>
-            result: $Utils.Optional<OrderFurnitureGroupByOutputType>[]
+            args: Prisma.OrderPeripheralGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OrderPeripheralGroupByOutputType>[]
           }
           count: {
-            args: Prisma.OrderFurnitureCountArgs<ExtArgs>
-            result: $Utils.Optional<OrderFurnitureCountAggregateOutputType> | number
+            args: Prisma.OrderPeripheralCountArgs<ExtArgs>
+            result: $Utils.Optional<OrderPeripheralCountAggregateOutputType> | number
           }
         }
       }
@@ -1066,20 +1009,20 @@ export namespace Prisma {
     other: {
       payload: any
       operations: {
-        $executeRawUnsafe: {
-          args: [query: string, ...values: any[]],
-          result: any
-        }
         $executeRaw: {
           args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
           result: any
         }
-        $queryRawUnsafe: {
+        $executeRawUnsafe: {
           args: [query: string, ...values: any[]],
           result: any
         }
         $queryRaw: {
           args: [query: TemplateStringsArray | Prisma.Sql, ...values: any[]],
+          result: any
+        }
+        $queryRawUnsafe: {
+          args: [query: string, ...values: any[]],
           result: any
         }
       }
@@ -1218,33 +1161,33 @@ export namespace Prisma {
 
 
   /**
-   * Count Type FurnituresCountOutputType
+   * Count Type PeripheralsCountOutputType
    */
 
-  export type FurnituresCountOutputType = {
-    OrderFurniture: number
+  export type PeripheralsCountOutputType = {
+    OrderPeripheral: number
   }
 
-  export type FurnituresCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    OrderFurniture?: boolean | FurnituresCountOutputTypeCountOrderFurnitureArgs
+  export type PeripheralsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    OrderPeripheral?: boolean | PeripheralsCountOutputTypeCountOrderPeripheralArgs
   }
 
   // Custom InputTypes
   /**
-   * FurnituresCountOutputType without action
+   * PeripheralsCountOutputType without action
    */
-  export type FurnituresCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PeripheralsCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the FurnituresCountOutputType
+     * Select specific fields to fetch from the PeripheralsCountOutputType
      */
-    select?: FurnituresCountOutputTypeSelect<ExtArgs> | null
+    select?: PeripheralsCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * FurnituresCountOutputType without action
+   * PeripheralsCountOutputType without action
    */
-  export type FurnituresCountOutputTypeCountOrderFurnitureArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OrderFurnitureWhereInput
+  export type PeripheralsCountOutputTypeCountOrderPeripheralArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrderPeripheralWhereInput
   }
 
 
@@ -1253,13 +1196,13 @@ export namespace Prisma {
    */
 
   export type StoreCountOutputType = {
-    furniture: number
-    OrderFurniture: number
+    Peripherals: number
+    OrderPeripheral: number
   }
 
   export type StoreCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    furniture?: boolean | StoreCountOutputTypeCountFurnitureArgs
-    OrderFurniture?: boolean | StoreCountOutputTypeCountOrderFurnitureArgs
+    Peripherals?: boolean | StoreCountOutputTypeCountPeripheralsArgs
+    OrderPeripheral?: boolean | StoreCountOutputTypeCountOrderPeripheralArgs
   }
 
   // Custom InputTypes
@@ -1276,15 +1219,15 @@ export namespace Prisma {
   /**
    * StoreCountOutputType without action
    */
-  export type StoreCountOutputTypeCountFurnitureArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: furnituresWhereInput
+  export type StoreCountOutputTypeCountPeripheralsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PeripheralsWhereInput
   }
 
   /**
    * StoreCountOutputType without action
    */
-  export type StoreCountOutputTypeCountOrderFurnitureArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OrderFurnitureWhereInput
+  export type StoreCountOutputTypeCountOrderPeripheralArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrderPeripheralWhereInput
   }
 
 
@@ -1293,11 +1236,11 @@ export namespace Prisma {
    */
 
   export type OrdersCountOutputType = {
-    OrderFurniture: number
+    OrderPeripheral: number
   }
 
   export type OrdersCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    OrderFurniture?: boolean | OrdersCountOutputTypeCountOrderFurnitureArgs
+    OrderPeripheral?: boolean | OrdersCountOutputTypeCountOrderPeripheralArgs
   }
 
   // Custom InputTypes
@@ -1314,8 +1257,8 @@ export namespace Prisma {
   /**
    * OrdersCountOutputType without action
    */
-  export type OrdersCountOutputTypeCountOrderFurnitureArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OrderFurnitureWhereInput
+  export type OrdersCountOutputTypeCountOrderPeripheralArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrderPeripheralWhereInput
   }
 
 
@@ -1324,32 +1267,32 @@ export namespace Prisma {
    */
 
   /**
-   * Model furnitures
+   * Model Peripherals
    */
 
-  export type AggregateFurnitures = {
-    _count: FurnituresCountAggregateOutputType | null
-    _avg: FurnituresAvgAggregateOutputType | null
-    _sum: FurnituresSumAggregateOutputType | null
-    _min: FurnituresMinAggregateOutputType | null
-    _max: FurnituresMaxAggregateOutputType | null
+  export type AggregatePeripherals = {
+    _count: PeripheralsCountAggregateOutputType | null
+    _avg: PeripheralsAvgAggregateOutputType | null
+    _sum: PeripheralsSumAggregateOutputType | null
+    _min: PeripheralsMinAggregateOutputType | null
+    _max: PeripheralsMaxAggregateOutputType | null
   }
 
-  export type FurnituresAvgAggregateOutputType = {
+  export type PeripheralsAvgAggregateOutputType = {
     id: number | null
     harga: number | null
     store_id: number | null
   }
 
-  export type FurnituresSumAggregateOutputType = {
+  export type PeripheralsSumAggregateOutputType = {
     id: number | null
     harga: number | null
     store_id: number | null
   }
 
-  export type FurnituresMinAggregateOutputType = {
+  export type PeripheralsMinAggregateOutputType = {
     id: number | null
-    nama_furniture: string | null
+    nama_peripheral: string | null
     slug: string | null
     deskripsi: string | null
     harga: number | null
@@ -1360,9 +1303,9 @@ export namespace Prisma {
     updated_at: Date | null
   }
 
-  export type FurnituresMaxAggregateOutputType = {
+  export type PeripheralsMaxAggregateOutputType = {
     id: number | null
-    nama_furniture: string | null
+    nama_peripheral: string | null
     slug: string | null
     deskripsi: string | null
     harga: number | null
@@ -1373,9 +1316,9 @@ export namespace Prisma {
     updated_at: Date | null
   }
 
-  export type FurnituresCountAggregateOutputType = {
+  export type PeripheralsCountAggregateOutputType = {
     id: number
-    nama_furniture: number
+    nama_peripheral: number
     slug: number
     deskripsi: number
     harga: number
@@ -1388,21 +1331,21 @@ export namespace Prisma {
   }
 
 
-  export type FurnituresAvgAggregateInputType = {
+  export type PeripheralsAvgAggregateInputType = {
     id?: true
     harga?: true
     store_id?: true
   }
 
-  export type FurnituresSumAggregateInputType = {
+  export type PeripheralsSumAggregateInputType = {
     id?: true
     harga?: true
     store_id?: true
   }
 
-  export type FurnituresMinAggregateInputType = {
+  export type PeripheralsMinAggregateInputType = {
     id?: true
-    nama_furniture?: true
+    nama_peripheral?: true
     slug?: true
     deskripsi?: true
     harga?: true
@@ -1413,9 +1356,9 @@ export namespace Prisma {
     updated_at?: true
   }
 
-  export type FurnituresMaxAggregateInputType = {
+  export type PeripheralsMaxAggregateInputType = {
     id?: true
-    nama_furniture?: true
+    nama_peripheral?: true
     slug?: true
     deskripsi?: true
     harga?: true
@@ -1426,9 +1369,9 @@ export namespace Prisma {
     updated_at?: true
   }
 
-  export type FurnituresCountAggregateInputType = {
+  export type PeripheralsCountAggregateInputType = {
     id?: true
-    nama_furniture?: true
+    nama_peripheral?: true
     slug?: true
     deskripsi?: true
     harga?: true
@@ -1440,95 +1383,95 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type FurnituresAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PeripheralsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which furnitures to aggregate.
+     * Filter which Peripherals to aggregate.
      */
-    where?: furnituresWhereInput
+    where?: PeripheralsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of furnitures to fetch.
+     * Determine the order of Peripherals to fetch.
      */
-    orderBy?: furnituresOrderByWithRelationInput | furnituresOrderByWithRelationInput[]
+    orderBy?: PeripheralsOrderByWithRelationInput | PeripheralsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: furnituresWhereUniqueInput
+    cursor?: PeripheralsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` furnitures from the position of the cursor.
+     * Take `±n` Peripherals from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` furnitures.
+     * Skip the first `n` Peripherals.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned furnitures
+     * Count returned Peripherals
     **/
-    _count?: true | FurnituresCountAggregateInputType
+    _count?: true | PeripheralsCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: FurnituresAvgAggregateInputType
+    _avg?: PeripheralsAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: FurnituresSumAggregateInputType
+    _sum?: PeripheralsSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: FurnituresMinAggregateInputType
+    _min?: PeripheralsMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: FurnituresMaxAggregateInputType
+    _max?: PeripheralsMaxAggregateInputType
   }
 
-  export type GetFurnituresAggregateType<T extends FurnituresAggregateArgs> = {
-        [P in keyof T & keyof AggregateFurnitures]: P extends '_count' | 'count'
+  export type GetPeripheralsAggregateType<T extends PeripheralsAggregateArgs> = {
+        [P in keyof T & keyof AggregatePeripherals]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateFurnitures[P]>
-      : GetScalarType<T[P], AggregateFurnitures[P]>
+        : GetScalarType<T[P], AggregatePeripherals[P]>
+      : GetScalarType<T[P], AggregatePeripherals[P]>
   }
 
 
 
 
-  export type furnituresGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: furnituresWhereInput
-    orderBy?: furnituresOrderByWithAggregationInput | furnituresOrderByWithAggregationInput[]
-    by: FurnituresScalarFieldEnum[] | FurnituresScalarFieldEnum
-    having?: furnituresScalarWhereWithAggregatesInput
+  export type PeripheralsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PeripheralsWhereInput
+    orderBy?: PeripheralsOrderByWithAggregationInput | PeripheralsOrderByWithAggregationInput[]
+    by: PeripheralsScalarFieldEnum[] | PeripheralsScalarFieldEnum
+    having?: PeripheralsScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: FurnituresCountAggregateInputType | true
-    _avg?: FurnituresAvgAggregateInputType
-    _sum?: FurnituresSumAggregateInputType
-    _min?: FurnituresMinAggregateInputType
-    _max?: FurnituresMaxAggregateInputType
+    _count?: PeripheralsCountAggregateInputType | true
+    _avg?: PeripheralsAvgAggregateInputType
+    _sum?: PeripheralsSumAggregateInputType
+    _min?: PeripheralsMinAggregateInputType
+    _max?: PeripheralsMaxAggregateInputType
   }
 
-  export type FurnituresGroupByOutputType = {
+  export type PeripheralsGroupByOutputType = {
     id: number
-    nama_furniture: string
+    nama_peripheral: string
     slug: string
     deskripsi: string
     harga: number
@@ -1537,30 +1480,30 @@ export namespace Prisma {
     store_id: number
     created_at: Date
     updated_at: Date
-    _count: FurnituresCountAggregateOutputType | null
-    _avg: FurnituresAvgAggregateOutputType | null
-    _sum: FurnituresSumAggregateOutputType | null
-    _min: FurnituresMinAggregateOutputType | null
-    _max: FurnituresMaxAggregateOutputType | null
+    _count: PeripheralsCountAggregateOutputType | null
+    _avg: PeripheralsAvgAggregateOutputType | null
+    _sum: PeripheralsSumAggregateOutputType | null
+    _min: PeripheralsMinAggregateOutputType | null
+    _max: PeripheralsMaxAggregateOutputType | null
   }
 
-  type GetFurnituresGroupByPayload<T extends furnituresGroupByArgs> = Prisma.PrismaPromise<
+  type GetPeripheralsGroupByPayload<T extends PeripheralsGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<FurnituresGroupByOutputType, T['by']> &
+      PickEnumerable<PeripheralsGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof FurnituresGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof PeripheralsGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], FurnituresGroupByOutputType[P]>
-            : GetScalarType<T[P], FurnituresGroupByOutputType[P]>
+              : GetScalarType<T[P], PeripheralsGroupByOutputType[P]>
+            : GetScalarType<T[P], PeripheralsGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type furnituresSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type PeripheralsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    nama_furniture?: boolean
+    nama_peripheral?: boolean
     slug?: boolean
     deskripsi?: boolean
     harga?: boolean
@@ -1569,28 +1512,15 @@ export namespace Prisma {
     store_id?: boolean
     created_at?: boolean
     updated_at?: boolean
-    Store?: boolean | furnitures$StoreArgs<ExtArgs>
-    OrderFurniture?: boolean | furnitures$OrderFurnitureArgs<ExtArgs>
-    _count?: boolean | FurnituresCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["furnitures"]>
+    Store?: boolean | Peripherals$StoreArgs<ExtArgs>
+    OrderPeripheral?: boolean | Peripherals$OrderPeripheralArgs<ExtArgs>
+    _count?: boolean | PeripheralsCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["peripherals"]>
 
-  export type furnituresSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    nama_furniture?: boolean
-    slug?: boolean
-    deskripsi?: boolean
-    harga?: boolean
-    categories?: boolean
-    image?: boolean
-    store_id?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    Store?: boolean | furnitures$StoreArgs<ExtArgs>
-  }, ExtArgs["result"]["furnitures"]>
 
-  export type furnituresSelectScalar = {
+  export type PeripheralsSelectScalar = {
     id?: boolean
-    nama_furniture?: boolean
+    nama_peripheral?: boolean
     slug?: boolean
     deskripsi?: boolean
     harga?: boolean
@@ -1601,24 +1531,21 @@ export namespace Prisma {
     updated_at?: boolean
   }
 
-  export type furnituresInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Store?: boolean | furnitures$StoreArgs<ExtArgs>
-    OrderFurniture?: boolean | furnitures$OrderFurnitureArgs<ExtArgs>
-    _count?: boolean | FurnituresCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type furnituresIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Store?: boolean | furnitures$StoreArgs<ExtArgs>
+  export type PeripheralsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Store?: boolean | Peripherals$StoreArgs<ExtArgs>
+    OrderPeripheral?: boolean | Peripherals$OrderPeripheralArgs<ExtArgs>
+    _count?: boolean | PeripheralsCountOutputTypeDefaultArgs<ExtArgs>
   }
 
-  export type $furnituresPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "furnitures"
+  export type $PeripheralsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Peripherals"
     objects: {
       Store: Prisma.$StorePayload<ExtArgs> | null
-      OrderFurniture: Prisma.$OrderFurniturePayload<ExtArgs>[]
+      OrderPeripheral: Prisma.$OrderPeripheralPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      nama_furniture: string
+      nama_peripheral: string
       slug: string
       deskripsi: string
       harga: number
@@ -1627,167 +1554,143 @@ export namespace Prisma {
       store_id: number
       created_at: Date
       updated_at: Date
-    }, ExtArgs["result"]["furnitures"]>
+    }, ExtArgs["result"]["peripherals"]>
     composites: {}
   }
 
-  type furnituresGetPayload<S extends boolean | null | undefined | furnituresDefaultArgs> = $Result.GetResult<Prisma.$furnituresPayload, S>
+  type PeripheralsGetPayload<S extends boolean | null | undefined | PeripheralsDefaultArgs> = $Result.GetResult<Prisma.$PeripheralsPayload, S>
 
-  type furnituresCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<furnituresFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: FurnituresCountAggregateInputType | true
+  type PeripheralsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<PeripheralsFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: PeripheralsCountAggregateInputType | true
     }
 
-  export interface furnituresDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['furnitures'], meta: { name: 'furnitures' } }
+  export interface PeripheralsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Peripherals'], meta: { name: 'Peripherals' } }
     /**
-     * Find zero or one Furnitures that matches the filter.
-     * @param {furnituresFindUniqueArgs} args - Arguments to find a Furnitures
+     * Find zero or one Peripherals that matches the filter.
+     * @param {PeripheralsFindUniqueArgs} args - Arguments to find a Peripherals
      * @example
-     * // Get one Furnitures
-     * const furnitures = await prisma.furnitures.findUnique({
+     * // Get one Peripherals
+     * const peripherals = await prisma.peripherals.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends furnituresFindUniqueArgs>(args: SelectSubset<T, furnituresFindUniqueArgs<ExtArgs>>): Prisma__furnituresClient<$Result.GetResult<Prisma.$furnituresPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+    findUnique<T extends PeripheralsFindUniqueArgs>(args: SelectSubset<T, PeripheralsFindUniqueArgs<ExtArgs>>): Prisma__PeripheralsClient<$Result.GetResult<Prisma.$PeripheralsPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
 
     /**
-     * Find one Furnitures that matches the filter or throw an error with `error.code='P2025'` 
+     * Find one Peripherals that matches the filter or throw an error with `error.code='P2025'` 
      * if no matches were found.
-     * @param {furnituresFindUniqueOrThrowArgs} args - Arguments to find a Furnitures
+     * @param {PeripheralsFindUniqueOrThrowArgs} args - Arguments to find a Peripherals
      * @example
-     * // Get one Furnitures
-     * const furnitures = await prisma.furnitures.findUniqueOrThrow({
+     * // Get one Peripherals
+     * const peripherals = await prisma.peripherals.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends furnituresFindUniqueOrThrowArgs>(args: SelectSubset<T, furnituresFindUniqueOrThrowArgs<ExtArgs>>): Prisma__furnituresClient<$Result.GetResult<Prisma.$furnituresPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+    findUniqueOrThrow<T extends PeripheralsFindUniqueOrThrowArgs>(args: SelectSubset<T, PeripheralsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PeripheralsClient<$Result.GetResult<Prisma.$PeripheralsPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
 
     /**
-     * Find the first Furnitures that matches the filter.
+     * Find the first Peripherals that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {furnituresFindFirstArgs} args - Arguments to find a Furnitures
+     * @param {PeripheralsFindFirstArgs} args - Arguments to find a Peripherals
      * @example
-     * // Get one Furnitures
-     * const furnitures = await prisma.furnitures.findFirst({
+     * // Get one Peripherals
+     * const peripherals = await prisma.peripherals.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends furnituresFindFirstArgs>(args?: SelectSubset<T, furnituresFindFirstArgs<ExtArgs>>): Prisma__furnituresClient<$Result.GetResult<Prisma.$furnituresPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+    findFirst<T extends PeripheralsFindFirstArgs>(args?: SelectSubset<T, PeripheralsFindFirstArgs<ExtArgs>>): Prisma__PeripheralsClient<$Result.GetResult<Prisma.$PeripheralsPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
 
     /**
-     * Find the first Furnitures that matches the filter or
+     * Find the first Peripherals that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {furnituresFindFirstOrThrowArgs} args - Arguments to find a Furnitures
+     * @param {PeripheralsFindFirstOrThrowArgs} args - Arguments to find a Peripherals
      * @example
-     * // Get one Furnitures
-     * const furnitures = await prisma.furnitures.findFirstOrThrow({
+     * // Get one Peripherals
+     * const peripherals = await prisma.peripherals.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends furnituresFindFirstOrThrowArgs>(args?: SelectSubset<T, furnituresFindFirstOrThrowArgs<ExtArgs>>): Prisma__furnituresClient<$Result.GetResult<Prisma.$furnituresPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+    findFirstOrThrow<T extends PeripheralsFindFirstOrThrowArgs>(args?: SelectSubset<T, PeripheralsFindFirstOrThrowArgs<ExtArgs>>): Prisma__PeripheralsClient<$Result.GetResult<Prisma.$PeripheralsPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
 
     /**
-     * Find zero or more Furnitures that matches the filter.
+     * Find zero or more Peripherals that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {furnituresFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {PeripheralsFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Furnitures
-     * const furnitures = await prisma.furnitures.findMany()
+     * // Get all Peripherals
+     * const peripherals = await prisma.peripherals.findMany()
      * 
-     * // Get first 10 Furnitures
-     * const furnitures = await prisma.furnitures.findMany({ take: 10 })
+     * // Get first 10 Peripherals
+     * const peripherals = await prisma.peripherals.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const furnituresWithIdOnly = await prisma.furnitures.findMany({ select: { id: true } })
+     * const peripheralsWithIdOnly = await prisma.peripherals.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends furnituresFindManyArgs>(args?: SelectSubset<T, furnituresFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$furnituresPayload<ExtArgs>, T, "findMany">>
+    findMany<T extends PeripheralsFindManyArgs>(args?: SelectSubset<T, PeripheralsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PeripheralsPayload<ExtArgs>, T, "findMany">>
 
     /**
-     * Create a Furnitures.
-     * @param {furnituresCreateArgs} args - Arguments to create a Furnitures.
+     * Create a Peripherals.
+     * @param {PeripheralsCreateArgs} args - Arguments to create a Peripherals.
      * @example
-     * // Create one Furnitures
-     * const Furnitures = await prisma.furnitures.create({
+     * // Create one Peripherals
+     * const Peripherals = await prisma.peripherals.create({
      *   data: {
-     *     // ... data to create a Furnitures
+     *     // ... data to create a Peripherals
      *   }
      * })
      * 
      */
-    create<T extends furnituresCreateArgs>(args: SelectSubset<T, furnituresCreateArgs<ExtArgs>>): Prisma__furnituresClient<$Result.GetResult<Prisma.$furnituresPayload<ExtArgs>, T, "create">, never, ExtArgs>
+    create<T extends PeripheralsCreateArgs>(args: SelectSubset<T, PeripheralsCreateArgs<ExtArgs>>): Prisma__PeripheralsClient<$Result.GetResult<Prisma.$PeripheralsPayload<ExtArgs>, T, "create">, never, ExtArgs>
 
     /**
-     * Create many Furnitures.
-     * @param {furnituresCreateManyArgs} args - Arguments to create many Furnitures.
+     * Create many Peripherals.
+     * @param {PeripheralsCreateManyArgs} args - Arguments to create many Peripherals.
      * @example
-     * // Create many Furnitures
-     * const furnitures = await prisma.furnitures.createMany({
+     * // Create many Peripherals
+     * const peripherals = await prisma.peripherals.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends furnituresCreateManyArgs>(args?: SelectSubset<T, furnituresCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends PeripheralsCreateManyArgs>(args?: SelectSubset<T, PeripheralsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many Furnitures and returns the data saved in the database.
-     * @param {furnituresCreateManyAndReturnArgs} args - Arguments to create many Furnitures.
+     * Delete a Peripherals.
+     * @param {PeripheralsDeleteArgs} args - Arguments to delete one Peripherals.
      * @example
-     * // Create many Furnitures
-     * const furnitures = await prisma.furnitures.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Furnitures and only return the `id`
-     * const furnituresWithIdOnly = await prisma.furnitures.createManyAndReturn({ 
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends furnituresCreateManyAndReturnArgs>(args?: SelectSubset<T, furnituresCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$furnituresPayload<ExtArgs>, T, "createManyAndReturn">>
-
-    /**
-     * Delete a Furnitures.
-     * @param {furnituresDeleteArgs} args - Arguments to delete one Furnitures.
-     * @example
-     * // Delete one Furnitures
-     * const Furnitures = await prisma.furnitures.delete({
+     * // Delete one Peripherals
+     * const Peripherals = await prisma.peripherals.delete({
      *   where: {
-     *     // ... filter to delete one Furnitures
+     *     // ... filter to delete one Peripherals
      *   }
      * })
      * 
      */
-    delete<T extends furnituresDeleteArgs>(args: SelectSubset<T, furnituresDeleteArgs<ExtArgs>>): Prisma__furnituresClient<$Result.GetResult<Prisma.$furnituresPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+    delete<T extends PeripheralsDeleteArgs>(args: SelectSubset<T, PeripheralsDeleteArgs<ExtArgs>>): Prisma__PeripheralsClient<$Result.GetResult<Prisma.$PeripheralsPayload<ExtArgs>, T, "delete">, never, ExtArgs>
 
     /**
-     * Update one Furnitures.
-     * @param {furnituresUpdateArgs} args - Arguments to update one Furnitures.
+     * Update one Peripherals.
+     * @param {PeripheralsUpdateArgs} args - Arguments to update one Peripherals.
      * @example
-     * // Update one Furnitures
-     * const furnitures = await prisma.furnitures.update({
+     * // Update one Peripherals
+     * const peripherals = await prisma.peripherals.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1797,30 +1700,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends furnituresUpdateArgs>(args: SelectSubset<T, furnituresUpdateArgs<ExtArgs>>): Prisma__furnituresClient<$Result.GetResult<Prisma.$furnituresPayload<ExtArgs>, T, "update">, never, ExtArgs>
+    update<T extends PeripheralsUpdateArgs>(args: SelectSubset<T, PeripheralsUpdateArgs<ExtArgs>>): Prisma__PeripheralsClient<$Result.GetResult<Prisma.$PeripheralsPayload<ExtArgs>, T, "update">, never, ExtArgs>
 
     /**
-     * Delete zero or more Furnitures.
-     * @param {furnituresDeleteManyArgs} args - Arguments to filter Furnitures to delete.
+     * Delete zero or more Peripherals.
+     * @param {PeripheralsDeleteManyArgs} args - Arguments to filter Peripherals to delete.
      * @example
-     * // Delete a few Furnitures
-     * const { count } = await prisma.furnitures.deleteMany({
+     * // Delete a few Peripherals
+     * const { count } = await prisma.peripherals.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends furnituresDeleteManyArgs>(args?: SelectSubset<T, furnituresDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends PeripheralsDeleteManyArgs>(args?: SelectSubset<T, PeripheralsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Furnitures.
+     * Update zero or more Peripherals.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {furnituresUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {PeripheralsUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Furnitures
-     * const furnitures = await prisma.furnitures.updateMany({
+     * // Update many Peripherals
+     * const peripherals = await prisma.peripherals.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -1830,56 +1733,56 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends furnituresUpdateManyArgs>(args: SelectSubset<T, furnituresUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends PeripheralsUpdateManyArgs>(args: SelectSubset<T, PeripheralsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Furnitures.
-     * @param {furnituresUpsertArgs} args - Arguments to update or create a Furnitures.
+     * Create or update one Peripherals.
+     * @param {PeripheralsUpsertArgs} args - Arguments to update or create a Peripherals.
      * @example
-     * // Update or create a Furnitures
-     * const furnitures = await prisma.furnitures.upsert({
+     * // Update or create a Peripherals
+     * const peripherals = await prisma.peripherals.upsert({
      *   create: {
-     *     // ... data to create a Furnitures
+     *     // ... data to create a Peripherals
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Furnitures we want to update
+     *     // ... the filter for the Peripherals we want to update
      *   }
      * })
      */
-    upsert<T extends furnituresUpsertArgs>(args: SelectSubset<T, furnituresUpsertArgs<ExtArgs>>): Prisma__furnituresClient<$Result.GetResult<Prisma.$furnituresPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+    upsert<T extends PeripheralsUpsertArgs>(args: SelectSubset<T, PeripheralsUpsertArgs<ExtArgs>>): Prisma__PeripheralsClient<$Result.GetResult<Prisma.$PeripheralsPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
 
 
     /**
-     * Count the number of Furnitures.
+     * Count the number of Peripherals.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {furnituresCountArgs} args - Arguments to filter Furnitures to count.
+     * @param {PeripheralsCountArgs} args - Arguments to filter Peripherals to count.
      * @example
-     * // Count the number of Furnitures
-     * const count = await prisma.furnitures.count({
+     * // Count the number of Peripherals
+     * const count = await prisma.peripherals.count({
      *   where: {
-     *     // ... the filter for the Furnitures we want to count
+     *     // ... the filter for the Peripherals we want to count
      *   }
      * })
     **/
-    count<T extends furnituresCountArgs>(
-      args?: Subset<T, furnituresCountArgs>,
+    count<T extends PeripheralsCountArgs>(
+      args?: Subset<T, PeripheralsCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], FurnituresCountAggregateOutputType>
+          : GetScalarType<T['select'], PeripheralsCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Furnitures.
+     * Allows you to perform aggregations operations on a Peripherals.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {FurnituresAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {PeripheralsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -1899,13 +1802,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends FurnituresAggregateArgs>(args: Subset<T, FurnituresAggregateArgs>): Prisma.PrismaPromise<GetFurnituresAggregateType<T>>
+    aggregate<T extends PeripheralsAggregateArgs>(args: Subset<T, PeripheralsAggregateArgs>): Prisma.PrismaPromise<GetPeripheralsAggregateType<T>>
 
     /**
-     * Group by Furnitures.
+     * Group by Peripherals.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {furnituresGroupByArgs} args - Group by arguments.
+     * @param {PeripheralsGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -1920,14 +1823,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends furnituresGroupByArgs,
+      T extends PeripheralsGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: furnituresGroupByArgs['orderBy'] }
-        : { orderBy?: furnituresGroupByArgs['orderBy'] },
+        ? { orderBy: PeripheralsGroupByArgs['orderBy'] }
+        : { orderBy?: PeripheralsGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -1976,23 +1879,23 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, furnituresGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFurnituresGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, PeripheralsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPeripheralsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the furnitures model
+   * Fields of the Peripherals model
    */
-  readonly fields: furnituresFieldRefs;
+  readonly fields: PeripheralsFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for furnitures.
+   * The delegate class that acts as a "Promise-like" for Peripherals.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__furnituresClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__PeripheralsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Store<T extends furnitures$StoreArgs<ExtArgs> = {}>(args?: Subset<T, furnitures$StoreArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
-    OrderFurniture<T extends furnitures$OrderFurnitureArgs<ExtArgs> = {}>(args?: Subset<T, furnitures$OrderFurnitureArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderFurniturePayload<ExtArgs>, T, "findMany"> | Null>
+    Store<T extends Peripherals$StoreArgs<ExtArgs> = {}>(args?: Subset<T, Peripherals$StoreArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    OrderPeripheral<T extends Peripherals$OrderPeripheralArgs<ExtArgs> = {}>(args?: Subset<T, Peripherals$OrderPeripheralArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPeripheralPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2019,340 +1922,321 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the furnitures model
+   * Fields of the Peripherals model
    */ 
-  interface furnituresFieldRefs {
-    readonly id: FieldRef<"furnitures", 'Int'>
-    readonly nama_furniture: FieldRef<"furnitures", 'String'>
-    readonly slug: FieldRef<"furnitures", 'String'>
-    readonly deskripsi: FieldRef<"furnitures", 'String'>
-    readonly harga: FieldRef<"furnitures", 'Float'>
-    readonly categories: FieldRef<"furnitures", 'String'>
-    readonly image: FieldRef<"furnitures", 'String'>
-    readonly store_id: FieldRef<"furnitures", 'Int'>
-    readonly created_at: FieldRef<"furnitures", 'DateTime'>
-    readonly updated_at: FieldRef<"furnitures", 'DateTime'>
+  interface PeripheralsFieldRefs {
+    readonly id: FieldRef<"Peripherals", 'Int'>
+    readonly nama_peripheral: FieldRef<"Peripherals", 'String'>
+    readonly slug: FieldRef<"Peripherals", 'String'>
+    readonly deskripsi: FieldRef<"Peripherals", 'String'>
+    readonly harga: FieldRef<"Peripherals", 'Float'>
+    readonly categories: FieldRef<"Peripherals", 'String'>
+    readonly image: FieldRef<"Peripherals", 'String'>
+    readonly store_id: FieldRef<"Peripherals", 'Int'>
+    readonly created_at: FieldRef<"Peripherals", 'DateTime'>
+    readonly updated_at: FieldRef<"Peripherals", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * furnitures findUnique
+   * Peripherals findUnique
    */
-  export type furnituresFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PeripheralsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the furnitures
+     * Select specific fields to fetch from the Peripherals
      */
-    select?: furnituresSelect<ExtArgs> | null
+    select?: PeripheralsSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: furnituresInclude<ExtArgs> | null
+    include?: PeripheralsInclude<ExtArgs> | null
     /**
-     * Filter, which furnitures to fetch.
+     * Filter, which Peripherals to fetch.
      */
-    where: furnituresWhereUniqueInput
+    where: PeripheralsWhereUniqueInput
   }
 
   /**
-   * furnitures findUniqueOrThrow
+   * Peripherals findUniqueOrThrow
    */
-  export type furnituresFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PeripheralsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the furnitures
+     * Select specific fields to fetch from the Peripherals
      */
-    select?: furnituresSelect<ExtArgs> | null
+    select?: PeripheralsSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: furnituresInclude<ExtArgs> | null
+    include?: PeripheralsInclude<ExtArgs> | null
     /**
-     * Filter, which furnitures to fetch.
+     * Filter, which Peripherals to fetch.
      */
-    where: furnituresWhereUniqueInput
+    where: PeripheralsWhereUniqueInput
   }
 
   /**
-   * furnitures findFirst
+   * Peripherals findFirst
    */
-  export type furnituresFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PeripheralsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the furnitures
+     * Select specific fields to fetch from the Peripherals
      */
-    select?: furnituresSelect<ExtArgs> | null
+    select?: PeripheralsSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: furnituresInclude<ExtArgs> | null
+    include?: PeripheralsInclude<ExtArgs> | null
     /**
-     * Filter, which furnitures to fetch.
+     * Filter, which Peripherals to fetch.
      */
-    where?: furnituresWhereInput
+    where?: PeripheralsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of furnitures to fetch.
+     * Determine the order of Peripherals to fetch.
      */
-    orderBy?: furnituresOrderByWithRelationInput | furnituresOrderByWithRelationInput[]
+    orderBy?: PeripheralsOrderByWithRelationInput | PeripheralsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for furnitures.
+     * Sets the position for searching for Peripherals.
      */
-    cursor?: furnituresWhereUniqueInput
+    cursor?: PeripheralsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` furnitures from the position of the cursor.
+     * Take `±n` Peripherals from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` furnitures.
+     * Skip the first `n` Peripherals.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of furnitures.
+     * Filter by unique combinations of Peripherals.
      */
-    distinct?: FurnituresScalarFieldEnum | FurnituresScalarFieldEnum[]
+    distinct?: PeripheralsScalarFieldEnum | PeripheralsScalarFieldEnum[]
   }
 
   /**
-   * furnitures findFirstOrThrow
+   * Peripherals findFirstOrThrow
    */
-  export type furnituresFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PeripheralsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the furnitures
+     * Select specific fields to fetch from the Peripherals
      */
-    select?: furnituresSelect<ExtArgs> | null
+    select?: PeripheralsSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: furnituresInclude<ExtArgs> | null
+    include?: PeripheralsInclude<ExtArgs> | null
     /**
-     * Filter, which furnitures to fetch.
+     * Filter, which Peripherals to fetch.
      */
-    where?: furnituresWhereInput
+    where?: PeripheralsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of furnitures to fetch.
+     * Determine the order of Peripherals to fetch.
      */
-    orderBy?: furnituresOrderByWithRelationInput | furnituresOrderByWithRelationInput[]
+    orderBy?: PeripheralsOrderByWithRelationInput | PeripheralsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for furnitures.
+     * Sets the position for searching for Peripherals.
      */
-    cursor?: furnituresWhereUniqueInput
+    cursor?: PeripheralsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` furnitures from the position of the cursor.
+     * Take `±n` Peripherals from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` furnitures.
+     * Skip the first `n` Peripherals.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of furnitures.
+     * Filter by unique combinations of Peripherals.
      */
-    distinct?: FurnituresScalarFieldEnum | FurnituresScalarFieldEnum[]
+    distinct?: PeripheralsScalarFieldEnum | PeripheralsScalarFieldEnum[]
   }
 
   /**
-   * furnitures findMany
+   * Peripherals findMany
    */
-  export type furnituresFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PeripheralsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the furnitures
+     * Select specific fields to fetch from the Peripherals
      */
-    select?: furnituresSelect<ExtArgs> | null
+    select?: PeripheralsSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: furnituresInclude<ExtArgs> | null
+    include?: PeripheralsInclude<ExtArgs> | null
     /**
-     * Filter, which furnitures to fetch.
+     * Filter, which Peripherals to fetch.
      */
-    where?: furnituresWhereInput
+    where?: PeripheralsWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of furnitures to fetch.
+     * Determine the order of Peripherals to fetch.
      */
-    orderBy?: furnituresOrderByWithRelationInput | furnituresOrderByWithRelationInput[]
+    orderBy?: PeripheralsOrderByWithRelationInput | PeripheralsOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing furnitures.
+     * Sets the position for listing Peripherals.
      */
-    cursor?: furnituresWhereUniqueInput
+    cursor?: PeripheralsWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` furnitures from the position of the cursor.
+     * Take `±n` Peripherals from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` furnitures.
+     * Skip the first `n` Peripherals.
      */
     skip?: number
-    distinct?: FurnituresScalarFieldEnum | FurnituresScalarFieldEnum[]
+    distinct?: PeripheralsScalarFieldEnum | PeripheralsScalarFieldEnum[]
   }
 
   /**
-   * furnitures create
+   * Peripherals create
    */
-  export type furnituresCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PeripheralsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the furnitures
+     * Select specific fields to fetch from the Peripherals
      */
-    select?: furnituresSelect<ExtArgs> | null
+    select?: PeripheralsSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: furnituresInclude<ExtArgs> | null
+    include?: PeripheralsInclude<ExtArgs> | null
     /**
-     * The data needed to create a furnitures.
+     * The data needed to create a Peripherals.
      */
-    data: XOR<furnituresCreateInput, furnituresUncheckedCreateInput>
+    data: XOR<PeripheralsCreateInput, PeripheralsUncheckedCreateInput>
   }
 
   /**
-   * furnitures createMany
+   * Peripherals createMany
    */
-  export type furnituresCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PeripheralsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many furnitures.
+     * The data used to create many Peripherals.
      */
-    data: furnituresCreateManyInput | furnituresCreateManyInput[]
+    data: PeripheralsCreateManyInput | PeripheralsCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * furnitures createManyAndReturn
+   * Peripherals update
    */
-  export type furnituresCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PeripheralsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the furnitures
+     * Select specific fields to fetch from the Peripherals
      */
-    select?: furnituresSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * The data used to create many furnitures.
-     */
-    data: furnituresCreateManyInput | furnituresCreateManyInput[]
-    skipDuplicates?: boolean
+    select?: PeripheralsSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: furnituresIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: PeripheralsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Peripherals.
+     */
+    data: XOR<PeripheralsUpdateInput, PeripheralsUncheckedUpdateInput>
+    /**
+     * Choose, which Peripherals to update.
+     */
+    where: PeripheralsWhereUniqueInput
   }
 
   /**
-   * furnitures update
+   * Peripherals updateMany
    */
-  export type furnituresUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PeripheralsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the furnitures
+     * The data used to update Peripherals.
      */
-    select?: furnituresSelect<ExtArgs> | null
+    data: XOR<PeripheralsUpdateManyMutationInput, PeripheralsUncheckedUpdateManyInput>
+    /**
+     * Filter which Peripherals to update
+     */
+    where?: PeripheralsWhereInput
+  }
+
+  /**
+   * Peripherals upsert
+   */
+  export type PeripheralsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Peripherals
+     */
+    select?: PeripheralsSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: furnituresInclude<ExtArgs> | null
+    include?: PeripheralsInclude<ExtArgs> | null
     /**
-     * The data needed to update a furnitures.
+     * The filter to search for the Peripherals to update in case it exists.
      */
-    data: XOR<furnituresUpdateInput, furnituresUncheckedUpdateInput>
+    where: PeripheralsWhereUniqueInput
     /**
-     * Choose, which furnitures to update.
+     * In case the Peripherals found by the `where` argument doesn't exist, create a new Peripherals with this data.
      */
-    where: furnituresWhereUniqueInput
+    create: XOR<PeripheralsCreateInput, PeripheralsUncheckedCreateInput>
+    /**
+     * In case the Peripherals was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PeripheralsUpdateInput, PeripheralsUncheckedUpdateInput>
   }
 
   /**
-   * furnitures updateMany
+   * Peripherals delete
    */
-  export type furnituresUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PeripheralsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update furnitures.
+     * Select specific fields to fetch from the Peripherals
      */
-    data: XOR<furnituresUpdateManyMutationInput, furnituresUncheckedUpdateManyInput>
-    /**
-     * Filter which furnitures to update
-     */
-    where?: furnituresWhereInput
-  }
-
-  /**
-   * furnitures upsert
-   */
-  export type furnituresUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the furnitures
-     */
-    select?: furnituresSelect<ExtArgs> | null
+    select?: PeripheralsSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: furnituresInclude<ExtArgs> | null
+    include?: PeripheralsInclude<ExtArgs> | null
     /**
-     * The filter to search for the furnitures to update in case it exists.
+     * Filter which Peripherals to delete.
      */
-    where: furnituresWhereUniqueInput
-    /**
-     * In case the furnitures found by the `where` argument doesn't exist, create a new furnitures with this data.
-     */
-    create: XOR<furnituresCreateInput, furnituresUncheckedCreateInput>
-    /**
-     * In case the furnitures was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<furnituresUpdateInput, furnituresUncheckedUpdateInput>
+    where: PeripheralsWhereUniqueInput
   }
 
   /**
-   * furnitures delete
+   * Peripherals deleteMany
    */
-  export type furnituresDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PeripheralsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the furnitures
+     * Filter which Peripherals to delete
      */
-    select?: furnituresSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: furnituresInclude<ExtArgs> | null
-    /**
-     * Filter which furnitures to delete.
-     */
-    where: furnituresWhereUniqueInput
+    where?: PeripheralsWhereInput
   }
 
   /**
-   * furnitures deleteMany
+   * Peripherals.Store
    */
-  export type furnituresDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which furnitures to delete
-     */
-    where?: furnituresWhereInput
-  }
-
-  /**
-   * furnitures.Store
-   */
-  export type furnitures$StoreArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Peripherals$StoreArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Store
      */
@@ -2365,42 +2249,42 @@ export namespace Prisma {
   }
 
   /**
-   * furnitures.OrderFurniture
+   * Peripherals.OrderPeripheral
    */
-  export type furnitures$OrderFurnitureArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Peripherals$OrderPeripheralArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OrderFurniture
+     * Select specific fields to fetch from the OrderPeripheral
      */
-    select?: OrderFurnitureSelect<ExtArgs> | null
+    select?: OrderPeripheralSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OrderFurnitureInclude<ExtArgs> | null
-    where?: OrderFurnitureWhereInput
-    orderBy?: OrderFurnitureOrderByWithRelationInput | OrderFurnitureOrderByWithRelationInput[]
-    cursor?: OrderFurnitureWhereUniqueInput
+    include?: OrderPeripheralInclude<ExtArgs> | null
+    where?: OrderPeripheralWhereInput
+    orderBy?: OrderPeripheralOrderByWithRelationInput | OrderPeripheralOrderByWithRelationInput[]
+    cursor?: OrderPeripheralWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: OrderFurnitureScalarFieldEnum | OrderFurnitureScalarFieldEnum[]
+    distinct?: OrderPeripheralScalarFieldEnum | OrderPeripheralScalarFieldEnum[]
   }
 
   /**
-   * furnitures without action
+   * Peripherals without action
    */
-  export type furnituresDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type PeripheralsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the furnitures
+     * Select specific fields to fetch from the Peripherals
      */
-    select?: furnituresSelect<ExtArgs> | null
+    select?: PeripheralsSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: furnituresInclude<ExtArgs> | null
+    include?: PeripheralsInclude<ExtArgs> | null
   }
 
 
   /**
-   * Model cart
+   * Model Cart
    */
 
   export type AggregateCart = {
@@ -2413,21 +2297,21 @@ export namespace Prisma {
 
   export type CartAvgAggregateOutputType = {
     id: number | null
-    id_furniture: number | null
+    id_peripherals: number | null
     harga: number | null
   }
 
   export type CartSumAggregateOutputType = {
     id: number | null
-    id_furniture: number | null
+    id_peripherals: number | null
     harga: number | null
   }
 
   export type CartMinAggregateOutputType = {
     id: number | null
-    id_furniture: number | null
+    id_peripherals: number | null
     user_email: string | null
-    nama_furniture: string | null
+    nama_peripheral: string | null
     slug: string | null
     harga: number | null
     categories: string | null
@@ -2436,9 +2320,9 @@ export namespace Prisma {
 
   export type CartMaxAggregateOutputType = {
     id: number | null
-    id_furniture: number | null
+    id_peripherals: number | null
     user_email: string | null
-    nama_furniture: string | null
+    nama_peripheral: string | null
     slug: string | null
     harga: number | null
     categories: string | null
@@ -2447,9 +2331,9 @@ export namespace Prisma {
 
   export type CartCountAggregateOutputType = {
     id: number
-    id_furniture: number
+    id_peripherals: number
     user_email: number
-    nama_furniture: number
+    nama_peripheral: number
     slug: number
     harga: number
     categories: number
@@ -2460,21 +2344,21 @@ export namespace Prisma {
 
   export type CartAvgAggregateInputType = {
     id?: true
-    id_furniture?: true
+    id_peripherals?: true
     harga?: true
   }
 
   export type CartSumAggregateInputType = {
     id?: true
-    id_furniture?: true
+    id_peripherals?: true
     harga?: true
   }
 
   export type CartMinAggregateInputType = {
     id?: true
-    id_furniture?: true
+    id_peripherals?: true
     user_email?: true
-    nama_furniture?: true
+    nama_peripheral?: true
     slug?: true
     harga?: true
     categories?: true
@@ -2483,9 +2367,9 @@ export namespace Prisma {
 
   export type CartMaxAggregateInputType = {
     id?: true
-    id_furniture?: true
+    id_peripherals?: true
     user_email?: true
-    nama_furniture?: true
+    nama_peripheral?: true
     slug?: true
     harga?: true
     categories?: true
@@ -2494,9 +2378,9 @@ export namespace Prisma {
 
   export type CartCountAggregateInputType = {
     id?: true
-    id_furniture?: true
+    id_peripherals?: true
     user_email?: true
-    nama_furniture?: true
+    nama_peripheral?: true
     slug?: true
     harga?: true
     categories?: true
@@ -2506,37 +2390,37 @@ export namespace Prisma {
 
   export type CartAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which cart to aggregate.
+     * Filter which Cart to aggregate.
      */
-    where?: cartWhereInput
+    where?: CartWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of carts to fetch.
+     * Determine the order of Carts to fetch.
      */
-    orderBy?: cartOrderByWithRelationInput | cartOrderByWithRelationInput[]
+    orderBy?: CartOrderByWithRelationInput | CartOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: cartWhereUniqueInput
+    cursor?: CartWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` carts from the position of the cursor.
+     * Take `±n` Carts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` carts.
+     * Skip the first `n` Carts.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned carts
+     * Count returned Carts
     **/
     _count?: true | CartCountAggregateInputType
     /**
@@ -2576,11 +2460,11 @@ export namespace Prisma {
 
 
 
-  export type cartGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: cartWhereInput
-    orderBy?: cartOrderByWithAggregationInput | cartOrderByWithAggregationInput[]
+  export type CartGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CartWhereInput
+    orderBy?: CartOrderByWithAggregationInput | CartOrderByWithAggregationInput[]
     by: CartScalarFieldEnum[] | CartScalarFieldEnum
-    having?: cartScalarWhereWithAggregatesInput
+    having?: CartScalarWhereWithAggregatesInput
     take?: number
     skip?: number
     _count?: CartCountAggregateInputType | true
@@ -2592,9 +2476,9 @@ export namespace Prisma {
 
   export type CartGroupByOutputType = {
     id: number
-    id_furniture: number
+    id_peripherals: number
     user_email: string | null
-    nama_furniture: string
+    nama_peripheral: string
     slug: string
     harga: number
     categories: string
@@ -2606,7 +2490,7 @@ export namespace Prisma {
     _max: CartMaxAggregateOutputType | null
   }
 
-  type GetCartGroupByPayload<T extends cartGroupByArgs> = Prisma.PrismaPromise<
+  type GetCartGroupByPayload<T extends CartGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickEnumerable<CartGroupByOutputType, T['by']> &
         {
@@ -2620,33 +2504,23 @@ export namespace Prisma {
     >
 
 
-  export type cartSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type CartSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    id_furniture?: boolean
+    id_peripherals?: boolean
     user_email?: boolean
-    nama_furniture?: boolean
+    nama_peripheral?: boolean
     slug?: boolean
     harga?: boolean
     categories?: boolean
     image?: boolean
   }, ExtArgs["result"]["cart"]>
 
-  export type cartSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    id_furniture?: boolean
-    user_email?: boolean
-    nama_furniture?: boolean
-    slug?: boolean
-    harga?: boolean
-    categories?: boolean
-    image?: boolean
-  }, ExtArgs["result"]["cart"]>
 
-  export type cartSelectScalar = {
+  export type CartSelectScalar = {
     id?: boolean
-    id_furniture?: boolean
+    id_peripherals?: boolean
     user_email?: boolean
-    nama_furniture?: boolean
+    nama_peripheral?: boolean
     slug?: boolean
     harga?: boolean
     categories?: boolean
@@ -2654,14 +2528,14 @@ export namespace Prisma {
   }
 
 
-  export type $cartPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "cart"
+  export type $CartPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Cart"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      id_furniture: number
+      id_peripherals: number
       user_email: string | null
-      nama_furniture: string
+      nama_peripheral: string
       slug: string
       harga: number
       categories: string
@@ -2670,18 +2544,18 @@ export namespace Prisma {
     composites: {}
   }
 
-  type cartGetPayload<S extends boolean | null | undefined | cartDefaultArgs> = $Result.GetResult<Prisma.$cartPayload, S>
+  type CartGetPayload<S extends boolean | null | undefined | CartDefaultArgs> = $Result.GetResult<Prisma.$CartPayload, S>
 
-  type cartCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<cartFindManyArgs, 'select' | 'include' | 'distinct'> & {
+  type CartCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<CartFindManyArgs, 'select' | 'include' | 'distinct'> & {
       select?: CartCountAggregateInputType | true
     }
 
-  export interface cartDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['cart'], meta: { name: 'cart' } }
+  export interface CartDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Cart'], meta: { name: 'Cart' } }
     /**
      * Find zero or one Cart that matches the filter.
-     * @param {cartFindUniqueArgs} args - Arguments to find a Cart
+     * @param {CartFindUniqueArgs} args - Arguments to find a Cart
      * @example
      * // Get one Cart
      * const cart = await prisma.cart.findUnique({
@@ -2690,12 +2564,12 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends cartFindUniqueArgs>(args: SelectSubset<T, cartFindUniqueArgs<ExtArgs>>): Prisma__cartClient<$Result.GetResult<Prisma.$cartPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+    findUnique<T extends CartFindUniqueArgs>(args: SelectSubset<T, CartFindUniqueArgs<ExtArgs>>): Prisma__CartClient<$Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
 
     /**
      * Find one Cart that matches the filter or throw an error with `error.code='P2025'` 
      * if no matches were found.
-     * @param {cartFindUniqueOrThrowArgs} args - Arguments to find a Cart
+     * @param {CartFindUniqueOrThrowArgs} args - Arguments to find a Cart
      * @example
      * // Get one Cart
      * const cart = await prisma.cart.findUniqueOrThrow({
@@ -2704,13 +2578,13 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends cartFindUniqueOrThrowArgs>(args: SelectSubset<T, cartFindUniqueOrThrowArgs<ExtArgs>>): Prisma__cartClient<$Result.GetResult<Prisma.$cartPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+    findUniqueOrThrow<T extends CartFindUniqueOrThrowArgs>(args: SelectSubset<T, CartFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CartClient<$Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
 
     /**
      * Find the first Cart that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {cartFindFirstArgs} args - Arguments to find a Cart
+     * @param {CartFindFirstArgs} args - Arguments to find a Cart
      * @example
      * // Get one Cart
      * const cart = await prisma.cart.findFirst({
@@ -2719,14 +2593,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends cartFindFirstArgs>(args?: SelectSubset<T, cartFindFirstArgs<ExtArgs>>): Prisma__cartClient<$Result.GetResult<Prisma.$cartPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+    findFirst<T extends CartFindFirstArgs>(args?: SelectSubset<T, CartFindFirstArgs<ExtArgs>>): Prisma__CartClient<$Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
 
     /**
      * Find the first Cart that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {cartFindFirstOrThrowArgs} args - Arguments to find a Cart
+     * @param {CartFindFirstOrThrowArgs} args - Arguments to find a Cart
      * @example
      * // Get one Cart
      * const cart = await prisma.cart.findFirstOrThrow({
@@ -2735,13 +2609,13 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends cartFindFirstOrThrowArgs>(args?: SelectSubset<T, cartFindFirstOrThrowArgs<ExtArgs>>): Prisma__cartClient<$Result.GetResult<Prisma.$cartPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+    findFirstOrThrow<T extends CartFindFirstOrThrowArgs>(args?: SelectSubset<T, CartFindFirstOrThrowArgs<ExtArgs>>): Prisma__CartClient<$Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
 
     /**
      * Find zero or more Carts that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {cartFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {CartFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Carts
      * const carts = await prisma.cart.findMany()
@@ -2753,11 +2627,11 @@ export namespace Prisma {
      * const cartWithIdOnly = await prisma.cart.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends cartFindManyArgs>(args?: SelectSubset<T, cartFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cartPayload<ExtArgs>, T, "findMany">>
+    findMany<T extends CartFindManyArgs>(args?: SelectSubset<T, CartFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findMany">>
 
     /**
      * Create a Cart.
-     * @param {cartCreateArgs} args - Arguments to create a Cart.
+     * @param {CartCreateArgs} args - Arguments to create a Cart.
      * @example
      * // Create one Cart
      * const Cart = await prisma.cart.create({
@@ -2767,11 +2641,11 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends cartCreateArgs>(args: SelectSubset<T, cartCreateArgs<ExtArgs>>): Prisma__cartClient<$Result.GetResult<Prisma.$cartPayload<ExtArgs>, T, "create">, never, ExtArgs>
+    create<T extends CartCreateArgs>(args: SelectSubset<T, CartCreateArgs<ExtArgs>>): Prisma__CartClient<$Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "create">, never, ExtArgs>
 
     /**
      * Create many Carts.
-     * @param {cartCreateManyArgs} args - Arguments to create many Carts.
+     * @param {CartCreateManyArgs} args - Arguments to create many Carts.
      * @example
      * // Create many Carts
      * const cart = await prisma.cart.createMany({
@@ -2781,35 +2655,11 @@ export namespace Prisma {
      * })
      *     
      */
-    createMany<T extends cartCreateManyArgs>(args?: SelectSubset<T, cartCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Carts and returns the data saved in the database.
-     * @param {cartCreateManyAndReturnArgs} args - Arguments to create many Carts.
-     * @example
-     * // Create many Carts
-     * const cart = await prisma.cart.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Carts and only return the `id`
-     * const cartWithIdOnly = await prisma.cart.createManyAndReturn({ 
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends cartCreateManyAndReturnArgs>(args?: SelectSubset<T, cartCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$cartPayload<ExtArgs>, T, "createManyAndReturn">>
+    createMany<T extends CartCreateManyArgs>(args?: SelectSubset<T, CartCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Delete a Cart.
-     * @param {cartDeleteArgs} args - Arguments to delete one Cart.
+     * @param {CartDeleteArgs} args - Arguments to delete one Cart.
      * @example
      * // Delete one Cart
      * const Cart = await prisma.cart.delete({
@@ -2819,11 +2669,11 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends cartDeleteArgs>(args: SelectSubset<T, cartDeleteArgs<ExtArgs>>): Prisma__cartClient<$Result.GetResult<Prisma.$cartPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+    delete<T extends CartDeleteArgs>(args: SelectSubset<T, CartDeleteArgs<ExtArgs>>): Prisma__CartClient<$Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "delete">, never, ExtArgs>
 
     /**
      * Update one Cart.
-     * @param {cartUpdateArgs} args - Arguments to update one Cart.
+     * @param {CartUpdateArgs} args - Arguments to update one Cart.
      * @example
      * // Update one Cart
      * const cart = await prisma.cart.update({
@@ -2836,11 +2686,11 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends cartUpdateArgs>(args: SelectSubset<T, cartUpdateArgs<ExtArgs>>): Prisma__cartClient<$Result.GetResult<Prisma.$cartPayload<ExtArgs>, T, "update">, never, ExtArgs>
+    update<T extends CartUpdateArgs>(args: SelectSubset<T, CartUpdateArgs<ExtArgs>>): Prisma__CartClient<$Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "update">, never, ExtArgs>
 
     /**
      * Delete zero or more Carts.
-     * @param {cartDeleteManyArgs} args - Arguments to filter Carts to delete.
+     * @param {CartDeleteManyArgs} args - Arguments to filter Carts to delete.
      * @example
      * // Delete a few Carts
      * const { count } = await prisma.cart.deleteMany({
@@ -2850,13 +2700,13 @@ export namespace Prisma {
      * })
      * 
      */
-    deleteMany<T extends cartDeleteManyArgs>(args?: SelectSubset<T, cartDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends CartDeleteManyArgs>(args?: SelectSubset<T, CartDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Carts.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {cartUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {CartUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Carts
      * const cart = await prisma.cart.updateMany({
@@ -2869,11 +2719,11 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends cartUpdateManyArgs>(args: SelectSubset<T, cartUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends CartUpdateManyArgs>(args: SelectSubset<T, CartUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create or update one Cart.
-     * @param {cartUpsertArgs} args - Arguments to update or create a Cart.
+     * @param {CartUpsertArgs} args - Arguments to update or create a Cart.
      * @example
      * // Update or create a Cart
      * const cart = await prisma.cart.upsert({
@@ -2888,14 +2738,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends cartUpsertArgs>(args: SelectSubset<T, cartUpsertArgs<ExtArgs>>): Prisma__cartClient<$Result.GetResult<Prisma.$cartPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+    upsert<T extends CartUpsertArgs>(args: SelectSubset<T, CartUpsertArgs<ExtArgs>>): Prisma__CartClient<$Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
 
 
     /**
      * Count the number of Carts.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {cartCountArgs} args - Arguments to filter Carts to count.
+     * @param {CartCountArgs} args - Arguments to filter Carts to count.
      * @example
      * // Count the number of Carts
      * const count = await prisma.cart.count({
@@ -2904,8 +2754,8 @@ export namespace Prisma {
      *   }
      * })
     **/
-    count<T extends cartCountArgs>(
-      args?: Subset<T, cartCountArgs>,
+    count<T extends CartCountArgs>(
+      args?: Subset<T, CartCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
@@ -2944,7 +2794,7 @@ export namespace Prisma {
      * Group by Cart.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {cartGroupByArgs} args - Group by arguments.
+     * @param {CartGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -2959,14 +2809,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends cartGroupByArgs,
+      T extends CartGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: cartGroupByArgs['orderBy'] }
-        : { orderBy?: cartGroupByArgs['orderBy'] },
+        ? { orderBy: CartGroupByArgs['orderBy'] }
+        : { orderBy?: CartGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -3015,20 +2865,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, cartGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCartGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, CartGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCartGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the cart model
+   * Fields of the Cart model
    */
-  readonly fields: cartFieldRefs;
+  readonly fields: CartFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for cart.
+   * The delegate class that acts as a "Promise-like" for Cart.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__cartClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__CartClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3056,302 +2906,287 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the cart model
+   * Fields of the Cart model
    */ 
-  interface cartFieldRefs {
-    readonly id: FieldRef<"cart", 'Int'>
-    readonly id_furniture: FieldRef<"cart", 'Int'>
-    readonly user_email: FieldRef<"cart", 'String'>
-    readonly nama_furniture: FieldRef<"cart", 'String'>
-    readonly slug: FieldRef<"cart", 'String'>
-    readonly harga: FieldRef<"cart", 'Float'>
-    readonly categories: FieldRef<"cart", 'String'>
-    readonly image: FieldRef<"cart", 'String'>
+  interface CartFieldRefs {
+    readonly id: FieldRef<"Cart", 'Int'>
+    readonly id_peripherals: FieldRef<"Cart", 'Int'>
+    readonly user_email: FieldRef<"Cart", 'String'>
+    readonly nama_peripheral: FieldRef<"Cart", 'String'>
+    readonly slug: FieldRef<"Cart", 'String'>
+    readonly harga: FieldRef<"Cart", 'Float'>
+    readonly categories: FieldRef<"Cart", 'String'>
+    readonly image: FieldRef<"Cart", 'String'>
   }
     
 
   // Custom InputTypes
   /**
-   * cart findUnique
+   * Cart findUnique
    */
-  export type cartFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CartFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the cart
+     * Select specific fields to fetch from the Cart
      */
-    select?: cartSelect<ExtArgs> | null
+    select?: CartSelect<ExtArgs> | null
     /**
-     * Filter, which cart to fetch.
+     * Filter, which Cart to fetch.
      */
-    where: cartWhereUniqueInput
+    where: CartWhereUniqueInput
   }
 
   /**
-   * cart findUniqueOrThrow
+   * Cart findUniqueOrThrow
    */
-  export type cartFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CartFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the cart
+     * Select specific fields to fetch from the Cart
      */
-    select?: cartSelect<ExtArgs> | null
+    select?: CartSelect<ExtArgs> | null
     /**
-     * Filter, which cart to fetch.
+     * Filter, which Cart to fetch.
      */
-    where: cartWhereUniqueInput
+    where: CartWhereUniqueInput
   }
 
   /**
-   * cart findFirst
+   * Cart findFirst
    */
-  export type cartFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CartFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the cart
+     * Select specific fields to fetch from the Cart
      */
-    select?: cartSelect<ExtArgs> | null
+    select?: CartSelect<ExtArgs> | null
     /**
-     * Filter, which cart to fetch.
+     * Filter, which Cart to fetch.
      */
-    where?: cartWhereInput
+    where?: CartWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of carts to fetch.
+     * Determine the order of Carts to fetch.
      */
-    orderBy?: cartOrderByWithRelationInput | cartOrderByWithRelationInput[]
+    orderBy?: CartOrderByWithRelationInput | CartOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for carts.
+     * Sets the position for searching for Carts.
      */
-    cursor?: cartWhereUniqueInput
+    cursor?: CartWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` carts from the position of the cursor.
+     * Take `±n` Carts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` carts.
+     * Skip the first `n` Carts.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of carts.
+     * Filter by unique combinations of Carts.
      */
     distinct?: CartScalarFieldEnum | CartScalarFieldEnum[]
   }
 
   /**
-   * cart findFirstOrThrow
+   * Cart findFirstOrThrow
    */
-  export type cartFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CartFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the cart
+     * Select specific fields to fetch from the Cart
      */
-    select?: cartSelect<ExtArgs> | null
+    select?: CartSelect<ExtArgs> | null
     /**
-     * Filter, which cart to fetch.
+     * Filter, which Cart to fetch.
      */
-    where?: cartWhereInput
+    where?: CartWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of carts to fetch.
+     * Determine the order of Carts to fetch.
      */
-    orderBy?: cartOrderByWithRelationInput | cartOrderByWithRelationInput[]
+    orderBy?: CartOrderByWithRelationInput | CartOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for carts.
+     * Sets the position for searching for Carts.
      */
-    cursor?: cartWhereUniqueInput
+    cursor?: CartWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` carts from the position of the cursor.
+     * Take `±n` Carts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` carts.
+     * Skip the first `n` Carts.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of carts.
+     * Filter by unique combinations of Carts.
      */
     distinct?: CartScalarFieldEnum | CartScalarFieldEnum[]
   }
 
   /**
-   * cart findMany
+   * Cart findMany
    */
-  export type cartFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CartFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the cart
+     * Select specific fields to fetch from the Cart
      */
-    select?: cartSelect<ExtArgs> | null
+    select?: CartSelect<ExtArgs> | null
     /**
-     * Filter, which carts to fetch.
+     * Filter, which Carts to fetch.
      */
-    where?: cartWhereInput
+    where?: CartWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of carts to fetch.
+     * Determine the order of Carts to fetch.
      */
-    orderBy?: cartOrderByWithRelationInput | cartOrderByWithRelationInput[]
+    orderBy?: CartOrderByWithRelationInput | CartOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing carts.
+     * Sets the position for listing Carts.
      */
-    cursor?: cartWhereUniqueInput
+    cursor?: CartWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` carts from the position of the cursor.
+     * Take `±n` Carts from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` carts.
+     * Skip the first `n` Carts.
      */
     skip?: number
     distinct?: CartScalarFieldEnum | CartScalarFieldEnum[]
   }
 
   /**
-   * cart create
+   * Cart create
    */
-  export type cartCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CartCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the cart
+     * Select specific fields to fetch from the Cart
      */
-    select?: cartSelect<ExtArgs> | null
+    select?: CartSelect<ExtArgs> | null
     /**
-     * The data needed to create a cart.
+     * The data needed to create a Cart.
      */
-    data: XOR<cartCreateInput, cartUncheckedCreateInput>
+    data: XOR<CartCreateInput, CartUncheckedCreateInput>
   }
 
   /**
-   * cart createMany
+   * Cart createMany
    */
-  export type cartCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CartCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many carts.
+     * The data used to create many Carts.
      */
-    data: cartCreateManyInput | cartCreateManyInput[]
+    data: CartCreateManyInput | CartCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * cart createManyAndReturn
+   * Cart update
    */
-  export type cartCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CartUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the cart
+     * Select specific fields to fetch from the Cart
      */
-    select?: cartSelectCreateManyAndReturn<ExtArgs> | null
+    select?: CartSelect<ExtArgs> | null
     /**
-     * The data used to create many carts.
+     * The data needed to update a Cart.
      */
-    data: cartCreateManyInput | cartCreateManyInput[]
-    skipDuplicates?: boolean
+    data: XOR<CartUpdateInput, CartUncheckedUpdateInput>
+    /**
+     * Choose, which Cart to update.
+     */
+    where: CartWhereUniqueInput
   }
 
   /**
-   * cart update
+   * Cart updateMany
    */
-  export type cartUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CartUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the cart
+     * The data used to update Carts.
      */
-    select?: cartSelect<ExtArgs> | null
+    data: XOR<CartUpdateManyMutationInput, CartUncheckedUpdateManyInput>
     /**
-     * The data needed to update a cart.
+     * Filter which Carts to update
      */
-    data: XOR<cartUpdateInput, cartUncheckedUpdateInput>
-    /**
-     * Choose, which cart to update.
-     */
-    where: cartWhereUniqueInput
+    where?: CartWhereInput
   }
 
   /**
-   * cart updateMany
+   * Cart upsert
    */
-  export type cartUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CartUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update carts.
+     * Select specific fields to fetch from the Cart
      */
-    data: XOR<cartUpdateManyMutationInput, cartUncheckedUpdateManyInput>
+    select?: CartSelect<ExtArgs> | null
     /**
-     * Filter which carts to update
+     * The filter to search for the Cart to update in case it exists.
      */
-    where?: cartWhereInput
+    where: CartWhereUniqueInput
+    /**
+     * In case the Cart found by the `where` argument doesn't exist, create a new Cart with this data.
+     */
+    create: XOR<CartCreateInput, CartUncheckedCreateInput>
+    /**
+     * In case the Cart was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CartUpdateInput, CartUncheckedUpdateInput>
   }
 
   /**
-   * cart upsert
+   * Cart delete
    */
-  export type cartUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CartDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the cart
+     * Select specific fields to fetch from the Cart
      */
-    select?: cartSelect<ExtArgs> | null
+    select?: CartSelect<ExtArgs> | null
     /**
-     * The filter to search for the cart to update in case it exists.
+     * Filter which Cart to delete.
      */
-    where: cartWhereUniqueInput
-    /**
-     * In case the cart found by the `where` argument doesn't exist, create a new cart with this data.
-     */
-    create: XOR<cartCreateInput, cartUncheckedCreateInput>
-    /**
-     * In case the cart was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<cartUpdateInput, cartUncheckedUpdateInput>
+    where: CartWhereUniqueInput
   }
 
   /**
-   * cart delete
+   * Cart deleteMany
    */
-  export type cartDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CartDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the cart
+     * Filter which Carts to delete
      */
-    select?: cartSelect<ExtArgs> | null
-    /**
-     * Filter which cart to delete.
-     */
-    where: cartWhereUniqueInput
+    where?: CartWhereInput
   }
 
   /**
-   * cart deleteMany
+   * Cart without action
    */
-  export type cartDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type CartDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which carts to delete
+     * Select specific fields to fetch from the Cart
      */
-    where?: cartWhereInput
-  }
-
-  /**
-   * cart without action
-   */
-  export type cartDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the cart
-     */
-    select?: cartSelect<ExtArgs> | null
+    select?: CartSelect<ExtArgs> | null
   }
 
 
@@ -3577,21 +3412,11 @@ export namespace Prisma {
     user_email?: boolean
     created_at?: boolean
     updated_at?: boolean
-    furniture?: boolean | Store$furnitureArgs<ExtArgs>
-    OrderFurniture?: boolean | Store$OrderFurnitureArgs<ExtArgs>
+    Peripherals?: boolean | Store$PeripheralsArgs<ExtArgs>
+    OrderPeripheral?: boolean | Store$OrderPeripheralArgs<ExtArgs>
     _count?: boolean | StoreCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["store"]>
 
-  export type StoreSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    nama_toko?: boolean
-    slug?: boolean
-    deskripsi?: boolean
-    telp?: boolean
-    user_email?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-  }, ExtArgs["result"]["store"]>
 
   export type StoreSelectScalar = {
     id?: boolean
@@ -3605,17 +3430,16 @@ export namespace Prisma {
   }
 
   export type StoreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    furniture?: boolean | Store$furnitureArgs<ExtArgs>
-    OrderFurniture?: boolean | Store$OrderFurnitureArgs<ExtArgs>
+    Peripherals?: boolean | Store$PeripheralsArgs<ExtArgs>
+    OrderPeripheral?: boolean | Store$OrderPeripheralArgs<ExtArgs>
     _count?: boolean | StoreCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type StoreIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $StorePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Store"
     objects: {
-      furniture: Prisma.$furnituresPayload<ExtArgs>[]
-      OrderFurniture: Prisma.$OrderFurniturePayload<ExtArgs>[]
+      Peripherals: Prisma.$PeripheralsPayload<ExtArgs>[]
+      OrderPeripheral: Prisma.$OrderPeripheralPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3742,30 +3566,6 @@ export namespace Prisma {
      *     
      */
     createMany<T extends StoreCreateManyArgs>(args?: SelectSubset<T, StoreCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Stores and returns the data saved in the database.
-     * @param {StoreCreateManyAndReturnArgs} args - Arguments to create many Stores.
-     * @example
-     * // Create many Stores
-     * const store = await prisma.store.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Stores and only return the `id`
-     * const storeWithIdOnly = await prisma.store.createManyAndReturn({ 
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends StoreCreateManyAndReturnArgs>(args?: SelectSubset<T, StoreCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "createManyAndReturn">>
 
     /**
      * Delete a Store.
@@ -3990,8 +3790,8 @@ export namespace Prisma {
    */
   export interface Prisma__StoreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    furniture<T extends Store$furnitureArgs<ExtArgs> = {}>(args?: Subset<T, Store$furnitureArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$furnituresPayload<ExtArgs>, T, "findMany"> | Null>
-    OrderFurniture<T extends Store$OrderFurnitureArgs<ExtArgs> = {}>(args?: Subset<T, Store$OrderFurnitureArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderFurniturePayload<ExtArgs>, T, "findMany"> | Null>
+    Peripherals<T extends Store$PeripheralsArgs<ExtArgs> = {}>(args?: Subset<T, Store$PeripheralsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PeripheralsPayload<ExtArgs>, T, "findMany"> | Null>
+    OrderPeripheral<T extends Store$OrderPeripheralArgs<ExtArgs> = {}>(args?: Subset<T, Store$OrderPeripheralArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPeripheralPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4238,21 +4038,6 @@ export namespace Prisma {
   }
 
   /**
-   * Store createManyAndReturn
-   */
-  export type StoreCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Store
-     */
-    select?: StoreSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * The data used to create many Stores.
-     */
-    data: StoreCreateManyInput | StoreCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
    * Store update
    */
   export type StoreUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4343,43 +4128,43 @@ export namespace Prisma {
   }
 
   /**
-   * Store.furniture
+   * Store.Peripherals
    */
-  export type Store$furnitureArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Store$PeripheralsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the furnitures
+     * Select specific fields to fetch from the Peripherals
      */
-    select?: furnituresSelect<ExtArgs> | null
+    select?: PeripheralsSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: furnituresInclude<ExtArgs> | null
-    where?: furnituresWhereInput
-    orderBy?: furnituresOrderByWithRelationInput | furnituresOrderByWithRelationInput[]
-    cursor?: furnituresWhereUniqueInput
+    include?: PeripheralsInclude<ExtArgs> | null
+    where?: PeripheralsWhereInput
+    orderBy?: PeripheralsOrderByWithRelationInput | PeripheralsOrderByWithRelationInput[]
+    cursor?: PeripheralsWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: FurnituresScalarFieldEnum | FurnituresScalarFieldEnum[]
+    distinct?: PeripheralsScalarFieldEnum | PeripheralsScalarFieldEnum[]
   }
 
   /**
-   * Store.OrderFurniture
+   * Store.OrderPeripheral
    */
-  export type Store$OrderFurnitureArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Store$OrderPeripheralArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OrderFurniture
+     * Select specific fields to fetch from the OrderPeripheral
      */
-    select?: OrderFurnitureSelect<ExtArgs> | null
+    select?: OrderPeripheralSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OrderFurnitureInclude<ExtArgs> | null
-    where?: OrderFurnitureWhereInput
-    orderBy?: OrderFurnitureOrderByWithRelationInput | OrderFurnitureOrderByWithRelationInput[]
-    cursor?: OrderFurnitureWhereUniqueInput
+    include?: OrderPeripheralInclude<ExtArgs> | null
+    where?: OrderPeripheralWhereInput
+    orderBy?: OrderPeripheralOrderByWithRelationInput | OrderPeripheralOrderByWithRelationInput[]
+    cursor?: OrderPeripheralWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: OrderFurnitureScalarFieldEnum | OrderFurnitureScalarFieldEnum[]
+    distinct?: OrderPeripheralScalarFieldEnum | OrderPeripheralScalarFieldEnum[]
   }
 
   /**
@@ -4611,19 +4396,10 @@ export namespace Prisma {
     status?: boolean
     created_at?: boolean
     updated_at?: boolean
-    OrderFurniture?: boolean | Orders$OrderFurnitureArgs<ExtArgs>
+    OrderPeripheral?: boolean | Orders$OrderPeripheralArgs<ExtArgs>
     _count?: boolean | OrdersCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["orders"]>
 
-  export type OrdersSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    user_email?: boolean
-    total_harga?: boolean
-    token?: boolean
-    status?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-  }, ExtArgs["result"]["orders"]>
 
   export type OrdersSelectScalar = {
     id?: boolean
@@ -4636,15 +4412,14 @@ export namespace Prisma {
   }
 
   export type OrdersInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    OrderFurniture?: boolean | Orders$OrderFurnitureArgs<ExtArgs>
+    OrderPeripheral?: boolean | Orders$OrderPeripheralArgs<ExtArgs>
     _count?: boolean | OrdersCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type OrdersIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $OrdersPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Orders"
     objects: {
-      OrderFurniture: Prisma.$OrderFurniturePayload<ExtArgs>[]
+      OrderPeripheral: Prisma.$OrderPeripheralPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4770,30 +4545,6 @@ export namespace Prisma {
      *     
      */
     createMany<T extends OrdersCreateManyArgs>(args?: SelectSubset<T, OrdersCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Orders and returns the data saved in the database.
-     * @param {OrdersCreateManyAndReturnArgs} args - Arguments to create many Orders.
-     * @example
-     * // Create many Orders
-     * const orders = await prisma.orders.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Orders and only return the `id`
-     * const ordersWithIdOnly = await prisma.orders.createManyAndReturn({ 
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends OrdersCreateManyAndReturnArgs>(args?: SelectSubset<T, OrdersCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrdersPayload<ExtArgs>, T, "createManyAndReturn">>
 
     /**
      * Delete a Orders.
@@ -5018,7 +4769,7 @@ export namespace Prisma {
    */
   export interface Prisma__OrdersClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    OrderFurniture<T extends Orders$OrderFurnitureArgs<ExtArgs> = {}>(args?: Subset<T, Orders$OrderFurnitureArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderFurniturePayload<ExtArgs>, T, "findMany"> | Null>
+    OrderPeripheral<T extends Orders$OrderPeripheralArgs<ExtArgs> = {}>(args?: Subset<T, Orders$OrderPeripheralArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPeripheralPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5264,21 +5015,6 @@ export namespace Prisma {
   }
 
   /**
-   * Orders createManyAndReturn
-   */
-  export type OrdersCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Orders
-     */
-    select?: OrdersSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * The data used to create many Orders.
-     */
-    data: OrdersCreateManyInput | OrdersCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
    * Orders update
    */
   export type OrdersUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5369,23 +5105,23 @@ export namespace Prisma {
   }
 
   /**
-   * Orders.OrderFurniture
+   * Orders.OrderPeripheral
    */
-  export type Orders$OrderFurnitureArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Orders$OrderPeripheralArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OrderFurniture
+     * Select specific fields to fetch from the OrderPeripheral
      */
-    select?: OrderFurnitureSelect<ExtArgs> | null
+    select?: OrderPeripheralSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OrderFurnitureInclude<ExtArgs> | null
-    where?: OrderFurnitureWhereInput
-    orderBy?: OrderFurnitureOrderByWithRelationInput | OrderFurnitureOrderByWithRelationInput[]
-    cursor?: OrderFurnitureWhereUniqueInput
+    include?: OrderPeripheralInclude<ExtArgs> | null
+    where?: OrderPeripheralWhereInput
+    orderBy?: OrderPeripheralOrderByWithRelationInput | OrderPeripheralOrderByWithRelationInput[]
+    cursor?: OrderPeripheralWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: OrderFurnitureScalarFieldEnum | OrderFurnitureScalarFieldEnum[]
+    distinct?: OrderPeripheralScalarFieldEnum | OrderPeripheralScalarFieldEnum[]
   }
 
   /**
@@ -5404,51 +5140,51 @@ export namespace Prisma {
 
 
   /**
-   * Model OrderFurniture
+   * Model OrderPeripheral
    */
 
-  export type AggregateOrderFurniture = {
-    _count: OrderFurnitureCountAggregateOutputType | null
-    _avg: OrderFurnitureAvgAggregateOutputType | null
-    _sum: OrderFurnitureSumAggregateOutputType | null
-    _min: OrderFurnitureMinAggregateOutputType | null
-    _max: OrderFurnitureMaxAggregateOutputType | null
+  export type AggregateOrderPeripheral = {
+    _count: OrderPeripheralCountAggregateOutputType | null
+    _avg: OrderPeripheralAvgAggregateOutputType | null
+    _sum: OrderPeripheralSumAggregateOutputType | null
+    _min: OrderPeripheralMinAggregateOutputType | null
+    _max: OrderPeripheralMaxAggregateOutputType | null
   }
 
-  export type OrderFurnitureAvgAggregateOutputType = {
+  export type OrderPeripheralAvgAggregateOutputType = {
     id: number | null
-    furnitureId: number | null
+    peripheralId: number | null
     storeId: number | null
   }
 
-  export type OrderFurnitureSumAggregateOutputType = {
+  export type OrderPeripheralSumAggregateOutputType = {
     id: number | null
-    furnitureId: number | null
+    peripheralId: number | null
     storeId: number | null
   }
 
-  export type OrderFurnitureMinAggregateOutputType = {
+  export type OrderPeripheralMinAggregateOutputType = {
     id: number | null
     orderId: string | null
-    furnitureId: number | null
+    peripheralId: number | null
     storeId: number | null
     created_at: Date | null
     updated_at: Date | null
   }
 
-  export type OrderFurnitureMaxAggregateOutputType = {
+  export type OrderPeripheralMaxAggregateOutputType = {
     id: number | null
     orderId: string | null
-    furnitureId: number | null
+    peripheralId: number | null
     storeId: number | null
     created_at: Date | null
     updated_at: Date | null
   }
 
-  export type OrderFurnitureCountAggregateOutputType = {
+  export type OrderPeripheralCountAggregateOutputType = {
     id: number
     orderId: number
-    furnitureId: number
+    peripheralId: number
     storeId: number
     created_at: number
     updated_at: number
@@ -5456,379 +5192,339 @@ export namespace Prisma {
   }
 
 
-  export type OrderFurnitureAvgAggregateInputType = {
+  export type OrderPeripheralAvgAggregateInputType = {
     id?: true
-    furnitureId?: true
+    peripheralId?: true
     storeId?: true
   }
 
-  export type OrderFurnitureSumAggregateInputType = {
+  export type OrderPeripheralSumAggregateInputType = {
     id?: true
-    furnitureId?: true
+    peripheralId?: true
     storeId?: true
   }
 
-  export type OrderFurnitureMinAggregateInputType = {
+  export type OrderPeripheralMinAggregateInputType = {
     id?: true
     orderId?: true
-    furnitureId?: true
+    peripheralId?: true
     storeId?: true
     created_at?: true
     updated_at?: true
   }
 
-  export type OrderFurnitureMaxAggregateInputType = {
+  export type OrderPeripheralMaxAggregateInputType = {
     id?: true
     orderId?: true
-    furnitureId?: true
+    peripheralId?: true
     storeId?: true
     created_at?: true
     updated_at?: true
   }
 
-  export type OrderFurnitureCountAggregateInputType = {
+  export type OrderPeripheralCountAggregateInputType = {
     id?: true
     orderId?: true
-    furnitureId?: true
+    peripheralId?: true
     storeId?: true
     created_at?: true
     updated_at?: true
     _all?: true
   }
 
-  export type OrderFurnitureAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type OrderPeripheralAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which OrderFurniture to aggregate.
+     * Filter which OrderPeripheral to aggregate.
      */
-    where?: OrderFurnitureWhereInput
+    where?: OrderPeripheralWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of OrderFurnitures to fetch.
+     * Determine the order of OrderPeripherals to fetch.
      */
-    orderBy?: OrderFurnitureOrderByWithRelationInput | OrderFurnitureOrderByWithRelationInput[]
+    orderBy?: OrderPeripheralOrderByWithRelationInput | OrderPeripheralOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: OrderFurnitureWhereUniqueInput
+    cursor?: OrderPeripheralWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` OrderFurnitures from the position of the cursor.
+     * Take `±n` OrderPeripherals from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` OrderFurnitures.
+     * Skip the first `n` OrderPeripherals.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned OrderFurnitures
+     * Count returned OrderPeripherals
     **/
-    _count?: true | OrderFurnitureCountAggregateInputType
+    _count?: true | OrderPeripheralCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: OrderFurnitureAvgAggregateInputType
+    _avg?: OrderPeripheralAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: OrderFurnitureSumAggregateInputType
+    _sum?: OrderPeripheralSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: OrderFurnitureMinAggregateInputType
+    _min?: OrderPeripheralMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: OrderFurnitureMaxAggregateInputType
+    _max?: OrderPeripheralMaxAggregateInputType
   }
 
-  export type GetOrderFurnitureAggregateType<T extends OrderFurnitureAggregateArgs> = {
-        [P in keyof T & keyof AggregateOrderFurniture]: P extends '_count' | 'count'
+  export type GetOrderPeripheralAggregateType<T extends OrderPeripheralAggregateArgs> = {
+        [P in keyof T & keyof AggregateOrderPeripheral]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateOrderFurniture[P]>
-      : GetScalarType<T[P], AggregateOrderFurniture[P]>
+        : GetScalarType<T[P], AggregateOrderPeripheral[P]>
+      : GetScalarType<T[P], AggregateOrderPeripheral[P]>
   }
 
 
 
 
-  export type OrderFurnitureGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: OrderFurnitureWhereInput
-    orderBy?: OrderFurnitureOrderByWithAggregationInput | OrderFurnitureOrderByWithAggregationInput[]
-    by: OrderFurnitureScalarFieldEnum[] | OrderFurnitureScalarFieldEnum
-    having?: OrderFurnitureScalarWhereWithAggregatesInput
+  export type OrderPeripheralGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrderPeripheralWhereInput
+    orderBy?: OrderPeripheralOrderByWithAggregationInput | OrderPeripheralOrderByWithAggregationInput[]
+    by: OrderPeripheralScalarFieldEnum[] | OrderPeripheralScalarFieldEnum
+    having?: OrderPeripheralScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: OrderFurnitureCountAggregateInputType | true
-    _avg?: OrderFurnitureAvgAggregateInputType
-    _sum?: OrderFurnitureSumAggregateInputType
-    _min?: OrderFurnitureMinAggregateInputType
-    _max?: OrderFurnitureMaxAggregateInputType
+    _count?: OrderPeripheralCountAggregateInputType | true
+    _avg?: OrderPeripheralAvgAggregateInputType
+    _sum?: OrderPeripheralSumAggregateInputType
+    _min?: OrderPeripheralMinAggregateInputType
+    _max?: OrderPeripheralMaxAggregateInputType
   }
 
-  export type OrderFurnitureGroupByOutputType = {
+  export type OrderPeripheralGroupByOutputType = {
     id: number
     orderId: string
-    furnitureId: number
+    peripheralId: number
     storeId: number
     created_at: Date
     updated_at: Date
-    _count: OrderFurnitureCountAggregateOutputType | null
-    _avg: OrderFurnitureAvgAggregateOutputType | null
-    _sum: OrderFurnitureSumAggregateOutputType | null
-    _min: OrderFurnitureMinAggregateOutputType | null
-    _max: OrderFurnitureMaxAggregateOutputType | null
+    _count: OrderPeripheralCountAggregateOutputType | null
+    _avg: OrderPeripheralAvgAggregateOutputType | null
+    _sum: OrderPeripheralSumAggregateOutputType | null
+    _min: OrderPeripheralMinAggregateOutputType | null
+    _max: OrderPeripheralMaxAggregateOutputType | null
   }
 
-  type GetOrderFurnitureGroupByPayload<T extends OrderFurnitureGroupByArgs> = Prisma.PrismaPromise<
+  type GetOrderPeripheralGroupByPayload<T extends OrderPeripheralGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<OrderFurnitureGroupByOutputType, T['by']> &
+      PickEnumerable<OrderPeripheralGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof OrderFurnitureGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof OrderPeripheralGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], OrderFurnitureGroupByOutputType[P]>
-            : GetScalarType<T[P], OrderFurnitureGroupByOutputType[P]>
+              : GetScalarType<T[P], OrderPeripheralGroupByOutputType[P]>
+            : GetScalarType<T[P], OrderPeripheralGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type OrderFurnitureSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type OrderPeripheralSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     orderId?: boolean
-    furnitureId?: boolean
+    peripheralId?: boolean
     storeId?: boolean
     created_at?: boolean
     updated_at?: boolean
     orders?: boolean | OrdersDefaultArgs<ExtArgs>
-    furnitures?: boolean | furnituresDefaultArgs<ExtArgs>
+    Peripherals?: boolean | PeripheralsDefaultArgs<ExtArgs>
     store?: boolean | StoreDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["orderFurniture"]>
+  }, ExtArgs["result"]["orderPeripheral"]>
 
-  export type OrderFurnitureSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+
+  export type OrderPeripheralSelectScalar = {
     id?: boolean
     orderId?: boolean
-    furnitureId?: boolean
-    storeId?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    orders?: boolean | OrdersDefaultArgs<ExtArgs>
-    furnitures?: boolean | furnituresDefaultArgs<ExtArgs>
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["orderFurniture"]>
-
-  export type OrderFurnitureSelectScalar = {
-    id?: boolean
-    orderId?: boolean
-    furnitureId?: boolean
+    peripheralId?: boolean
     storeId?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
-  export type OrderFurnitureInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type OrderPeripheralInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orders?: boolean | OrdersDefaultArgs<ExtArgs>
-    furnitures?: boolean | furnituresDefaultArgs<ExtArgs>
-    store?: boolean | StoreDefaultArgs<ExtArgs>
-  }
-  export type OrderFurnitureIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    orders?: boolean | OrdersDefaultArgs<ExtArgs>
-    furnitures?: boolean | furnituresDefaultArgs<ExtArgs>
+    Peripherals?: boolean | PeripheralsDefaultArgs<ExtArgs>
     store?: boolean | StoreDefaultArgs<ExtArgs>
   }
 
-  export type $OrderFurniturePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "OrderFurniture"
+  export type $OrderPeripheralPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OrderPeripheral"
     objects: {
       orders: Prisma.$OrdersPayload<ExtArgs>
-      furnitures: Prisma.$furnituresPayload<ExtArgs>
+      Peripherals: Prisma.$PeripheralsPayload<ExtArgs>
       store: Prisma.$StorePayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       orderId: string
-      furnitureId: number
+      peripheralId: number
       storeId: number
       created_at: Date
       updated_at: Date
-    }, ExtArgs["result"]["orderFurniture"]>
+    }, ExtArgs["result"]["orderPeripheral"]>
     composites: {}
   }
 
-  type OrderFurnitureGetPayload<S extends boolean | null | undefined | OrderFurnitureDefaultArgs> = $Result.GetResult<Prisma.$OrderFurniturePayload, S>
+  type OrderPeripheralGetPayload<S extends boolean | null | undefined | OrderPeripheralDefaultArgs> = $Result.GetResult<Prisma.$OrderPeripheralPayload, S>
 
-  type OrderFurnitureCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
-    Omit<OrderFurnitureFindManyArgs, 'select' | 'include' | 'distinct'> & {
-      select?: OrderFurnitureCountAggregateInputType | true
+  type OrderPeripheralCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<OrderPeripheralFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: OrderPeripheralCountAggregateInputType | true
     }
 
-  export interface OrderFurnitureDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OrderFurniture'], meta: { name: 'OrderFurniture' } }
+  export interface OrderPeripheralDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OrderPeripheral'], meta: { name: 'OrderPeripheral' } }
     /**
-     * Find zero or one OrderFurniture that matches the filter.
-     * @param {OrderFurnitureFindUniqueArgs} args - Arguments to find a OrderFurniture
+     * Find zero or one OrderPeripheral that matches the filter.
+     * @param {OrderPeripheralFindUniqueArgs} args - Arguments to find a OrderPeripheral
      * @example
-     * // Get one OrderFurniture
-     * const orderFurniture = await prisma.orderFurniture.findUnique({
+     * // Get one OrderPeripheral
+     * const orderPeripheral = await prisma.orderPeripheral.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUnique<T extends OrderFurnitureFindUniqueArgs>(args: SelectSubset<T, OrderFurnitureFindUniqueArgs<ExtArgs>>): Prisma__OrderFurnitureClient<$Result.GetResult<Prisma.$OrderFurniturePayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+    findUnique<T extends OrderPeripheralFindUniqueArgs>(args: SelectSubset<T, OrderPeripheralFindUniqueArgs<ExtArgs>>): Prisma__OrderPeripheralClient<$Result.GetResult<Prisma.$OrderPeripheralPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
 
     /**
-     * Find one OrderFurniture that matches the filter or throw an error with `error.code='P2025'` 
+     * Find one OrderPeripheral that matches the filter or throw an error with `error.code='P2025'` 
      * if no matches were found.
-     * @param {OrderFurnitureFindUniqueOrThrowArgs} args - Arguments to find a OrderFurniture
+     * @param {OrderPeripheralFindUniqueOrThrowArgs} args - Arguments to find a OrderPeripheral
      * @example
-     * // Get one OrderFurniture
-     * const orderFurniture = await prisma.orderFurniture.findUniqueOrThrow({
+     * // Get one OrderPeripheral
+     * const orderPeripheral = await prisma.orderPeripheral.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findUniqueOrThrow<T extends OrderFurnitureFindUniqueOrThrowArgs>(args: SelectSubset<T, OrderFurnitureFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OrderFurnitureClient<$Result.GetResult<Prisma.$OrderFurniturePayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+    findUniqueOrThrow<T extends OrderPeripheralFindUniqueOrThrowArgs>(args: SelectSubset<T, OrderPeripheralFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OrderPeripheralClient<$Result.GetResult<Prisma.$OrderPeripheralPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
 
     /**
-     * Find the first OrderFurniture that matches the filter.
+     * Find the first OrderPeripheral that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OrderFurnitureFindFirstArgs} args - Arguments to find a OrderFurniture
+     * @param {OrderPeripheralFindFirstArgs} args - Arguments to find a OrderPeripheral
      * @example
-     * // Get one OrderFurniture
-     * const orderFurniture = await prisma.orderFurniture.findFirst({
+     * // Get one OrderPeripheral
+     * const orderPeripheral = await prisma.orderPeripheral.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirst<T extends OrderFurnitureFindFirstArgs>(args?: SelectSubset<T, OrderFurnitureFindFirstArgs<ExtArgs>>): Prisma__OrderFurnitureClient<$Result.GetResult<Prisma.$OrderFurniturePayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+    findFirst<T extends OrderPeripheralFindFirstArgs>(args?: SelectSubset<T, OrderPeripheralFindFirstArgs<ExtArgs>>): Prisma__OrderPeripheralClient<$Result.GetResult<Prisma.$OrderPeripheralPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
 
     /**
-     * Find the first OrderFurniture that matches the filter or
+     * Find the first OrderPeripheral that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OrderFurnitureFindFirstOrThrowArgs} args - Arguments to find a OrderFurniture
+     * @param {OrderPeripheralFindFirstOrThrowArgs} args - Arguments to find a OrderPeripheral
      * @example
-     * // Get one OrderFurniture
-     * const orderFurniture = await prisma.orderFurniture.findFirstOrThrow({
+     * // Get one OrderPeripheral
+     * const orderPeripheral = await prisma.orderPeripheral.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      */
-    findFirstOrThrow<T extends OrderFurnitureFindFirstOrThrowArgs>(args?: SelectSubset<T, OrderFurnitureFindFirstOrThrowArgs<ExtArgs>>): Prisma__OrderFurnitureClient<$Result.GetResult<Prisma.$OrderFurniturePayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+    findFirstOrThrow<T extends OrderPeripheralFindFirstOrThrowArgs>(args?: SelectSubset<T, OrderPeripheralFindFirstOrThrowArgs<ExtArgs>>): Prisma__OrderPeripheralClient<$Result.GetResult<Prisma.$OrderPeripheralPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
 
     /**
-     * Find zero or more OrderFurnitures that matches the filter.
+     * Find zero or more OrderPeripherals that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OrderFurnitureFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {OrderPeripheralFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all OrderFurnitures
-     * const orderFurnitures = await prisma.orderFurniture.findMany()
+     * // Get all OrderPeripherals
+     * const orderPeripherals = await prisma.orderPeripheral.findMany()
      * 
-     * // Get first 10 OrderFurnitures
-     * const orderFurnitures = await prisma.orderFurniture.findMany({ take: 10 })
+     * // Get first 10 OrderPeripherals
+     * const orderPeripherals = await prisma.orderPeripheral.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const orderFurnitureWithIdOnly = await prisma.orderFurniture.findMany({ select: { id: true } })
+     * const orderPeripheralWithIdOnly = await prisma.orderPeripheral.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends OrderFurnitureFindManyArgs>(args?: SelectSubset<T, OrderFurnitureFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderFurniturePayload<ExtArgs>, T, "findMany">>
+    findMany<T extends OrderPeripheralFindManyArgs>(args?: SelectSubset<T, OrderPeripheralFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPeripheralPayload<ExtArgs>, T, "findMany">>
 
     /**
-     * Create a OrderFurniture.
-     * @param {OrderFurnitureCreateArgs} args - Arguments to create a OrderFurniture.
+     * Create a OrderPeripheral.
+     * @param {OrderPeripheralCreateArgs} args - Arguments to create a OrderPeripheral.
      * @example
-     * // Create one OrderFurniture
-     * const OrderFurniture = await prisma.orderFurniture.create({
+     * // Create one OrderPeripheral
+     * const OrderPeripheral = await prisma.orderPeripheral.create({
      *   data: {
-     *     // ... data to create a OrderFurniture
+     *     // ... data to create a OrderPeripheral
      *   }
      * })
      * 
      */
-    create<T extends OrderFurnitureCreateArgs>(args: SelectSubset<T, OrderFurnitureCreateArgs<ExtArgs>>): Prisma__OrderFurnitureClient<$Result.GetResult<Prisma.$OrderFurniturePayload<ExtArgs>, T, "create">, never, ExtArgs>
+    create<T extends OrderPeripheralCreateArgs>(args: SelectSubset<T, OrderPeripheralCreateArgs<ExtArgs>>): Prisma__OrderPeripheralClient<$Result.GetResult<Prisma.$OrderPeripheralPayload<ExtArgs>, T, "create">, never, ExtArgs>
 
     /**
-     * Create many OrderFurnitures.
-     * @param {OrderFurnitureCreateManyArgs} args - Arguments to create many OrderFurnitures.
+     * Create many OrderPeripherals.
+     * @param {OrderPeripheralCreateManyArgs} args - Arguments to create many OrderPeripherals.
      * @example
-     * // Create many OrderFurnitures
-     * const orderFurniture = await prisma.orderFurniture.createMany({
+     * // Create many OrderPeripherals
+     * const orderPeripheral = await prisma.orderPeripheral.createMany({
      *   data: [
      *     // ... provide data here
      *   ]
      * })
      *     
      */
-    createMany<T extends OrderFurnitureCreateManyArgs>(args?: SelectSubset<T, OrderFurnitureCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends OrderPeripheralCreateManyArgs>(args?: SelectSubset<T, OrderPeripheralCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create many OrderFurnitures and returns the data saved in the database.
-     * @param {OrderFurnitureCreateManyAndReturnArgs} args - Arguments to create many OrderFurnitures.
+     * Delete a OrderPeripheral.
+     * @param {OrderPeripheralDeleteArgs} args - Arguments to delete one OrderPeripheral.
      * @example
-     * // Create many OrderFurnitures
-     * const orderFurniture = await prisma.orderFurniture.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many OrderFurnitures and only return the `id`
-     * const orderFurnitureWithIdOnly = await prisma.orderFurniture.createManyAndReturn({ 
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends OrderFurnitureCreateManyAndReturnArgs>(args?: SelectSubset<T, OrderFurnitureCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderFurniturePayload<ExtArgs>, T, "createManyAndReturn">>
-
-    /**
-     * Delete a OrderFurniture.
-     * @param {OrderFurnitureDeleteArgs} args - Arguments to delete one OrderFurniture.
-     * @example
-     * // Delete one OrderFurniture
-     * const OrderFurniture = await prisma.orderFurniture.delete({
+     * // Delete one OrderPeripheral
+     * const OrderPeripheral = await prisma.orderPeripheral.delete({
      *   where: {
-     *     // ... filter to delete one OrderFurniture
+     *     // ... filter to delete one OrderPeripheral
      *   }
      * })
      * 
      */
-    delete<T extends OrderFurnitureDeleteArgs>(args: SelectSubset<T, OrderFurnitureDeleteArgs<ExtArgs>>): Prisma__OrderFurnitureClient<$Result.GetResult<Prisma.$OrderFurniturePayload<ExtArgs>, T, "delete">, never, ExtArgs>
+    delete<T extends OrderPeripheralDeleteArgs>(args: SelectSubset<T, OrderPeripheralDeleteArgs<ExtArgs>>): Prisma__OrderPeripheralClient<$Result.GetResult<Prisma.$OrderPeripheralPayload<ExtArgs>, T, "delete">, never, ExtArgs>
 
     /**
-     * Update one OrderFurniture.
-     * @param {OrderFurnitureUpdateArgs} args - Arguments to update one OrderFurniture.
+     * Update one OrderPeripheral.
+     * @param {OrderPeripheralUpdateArgs} args - Arguments to update one OrderPeripheral.
      * @example
-     * // Update one OrderFurniture
-     * const orderFurniture = await prisma.orderFurniture.update({
+     * // Update one OrderPeripheral
+     * const orderPeripheral = await prisma.orderPeripheral.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5838,30 +5534,30 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends OrderFurnitureUpdateArgs>(args: SelectSubset<T, OrderFurnitureUpdateArgs<ExtArgs>>): Prisma__OrderFurnitureClient<$Result.GetResult<Prisma.$OrderFurniturePayload<ExtArgs>, T, "update">, never, ExtArgs>
+    update<T extends OrderPeripheralUpdateArgs>(args: SelectSubset<T, OrderPeripheralUpdateArgs<ExtArgs>>): Prisma__OrderPeripheralClient<$Result.GetResult<Prisma.$OrderPeripheralPayload<ExtArgs>, T, "update">, never, ExtArgs>
 
     /**
-     * Delete zero or more OrderFurnitures.
-     * @param {OrderFurnitureDeleteManyArgs} args - Arguments to filter OrderFurnitures to delete.
+     * Delete zero or more OrderPeripherals.
+     * @param {OrderPeripheralDeleteManyArgs} args - Arguments to filter OrderPeripherals to delete.
      * @example
-     * // Delete a few OrderFurnitures
-     * const { count } = await prisma.orderFurniture.deleteMany({
+     * // Delete a few OrderPeripherals
+     * const { count } = await prisma.orderPeripheral.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
      */
-    deleteMany<T extends OrderFurnitureDeleteManyArgs>(args?: SelectSubset<T, OrderFurnitureDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends OrderPeripheralDeleteManyArgs>(args?: SelectSubset<T, OrderPeripheralDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more OrderFurnitures.
+     * Update zero or more OrderPeripherals.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OrderFurnitureUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {OrderPeripheralUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many OrderFurnitures
-     * const orderFurniture = await prisma.orderFurniture.updateMany({
+     * // Update many OrderPeripherals
+     * const orderPeripheral = await prisma.orderPeripheral.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -5871,56 +5567,56 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends OrderFurnitureUpdateManyArgs>(args: SelectSubset<T, OrderFurnitureUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends OrderPeripheralUpdateManyArgs>(args: SelectSubset<T, OrderPeripheralUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one OrderFurniture.
-     * @param {OrderFurnitureUpsertArgs} args - Arguments to update or create a OrderFurniture.
+     * Create or update one OrderPeripheral.
+     * @param {OrderPeripheralUpsertArgs} args - Arguments to update or create a OrderPeripheral.
      * @example
-     * // Update or create a OrderFurniture
-     * const orderFurniture = await prisma.orderFurniture.upsert({
+     * // Update or create a OrderPeripheral
+     * const orderPeripheral = await prisma.orderPeripheral.upsert({
      *   create: {
-     *     // ... data to create a OrderFurniture
+     *     // ... data to create a OrderPeripheral
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the OrderFurniture we want to update
+     *     // ... the filter for the OrderPeripheral we want to update
      *   }
      * })
      */
-    upsert<T extends OrderFurnitureUpsertArgs>(args: SelectSubset<T, OrderFurnitureUpsertArgs<ExtArgs>>): Prisma__OrderFurnitureClient<$Result.GetResult<Prisma.$OrderFurniturePayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+    upsert<T extends OrderPeripheralUpsertArgs>(args: SelectSubset<T, OrderPeripheralUpsertArgs<ExtArgs>>): Prisma__OrderPeripheralClient<$Result.GetResult<Prisma.$OrderPeripheralPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
 
 
     /**
-     * Count the number of OrderFurnitures.
+     * Count the number of OrderPeripherals.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OrderFurnitureCountArgs} args - Arguments to filter OrderFurnitures to count.
+     * @param {OrderPeripheralCountArgs} args - Arguments to filter OrderPeripherals to count.
      * @example
-     * // Count the number of OrderFurnitures
-     * const count = await prisma.orderFurniture.count({
+     * // Count the number of OrderPeripherals
+     * const count = await prisma.orderPeripheral.count({
      *   where: {
-     *     // ... the filter for the OrderFurnitures we want to count
+     *     // ... the filter for the OrderPeripherals we want to count
      *   }
      * })
     **/
-    count<T extends OrderFurnitureCountArgs>(
-      args?: Subset<T, OrderFurnitureCountArgs>,
+    count<T extends OrderPeripheralCountArgs>(
+      args?: Subset<T, OrderPeripheralCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], OrderFurnitureCountAggregateOutputType>
+          : GetScalarType<T['select'], OrderPeripheralCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a OrderFurniture.
+     * Allows you to perform aggregations operations on a OrderPeripheral.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OrderFurnitureAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {OrderPeripheralAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -5940,13 +5636,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends OrderFurnitureAggregateArgs>(args: Subset<T, OrderFurnitureAggregateArgs>): Prisma.PrismaPromise<GetOrderFurnitureAggregateType<T>>
+    aggregate<T extends OrderPeripheralAggregateArgs>(args: Subset<T, OrderPeripheralAggregateArgs>): Prisma.PrismaPromise<GetOrderPeripheralAggregateType<T>>
 
     /**
-     * Group by OrderFurniture.
+     * Group by OrderPeripheral.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {OrderFurnitureGroupByArgs} args - Group by arguments.
+     * @param {OrderPeripheralGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -5961,14 +5657,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends OrderFurnitureGroupByArgs,
+      T extends OrderPeripheralGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: OrderFurnitureGroupByArgs['orderBy'] }
-        : { orderBy?: OrderFurnitureGroupByArgs['orderBy'] },
+        ? { orderBy: OrderPeripheralGroupByArgs['orderBy'] }
+        : { orderBy?: OrderPeripheralGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -6017,23 +5713,23 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, OrderFurnitureGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOrderFurnitureGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, OrderPeripheralGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOrderPeripheralGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the OrderFurniture model
+   * Fields of the OrderPeripheral model
    */
-  readonly fields: OrderFurnitureFieldRefs;
+  readonly fields: OrderPeripheralFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for OrderFurniture.
+   * The delegate class that acts as a "Promise-like" for OrderPeripheral.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__OrderFurnitureClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__OrderPeripheralClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     orders<T extends OrdersDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrdersDefaultArgs<ExtArgs>>): Prisma__OrdersClient<$Result.GetResult<Prisma.$OrdersPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    furnitures<T extends furnituresDefaultArgs<ExtArgs> = {}>(args?: Subset<T, furnituresDefaultArgs<ExtArgs>>): Prisma__furnituresClient<$Result.GetResult<Prisma.$furnituresPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    Peripherals<T extends PeripheralsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PeripheralsDefaultArgs<ExtArgs>>): Prisma__PeripheralsClient<$Result.GetResult<Prisma.$PeripheralsPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     store<T extends StoreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StoreDefaultArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6061,344 +5757,325 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the OrderFurniture model
+   * Fields of the OrderPeripheral model
    */ 
-  interface OrderFurnitureFieldRefs {
-    readonly id: FieldRef<"OrderFurniture", 'Int'>
-    readonly orderId: FieldRef<"OrderFurniture", 'String'>
-    readonly furnitureId: FieldRef<"OrderFurniture", 'Int'>
-    readonly storeId: FieldRef<"OrderFurniture", 'Int'>
-    readonly created_at: FieldRef<"OrderFurniture", 'DateTime'>
-    readonly updated_at: FieldRef<"OrderFurniture", 'DateTime'>
+  interface OrderPeripheralFieldRefs {
+    readonly id: FieldRef<"OrderPeripheral", 'Int'>
+    readonly orderId: FieldRef<"OrderPeripheral", 'String'>
+    readonly peripheralId: FieldRef<"OrderPeripheral", 'Int'>
+    readonly storeId: FieldRef<"OrderPeripheral", 'Int'>
+    readonly created_at: FieldRef<"OrderPeripheral", 'DateTime'>
+    readonly updated_at: FieldRef<"OrderPeripheral", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * OrderFurniture findUnique
+   * OrderPeripheral findUnique
    */
-  export type OrderFurnitureFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type OrderPeripheralFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OrderFurniture
+     * Select specific fields to fetch from the OrderPeripheral
      */
-    select?: OrderFurnitureSelect<ExtArgs> | null
+    select?: OrderPeripheralSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OrderFurnitureInclude<ExtArgs> | null
+    include?: OrderPeripheralInclude<ExtArgs> | null
     /**
-     * Filter, which OrderFurniture to fetch.
+     * Filter, which OrderPeripheral to fetch.
      */
-    where: OrderFurnitureWhereUniqueInput
+    where: OrderPeripheralWhereUniqueInput
   }
 
   /**
-   * OrderFurniture findUniqueOrThrow
+   * OrderPeripheral findUniqueOrThrow
    */
-  export type OrderFurnitureFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type OrderPeripheralFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OrderFurniture
+     * Select specific fields to fetch from the OrderPeripheral
      */
-    select?: OrderFurnitureSelect<ExtArgs> | null
+    select?: OrderPeripheralSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OrderFurnitureInclude<ExtArgs> | null
+    include?: OrderPeripheralInclude<ExtArgs> | null
     /**
-     * Filter, which OrderFurniture to fetch.
+     * Filter, which OrderPeripheral to fetch.
      */
-    where: OrderFurnitureWhereUniqueInput
+    where: OrderPeripheralWhereUniqueInput
   }
 
   /**
-   * OrderFurniture findFirst
+   * OrderPeripheral findFirst
    */
-  export type OrderFurnitureFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type OrderPeripheralFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OrderFurniture
+     * Select specific fields to fetch from the OrderPeripheral
      */
-    select?: OrderFurnitureSelect<ExtArgs> | null
+    select?: OrderPeripheralSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OrderFurnitureInclude<ExtArgs> | null
+    include?: OrderPeripheralInclude<ExtArgs> | null
     /**
-     * Filter, which OrderFurniture to fetch.
+     * Filter, which OrderPeripheral to fetch.
      */
-    where?: OrderFurnitureWhereInput
+    where?: OrderPeripheralWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of OrderFurnitures to fetch.
+     * Determine the order of OrderPeripherals to fetch.
      */
-    orderBy?: OrderFurnitureOrderByWithRelationInput | OrderFurnitureOrderByWithRelationInput[]
+    orderBy?: OrderPeripheralOrderByWithRelationInput | OrderPeripheralOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for OrderFurnitures.
+     * Sets the position for searching for OrderPeripherals.
      */
-    cursor?: OrderFurnitureWhereUniqueInput
+    cursor?: OrderPeripheralWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` OrderFurnitures from the position of the cursor.
+     * Take `±n` OrderPeripherals from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` OrderFurnitures.
+     * Skip the first `n` OrderPeripherals.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of OrderFurnitures.
+     * Filter by unique combinations of OrderPeripherals.
      */
-    distinct?: OrderFurnitureScalarFieldEnum | OrderFurnitureScalarFieldEnum[]
+    distinct?: OrderPeripheralScalarFieldEnum | OrderPeripheralScalarFieldEnum[]
   }
 
   /**
-   * OrderFurniture findFirstOrThrow
+   * OrderPeripheral findFirstOrThrow
    */
-  export type OrderFurnitureFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type OrderPeripheralFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OrderFurniture
+     * Select specific fields to fetch from the OrderPeripheral
      */
-    select?: OrderFurnitureSelect<ExtArgs> | null
+    select?: OrderPeripheralSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OrderFurnitureInclude<ExtArgs> | null
+    include?: OrderPeripheralInclude<ExtArgs> | null
     /**
-     * Filter, which OrderFurniture to fetch.
+     * Filter, which OrderPeripheral to fetch.
      */
-    where?: OrderFurnitureWhereInput
+    where?: OrderPeripheralWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of OrderFurnitures to fetch.
+     * Determine the order of OrderPeripherals to fetch.
      */
-    orderBy?: OrderFurnitureOrderByWithRelationInput | OrderFurnitureOrderByWithRelationInput[]
+    orderBy?: OrderPeripheralOrderByWithRelationInput | OrderPeripheralOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for OrderFurnitures.
+     * Sets the position for searching for OrderPeripherals.
      */
-    cursor?: OrderFurnitureWhereUniqueInput
+    cursor?: OrderPeripheralWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` OrderFurnitures from the position of the cursor.
+     * Take `±n` OrderPeripherals from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` OrderFurnitures.
+     * Skip the first `n` OrderPeripherals.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of OrderFurnitures.
+     * Filter by unique combinations of OrderPeripherals.
      */
-    distinct?: OrderFurnitureScalarFieldEnum | OrderFurnitureScalarFieldEnum[]
+    distinct?: OrderPeripheralScalarFieldEnum | OrderPeripheralScalarFieldEnum[]
   }
 
   /**
-   * OrderFurniture findMany
+   * OrderPeripheral findMany
    */
-  export type OrderFurnitureFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type OrderPeripheralFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OrderFurniture
+     * Select specific fields to fetch from the OrderPeripheral
      */
-    select?: OrderFurnitureSelect<ExtArgs> | null
+    select?: OrderPeripheralSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OrderFurnitureInclude<ExtArgs> | null
+    include?: OrderPeripheralInclude<ExtArgs> | null
     /**
-     * Filter, which OrderFurnitures to fetch.
+     * Filter, which OrderPeripherals to fetch.
      */
-    where?: OrderFurnitureWhereInput
+    where?: OrderPeripheralWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of OrderFurnitures to fetch.
+     * Determine the order of OrderPeripherals to fetch.
      */
-    orderBy?: OrderFurnitureOrderByWithRelationInput | OrderFurnitureOrderByWithRelationInput[]
+    orderBy?: OrderPeripheralOrderByWithRelationInput | OrderPeripheralOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing OrderFurnitures.
+     * Sets the position for listing OrderPeripherals.
      */
-    cursor?: OrderFurnitureWhereUniqueInput
+    cursor?: OrderPeripheralWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` OrderFurnitures from the position of the cursor.
+     * Take `±n` OrderPeripherals from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` OrderFurnitures.
+     * Skip the first `n` OrderPeripherals.
      */
     skip?: number
-    distinct?: OrderFurnitureScalarFieldEnum | OrderFurnitureScalarFieldEnum[]
+    distinct?: OrderPeripheralScalarFieldEnum | OrderPeripheralScalarFieldEnum[]
   }
 
   /**
-   * OrderFurniture create
+   * OrderPeripheral create
    */
-  export type OrderFurnitureCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type OrderPeripheralCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OrderFurniture
+     * Select specific fields to fetch from the OrderPeripheral
      */
-    select?: OrderFurnitureSelect<ExtArgs> | null
+    select?: OrderPeripheralSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OrderFurnitureInclude<ExtArgs> | null
+    include?: OrderPeripheralInclude<ExtArgs> | null
     /**
-     * The data needed to create a OrderFurniture.
+     * The data needed to create a OrderPeripheral.
      */
-    data: XOR<OrderFurnitureCreateInput, OrderFurnitureUncheckedCreateInput>
+    data: XOR<OrderPeripheralCreateInput, OrderPeripheralUncheckedCreateInput>
   }
 
   /**
-   * OrderFurniture createMany
+   * OrderPeripheral createMany
    */
-  export type OrderFurnitureCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type OrderPeripheralCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many OrderFurnitures.
+     * The data used to create many OrderPeripherals.
      */
-    data: OrderFurnitureCreateManyInput | OrderFurnitureCreateManyInput[]
+    data: OrderPeripheralCreateManyInput | OrderPeripheralCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * OrderFurniture createManyAndReturn
+   * OrderPeripheral update
    */
-  export type OrderFurnitureCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type OrderPeripheralUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OrderFurniture
+     * Select specific fields to fetch from the OrderPeripheral
      */
-    select?: OrderFurnitureSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * The data used to create many OrderFurnitures.
-     */
-    data: OrderFurnitureCreateManyInput | OrderFurnitureCreateManyInput[]
-    skipDuplicates?: boolean
+    select?: OrderPeripheralSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OrderFurnitureIncludeCreateManyAndReturn<ExtArgs> | null
+    include?: OrderPeripheralInclude<ExtArgs> | null
+    /**
+     * The data needed to update a OrderPeripheral.
+     */
+    data: XOR<OrderPeripheralUpdateInput, OrderPeripheralUncheckedUpdateInput>
+    /**
+     * Choose, which OrderPeripheral to update.
+     */
+    where: OrderPeripheralWhereUniqueInput
   }
 
   /**
-   * OrderFurniture update
+   * OrderPeripheral updateMany
    */
-  export type OrderFurnitureUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type OrderPeripheralUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OrderFurniture
+     * The data used to update OrderPeripherals.
      */
-    select?: OrderFurnitureSelect<ExtArgs> | null
+    data: XOR<OrderPeripheralUpdateManyMutationInput, OrderPeripheralUncheckedUpdateManyInput>
+    /**
+     * Filter which OrderPeripherals to update
+     */
+    where?: OrderPeripheralWhereInput
+  }
+
+  /**
+   * OrderPeripheral upsert
+   */
+  export type OrderPeripheralUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderPeripheral
+     */
+    select?: OrderPeripheralSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OrderFurnitureInclude<ExtArgs> | null
+    include?: OrderPeripheralInclude<ExtArgs> | null
     /**
-     * The data needed to update a OrderFurniture.
+     * The filter to search for the OrderPeripheral to update in case it exists.
      */
-    data: XOR<OrderFurnitureUpdateInput, OrderFurnitureUncheckedUpdateInput>
+    where: OrderPeripheralWhereUniqueInput
     /**
-     * Choose, which OrderFurniture to update.
+     * In case the OrderPeripheral found by the `where` argument doesn't exist, create a new OrderPeripheral with this data.
      */
-    where: OrderFurnitureWhereUniqueInput
+    create: XOR<OrderPeripheralCreateInput, OrderPeripheralUncheckedCreateInput>
+    /**
+     * In case the OrderPeripheral was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OrderPeripheralUpdateInput, OrderPeripheralUncheckedUpdateInput>
   }
 
   /**
-   * OrderFurniture updateMany
+   * OrderPeripheral delete
    */
-  export type OrderFurnitureUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type OrderPeripheralDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update OrderFurnitures.
+     * Select specific fields to fetch from the OrderPeripheral
      */
-    data: XOR<OrderFurnitureUpdateManyMutationInput, OrderFurnitureUncheckedUpdateManyInput>
-    /**
-     * Filter which OrderFurnitures to update
-     */
-    where?: OrderFurnitureWhereInput
-  }
-
-  /**
-   * OrderFurniture upsert
-   */
-  export type OrderFurnitureUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OrderFurniture
-     */
-    select?: OrderFurnitureSelect<ExtArgs> | null
+    select?: OrderPeripheralSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OrderFurnitureInclude<ExtArgs> | null
+    include?: OrderPeripheralInclude<ExtArgs> | null
     /**
-     * The filter to search for the OrderFurniture to update in case it exists.
+     * Filter which OrderPeripheral to delete.
      */
-    where: OrderFurnitureWhereUniqueInput
-    /**
-     * In case the OrderFurniture found by the `where` argument doesn't exist, create a new OrderFurniture with this data.
-     */
-    create: XOR<OrderFurnitureCreateInput, OrderFurnitureUncheckedCreateInput>
-    /**
-     * In case the OrderFurniture was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<OrderFurnitureUpdateInput, OrderFurnitureUncheckedUpdateInput>
+    where: OrderPeripheralWhereUniqueInput
   }
 
   /**
-   * OrderFurniture delete
+   * OrderPeripheral deleteMany
    */
-  export type OrderFurnitureDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type OrderPeripheralDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the OrderFurniture
+     * Filter which OrderPeripherals to delete
      */
-    select?: OrderFurnitureSelect<ExtArgs> | null
+    where?: OrderPeripheralWhereInput
+  }
+
+  /**
+   * OrderPeripheral without action
+   */
+  export type OrderPeripheralDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderPeripheral
+     */
+    select?: OrderPeripheralSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: OrderFurnitureInclude<ExtArgs> | null
-    /**
-     * Filter which OrderFurniture to delete.
-     */
-    where: OrderFurnitureWhereUniqueInput
-  }
-
-  /**
-   * OrderFurniture deleteMany
-   */
-  export type OrderFurnitureDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which OrderFurnitures to delete
-     */
-    where?: OrderFurnitureWhereInput
-  }
-
-  /**
-   * OrderFurniture without action
-   */
-  export type OrderFurnitureDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the OrderFurniture
-     */
-    select?: OrderFurnitureSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OrderFurnitureInclude<ExtArgs> | null
+    include?: OrderPeripheralInclude<ExtArgs> | null
   }
 
 
@@ -6416,9 +6093,9 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-  export const FurnituresScalarFieldEnum: {
+  export const PeripheralsScalarFieldEnum: {
     id: 'id',
-    nama_furniture: 'nama_furniture',
+    nama_peripheral: 'nama_peripheral',
     slug: 'slug',
     deskripsi: 'deskripsi',
     harga: 'harga',
@@ -6429,14 +6106,14 @@ export namespace Prisma {
     updated_at: 'updated_at'
   };
 
-  export type FurnituresScalarFieldEnum = (typeof FurnituresScalarFieldEnum)[keyof typeof FurnituresScalarFieldEnum]
+  export type PeripheralsScalarFieldEnum = (typeof PeripheralsScalarFieldEnum)[keyof typeof PeripheralsScalarFieldEnum]
 
 
   export const CartScalarFieldEnum: {
     id: 'id',
-    id_furniture: 'id_furniture',
+    id_peripherals: 'id_peripherals',
     user_email: 'user_email',
-    nama_furniture: 'nama_furniture',
+    nama_peripheral: 'nama_peripheral',
     slug: 'slug',
     harga: 'harga',
     categories: 'categories',
@@ -6473,16 +6150,16 @@ export namespace Prisma {
   export type OrdersScalarFieldEnum = (typeof OrdersScalarFieldEnum)[keyof typeof OrdersScalarFieldEnum]
 
 
-  export const OrderFurnitureScalarFieldEnum: {
+  export const OrderPeripheralScalarFieldEnum: {
     id: 'id',
     orderId: 'orderId',
-    furnitureId: 'furnitureId',
+    peripheralId: 'peripheralId',
     storeId: 'storeId',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
 
-  export type OrderFurnitureScalarFieldEnum = (typeof OrderFurnitureScalarFieldEnum)[keyof typeof OrderFurnitureScalarFieldEnum]
+  export type OrderPeripheralScalarFieldEnum = (typeof OrderPeripheralScalarFieldEnum)[keyof typeof OrderPeripheralScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -6491,14 +6168,6 @@ export namespace Prisma {
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
-
-
-  export const QueryMode: {
-    default: 'default',
-    insensitive: 'insensitive'
-  };
-
-  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
   export const NullsOrder: {
@@ -6522,23 +6191,9 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
    * Reference to a field of type 'String'
    */
   export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
-    
-
-
-  /**
-   * Reference to a field of type 'String[]'
-   */
-  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
     
 
 
@@ -6550,50 +6205,36 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
-
-
-  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-  /**
-   * Reference to a field of type 'DateTime[]'
-   */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
   /**
    * Deep Input Types
    */
 
 
-  export type furnituresWhereInput = {
-    AND?: furnituresWhereInput | furnituresWhereInput[]
-    OR?: furnituresWhereInput[]
-    NOT?: furnituresWhereInput | furnituresWhereInput[]
-    id?: IntFilter<"furnitures"> | number
-    nama_furniture?: StringFilter<"furnitures"> | string
-    slug?: StringFilter<"furnitures"> | string
-    deskripsi?: StringFilter<"furnitures"> | string
-    harga?: FloatFilter<"furnitures"> | number
-    categories?: StringFilter<"furnitures"> | string
-    image?: StringNullableFilter<"furnitures"> | string | null
-    store_id?: IntFilter<"furnitures"> | number
-    created_at?: DateTimeFilter<"furnitures"> | Date | string
-    updated_at?: DateTimeFilter<"furnitures"> | Date | string
+  export type PeripheralsWhereInput = {
+    AND?: PeripheralsWhereInput | PeripheralsWhereInput[]
+    OR?: PeripheralsWhereInput[]
+    NOT?: PeripheralsWhereInput | PeripheralsWhereInput[]
+    id?: IntFilter<"Peripherals"> | number
+    nama_peripheral?: StringFilter<"Peripherals"> | string
+    slug?: StringFilter<"Peripherals"> | string
+    deskripsi?: StringFilter<"Peripherals"> | string
+    harga?: FloatFilter<"Peripherals"> | number
+    categories?: StringFilter<"Peripherals"> | string
+    image?: StringNullableFilter<"Peripherals"> | string | null
+    store_id?: IntFilter<"Peripherals"> | number
+    created_at?: DateTimeFilter<"Peripherals"> | Date | string
+    updated_at?: DateTimeFilter<"Peripherals"> | Date | string
     Store?: XOR<StoreNullableRelationFilter, StoreWhereInput> | null
-    OrderFurniture?: OrderFurnitureListRelationFilter
+    OrderPeripheral?: OrderPeripheralListRelationFilter
   }
 
-  export type furnituresOrderByWithRelationInput = {
+  export type PeripheralsOrderByWithRelationInput = {
     id?: SortOrder
-    nama_furniture?: SortOrder
+    nama_peripheral?: SortOrder
     slug?: SortOrder
     deskripsi?: SortOrder
     harga?: SortOrder
@@ -6603,30 +6244,30 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     Store?: StoreOrderByWithRelationInput
-    OrderFurniture?: OrderFurnitureOrderByRelationAggregateInput
+    OrderPeripheral?: OrderPeripheralOrderByRelationAggregateInput
   }
 
-  export type furnituresWhereUniqueInput = Prisma.AtLeast<{
+  export type PeripheralsWhereUniqueInput = Prisma.AtLeast<{
     id?: number
     slug?: string
-    AND?: furnituresWhereInput | furnituresWhereInput[]
-    OR?: furnituresWhereInput[]
-    NOT?: furnituresWhereInput | furnituresWhereInput[]
-    nama_furniture?: StringFilter<"furnitures"> | string
-    deskripsi?: StringFilter<"furnitures"> | string
-    harga?: FloatFilter<"furnitures"> | number
-    categories?: StringFilter<"furnitures"> | string
-    image?: StringNullableFilter<"furnitures"> | string | null
-    store_id?: IntFilter<"furnitures"> | number
-    created_at?: DateTimeFilter<"furnitures"> | Date | string
-    updated_at?: DateTimeFilter<"furnitures"> | Date | string
+    AND?: PeripheralsWhereInput | PeripheralsWhereInput[]
+    OR?: PeripheralsWhereInput[]
+    NOT?: PeripheralsWhereInput | PeripheralsWhereInput[]
+    nama_peripheral?: StringFilter<"Peripherals"> | string
+    deskripsi?: StringFilter<"Peripherals"> | string
+    harga?: FloatFilter<"Peripherals"> | number
+    categories?: StringFilter<"Peripherals"> | string
+    image?: StringNullableFilter<"Peripherals"> | string | null
+    store_id?: IntFilter<"Peripherals"> | number
+    created_at?: DateTimeFilter<"Peripherals"> | Date | string
+    updated_at?: DateTimeFilter<"Peripherals"> | Date | string
     Store?: XOR<StoreNullableRelationFilter, StoreWhereInput> | null
-    OrderFurniture?: OrderFurnitureListRelationFilter
+    OrderPeripheral?: OrderPeripheralListRelationFilter
   }, "id" | "slug">
 
-  export type furnituresOrderByWithAggregationInput = {
+  export type PeripheralsOrderByWithAggregationInput = {
     id?: SortOrder
-    nama_furniture?: SortOrder
+    nama_peripheral?: SortOrder
     slug?: SortOrder
     deskripsi?: SortOrder
     harga?: SortOrder
@@ -6635,97 +6276,97 @@ export namespace Prisma {
     store_id?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    _count?: furnituresCountOrderByAggregateInput
-    _avg?: furnituresAvgOrderByAggregateInput
-    _max?: furnituresMaxOrderByAggregateInput
-    _min?: furnituresMinOrderByAggregateInput
-    _sum?: furnituresSumOrderByAggregateInput
+    _count?: PeripheralsCountOrderByAggregateInput
+    _avg?: PeripheralsAvgOrderByAggregateInput
+    _max?: PeripheralsMaxOrderByAggregateInput
+    _min?: PeripheralsMinOrderByAggregateInput
+    _sum?: PeripheralsSumOrderByAggregateInput
   }
 
-  export type furnituresScalarWhereWithAggregatesInput = {
-    AND?: furnituresScalarWhereWithAggregatesInput | furnituresScalarWhereWithAggregatesInput[]
-    OR?: furnituresScalarWhereWithAggregatesInput[]
-    NOT?: furnituresScalarWhereWithAggregatesInput | furnituresScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"furnitures"> | number
-    nama_furniture?: StringWithAggregatesFilter<"furnitures"> | string
-    slug?: StringWithAggregatesFilter<"furnitures"> | string
-    deskripsi?: StringWithAggregatesFilter<"furnitures"> | string
-    harga?: FloatWithAggregatesFilter<"furnitures"> | number
-    categories?: StringWithAggregatesFilter<"furnitures"> | string
-    image?: StringNullableWithAggregatesFilter<"furnitures"> | string | null
-    store_id?: IntWithAggregatesFilter<"furnitures"> | number
-    created_at?: DateTimeWithAggregatesFilter<"furnitures"> | Date | string
-    updated_at?: DateTimeWithAggregatesFilter<"furnitures"> | Date | string
+  export type PeripheralsScalarWhereWithAggregatesInput = {
+    AND?: PeripheralsScalarWhereWithAggregatesInput | PeripheralsScalarWhereWithAggregatesInput[]
+    OR?: PeripheralsScalarWhereWithAggregatesInput[]
+    NOT?: PeripheralsScalarWhereWithAggregatesInput | PeripheralsScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Peripherals"> | number
+    nama_peripheral?: StringWithAggregatesFilter<"Peripherals"> | string
+    slug?: StringWithAggregatesFilter<"Peripherals"> | string
+    deskripsi?: StringWithAggregatesFilter<"Peripherals"> | string
+    harga?: FloatWithAggregatesFilter<"Peripherals"> | number
+    categories?: StringWithAggregatesFilter<"Peripherals"> | string
+    image?: StringNullableWithAggregatesFilter<"Peripherals"> | string | null
+    store_id?: IntWithAggregatesFilter<"Peripherals"> | number
+    created_at?: DateTimeWithAggregatesFilter<"Peripherals"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"Peripherals"> | Date | string
   }
 
-  export type cartWhereInput = {
-    AND?: cartWhereInput | cartWhereInput[]
-    OR?: cartWhereInput[]
-    NOT?: cartWhereInput | cartWhereInput[]
-    id?: IntFilter<"cart"> | number
-    id_furniture?: IntFilter<"cart"> | number
-    user_email?: StringNullableFilter<"cart"> | string | null
-    nama_furniture?: StringFilter<"cart"> | string
-    slug?: StringFilter<"cart"> | string
-    harga?: FloatFilter<"cart"> | number
-    categories?: StringFilter<"cart"> | string
-    image?: StringNullableFilter<"cart"> | string | null
+  export type CartWhereInput = {
+    AND?: CartWhereInput | CartWhereInput[]
+    OR?: CartWhereInput[]
+    NOT?: CartWhereInput | CartWhereInput[]
+    id?: IntFilter<"Cart"> | number
+    id_peripherals?: IntFilter<"Cart"> | number
+    user_email?: StringNullableFilter<"Cart"> | string | null
+    nama_peripheral?: StringFilter<"Cart"> | string
+    slug?: StringFilter<"Cart"> | string
+    harga?: FloatFilter<"Cart"> | number
+    categories?: StringFilter<"Cart"> | string
+    image?: StringNullableFilter<"Cart"> | string | null
   }
 
-  export type cartOrderByWithRelationInput = {
+  export type CartOrderByWithRelationInput = {
     id?: SortOrder
-    id_furniture?: SortOrder
+    id_peripherals?: SortOrder
     user_email?: SortOrderInput | SortOrder
-    nama_furniture?: SortOrder
+    nama_peripheral?: SortOrder
     slug?: SortOrder
     harga?: SortOrder
     categories?: SortOrder
     image?: SortOrderInput | SortOrder
   }
 
-  export type cartWhereUniqueInput = Prisma.AtLeast<{
+  export type CartWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    slug_user_email?: cartSlugUser_emailCompoundUniqueInput
-    AND?: cartWhereInput | cartWhereInput[]
-    OR?: cartWhereInput[]
-    NOT?: cartWhereInput | cartWhereInput[]
-    id_furniture?: IntFilter<"cart"> | number
-    user_email?: StringNullableFilter<"cart"> | string | null
-    nama_furniture?: StringFilter<"cart"> | string
-    slug?: StringFilter<"cart"> | string
-    harga?: FloatFilter<"cart"> | number
-    categories?: StringFilter<"cart"> | string
-    image?: StringNullableFilter<"cart"> | string | null
+    slug_user_email?: CartSlugUser_emailCompoundUniqueInput
+    AND?: CartWhereInput | CartWhereInput[]
+    OR?: CartWhereInput[]
+    NOT?: CartWhereInput | CartWhereInput[]
+    id_peripherals?: IntFilter<"Cart"> | number
+    user_email?: StringNullableFilter<"Cart"> | string | null
+    nama_peripheral?: StringFilter<"Cart"> | string
+    slug?: StringFilter<"Cart"> | string
+    harga?: FloatFilter<"Cart"> | number
+    categories?: StringFilter<"Cart"> | string
+    image?: StringNullableFilter<"Cart"> | string | null
   }, "id" | "slug_user_email">
 
-  export type cartOrderByWithAggregationInput = {
+  export type CartOrderByWithAggregationInput = {
     id?: SortOrder
-    id_furniture?: SortOrder
+    id_peripherals?: SortOrder
     user_email?: SortOrderInput | SortOrder
-    nama_furniture?: SortOrder
+    nama_peripheral?: SortOrder
     slug?: SortOrder
     harga?: SortOrder
     categories?: SortOrder
     image?: SortOrderInput | SortOrder
-    _count?: cartCountOrderByAggregateInput
-    _avg?: cartAvgOrderByAggregateInput
-    _max?: cartMaxOrderByAggregateInput
-    _min?: cartMinOrderByAggregateInput
-    _sum?: cartSumOrderByAggregateInput
+    _count?: CartCountOrderByAggregateInput
+    _avg?: CartAvgOrderByAggregateInput
+    _max?: CartMaxOrderByAggregateInput
+    _min?: CartMinOrderByAggregateInput
+    _sum?: CartSumOrderByAggregateInput
   }
 
-  export type cartScalarWhereWithAggregatesInput = {
-    AND?: cartScalarWhereWithAggregatesInput | cartScalarWhereWithAggregatesInput[]
-    OR?: cartScalarWhereWithAggregatesInput[]
-    NOT?: cartScalarWhereWithAggregatesInput | cartScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"cart"> | number
-    id_furniture?: IntWithAggregatesFilter<"cart"> | number
-    user_email?: StringNullableWithAggregatesFilter<"cart"> | string | null
-    nama_furniture?: StringWithAggregatesFilter<"cart"> | string
-    slug?: StringWithAggregatesFilter<"cart"> | string
-    harga?: FloatWithAggregatesFilter<"cart"> | number
-    categories?: StringWithAggregatesFilter<"cart"> | string
-    image?: StringNullableWithAggregatesFilter<"cart"> | string | null
+  export type CartScalarWhereWithAggregatesInput = {
+    AND?: CartScalarWhereWithAggregatesInput | CartScalarWhereWithAggregatesInput[]
+    OR?: CartScalarWhereWithAggregatesInput[]
+    NOT?: CartScalarWhereWithAggregatesInput | CartScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Cart"> | number
+    id_peripherals?: IntWithAggregatesFilter<"Cart"> | number
+    user_email?: StringNullableWithAggregatesFilter<"Cart"> | string | null
+    nama_peripheral?: StringWithAggregatesFilter<"Cart"> | string
+    slug?: StringWithAggregatesFilter<"Cart"> | string
+    harga?: FloatWithAggregatesFilter<"Cart"> | number
+    categories?: StringWithAggregatesFilter<"Cart"> | string
+    image?: StringNullableWithAggregatesFilter<"Cart"> | string | null
   }
 
   export type StoreWhereInput = {
@@ -6740,8 +6381,8 @@ export namespace Prisma {
     user_email?: StringFilter<"Store"> | string
     created_at?: DateTimeFilter<"Store"> | Date | string
     updated_at?: DateTimeFilter<"Store"> | Date | string
-    furniture?: FurnituresListRelationFilter
-    OrderFurniture?: OrderFurnitureListRelationFilter
+    Peripherals?: PeripheralsListRelationFilter
+    OrderPeripheral?: OrderPeripheralListRelationFilter
   }
 
   export type StoreOrderByWithRelationInput = {
@@ -6753,8 +6394,8 @@ export namespace Prisma {
     user_email?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    furniture?: furnituresOrderByRelationAggregateInput
-    OrderFurniture?: OrderFurnitureOrderByRelationAggregateInput
+    Peripherals?: PeripheralsOrderByRelationAggregateInput
+    OrderPeripheral?: OrderPeripheralOrderByRelationAggregateInput
   }
 
   export type StoreWhereUniqueInput = Prisma.AtLeast<{
@@ -6769,8 +6410,8 @@ export namespace Prisma {
     user_email?: StringFilter<"Store"> | string
     created_at?: DateTimeFilter<"Store"> | Date | string
     updated_at?: DateTimeFilter<"Store"> | Date | string
-    furniture?: FurnituresListRelationFilter
-    OrderFurniture?: OrderFurnitureListRelationFilter
+    Peripherals?: PeripheralsListRelationFilter
+    OrderPeripheral?: OrderPeripheralListRelationFilter
   }, "id" | "slug">
 
   export type StoreOrderByWithAggregationInput = {
@@ -6814,7 +6455,7 @@ export namespace Prisma {
     status?: StringFilter<"Orders"> | string
     created_at?: DateTimeFilter<"Orders"> | Date | string
     updated_at?: DateTimeFilter<"Orders"> | Date | string
-    OrderFurniture?: OrderFurnitureListRelationFilter
+    OrderPeripheral?: OrderPeripheralListRelationFilter
   }
 
   export type OrdersOrderByWithRelationInput = {
@@ -6825,7 +6466,7 @@ export namespace Prisma {
     status?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    OrderFurniture?: OrderFurnitureOrderByRelationAggregateInput
+    OrderPeripheral?: OrderPeripheralOrderByRelationAggregateInput
   }
 
   export type OrdersWhereUniqueInput = Prisma.AtLeast<{
@@ -6839,7 +6480,7 @@ export namespace Prisma {
     status?: StringFilter<"Orders"> | string
     created_at?: DateTimeFilter<"Orders"> | Date | string
     updated_at?: DateTimeFilter<"Orders"> | Date | string
-    OrderFurniture?: OrderFurnitureListRelationFilter
+    OrderPeripheral?: OrderPeripheralListRelationFilter
   }, "id">
 
   export type OrdersOrderByWithAggregationInput = {
@@ -6870,76 +6511,76 @@ export namespace Prisma {
     updated_at?: DateTimeWithAggregatesFilter<"Orders"> | Date | string
   }
 
-  export type OrderFurnitureWhereInput = {
-    AND?: OrderFurnitureWhereInput | OrderFurnitureWhereInput[]
-    OR?: OrderFurnitureWhereInput[]
-    NOT?: OrderFurnitureWhereInput | OrderFurnitureWhereInput[]
-    id?: IntFilter<"OrderFurniture"> | number
-    orderId?: StringFilter<"OrderFurniture"> | string
-    furnitureId?: IntFilter<"OrderFurniture"> | number
-    storeId?: IntFilter<"OrderFurniture"> | number
-    created_at?: DateTimeFilter<"OrderFurniture"> | Date | string
-    updated_at?: DateTimeFilter<"OrderFurniture"> | Date | string
+  export type OrderPeripheralWhereInput = {
+    AND?: OrderPeripheralWhereInput | OrderPeripheralWhereInput[]
+    OR?: OrderPeripheralWhereInput[]
+    NOT?: OrderPeripheralWhereInput | OrderPeripheralWhereInput[]
+    id?: IntFilter<"OrderPeripheral"> | number
+    orderId?: StringFilter<"OrderPeripheral"> | string
+    peripheralId?: IntFilter<"OrderPeripheral"> | number
+    storeId?: IntFilter<"OrderPeripheral"> | number
+    created_at?: DateTimeFilter<"OrderPeripheral"> | Date | string
+    updated_at?: DateTimeFilter<"OrderPeripheral"> | Date | string
     orders?: XOR<OrdersRelationFilter, OrdersWhereInput>
-    furnitures?: XOR<FurnituresRelationFilter, furnituresWhereInput>
+    Peripherals?: XOR<PeripheralsRelationFilter, PeripheralsWhereInput>
     store?: XOR<StoreRelationFilter, StoreWhereInput>
   }
 
-  export type OrderFurnitureOrderByWithRelationInput = {
+  export type OrderPeripheralOrderByWithRelationInput = {
     id?: SortOrder
     orderId?: SortOrder
-    furnitureId?: SortOrder
+    peripheralId?: SortOrder
     storeId?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     orders?: OrdersOrderByWithRelationInput
-    furnitures?: furnituresOrderByWithRelationInput
+    Peripherals?: PeripheralsOrderByWithRelationInput
     store?: StoreOrderByWithRelationInput
   }
 
-  export type OrderFurnitureWhereUniqueInput = Prisma.AtLeast<{
+  export type OrderPeripheralWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    AND?: OrderFurnitureWhereInput | OrderFurnitureWhereInput[]
-    OR?: OrderFurnitureWhereInput[]
-    NOT?: OrderFurnitureWhereInput | OrderFurnitureWhereInput[]
-    orderId?: StringFilter<"OrderFurniture"> | string
-    furnitureId?: IntFilter<"OrderFurniture"> | number
-    storeId?: IntFilter<"OrderFurniture"> | number
-    created_at?: DateTimeFilter<"OrderFurniture"> | Date | string
-    updated_at?: DateTimeFilter<"OrderFurniture"> | Date | string
+    AND?: OrderPeripheralWhereInput | OrderPeripheralWhereInput[]
+    OR?: OrderPeripheralWhereInput[]
+    NOT?: OrderPeripheralWhereInput | OrderPeripheralWhereInput[]
+    orderId?: StringFilter<"OrderPeripheral"> | string
+    peripheralId?: IntFilter<"OrderPeripheral"> | number
+    storeId?: IntFilter<"OrderPeripheral"> | number
+    created_at?: DateTimeFilter<"OrderPeripheral"> | Date | string
+    updated_at?: DateTimeFilter<"OrderPeripheral"> | Date | string
     orders?: XOR<OrdersRelationFilter, OrdersWhereInput>
-    furnitures?: XOR<FurnituresRelationFilter, furnituresWhereInput>
+    Peripherals?: XOR<PeripheralsRelationFilter, PeripheralsWhereInput>
     store?: XOR<StoreRelationFilter, StoreWhereInput>
   }, "id">
 
-  export type OrderFurnitureOrderByWithAggregationInput = {
+  export type OrderPeripheralOrderByWithAggregationInput = {
     id?: SortOrder
     orderId?: SortOrder
-    furnitureId?: SortOrder
+    peripheralId?: SortOrder
     storeId?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
-    _count?: OrderFurnitureCountOrderByAggregateInput
-    _avg?: OrderFurnitureAvgOrderByAggregateInput
-    _max?: OrderFurnitureMaxOrderByAggregateInput
-    _min?: OrderFurnitureMinOrderByAggregateInput
-    _sum?: OrderFurnitureSumOrderByAggregateInput
+    _count?: OrderPeripheralCountOrderByAggregateInput
+    _avg?: OrderPeripheralAvgOrderByAggregateInput
+    _max?: OrderPeripheralMaxOrderByAggregateInput
+    _min?: OrderPeripheralMinOrderByAggregateInput
+    _sum?: OrderPeripheralSumOrderByAggregateInput
   }
 
-  export type OrderFurnitureScalarWhereWithAggregatesInput = {
-    AND?: OrderFurnitureScalarWhereWithAggregatesInput | OrderFurnitureScalarWhereWithAggregatesInput[]
-    OR?: OrderFurnitureScalarWhereWithAggregatesInput[]
-    NOT?: OrderFurnitureScalarWhereWithAggregatesInput | OrderFurnitureScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"OrderFurniture"> | number
-    orderId?: StringWithAggregatesFilter<"OrderFurniture"> | string
-    furnitureId?: IntWithAggregatesFilter<"OrderFurniture"> | number
-    storeId?: IntWithAggregatesFilter<"OrderFurniture"> | number
-    created_at?: DateTimeWithAggregatesFilter<"OrderFurniture"> | Date | string
-    updated_at?: DateTimeWithAggregatesFilter<"OrderFurniture"> | Date | string
+  export type OrderPeripheralScalarWhereWithAggregatesInput = {
+    AND?: OrderPeripheralScalarWhereWithAggregatesInput | OrderPeripheralScalarWhereWithAggregatesInput[]
+    OR?: OrderPeripheralScalarWhereWithAggregatesInput[]
+    NOT?: OrderPeripheralScalarWhereWithAggregatesInput | OrderPeripheralScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"OrderPeripheral"> | number
+    orderId?: StringWithAggregatesFilter<"OrderPeripheral"> | string
+    peripheralId?: IntWithAggregatesFilter<"OrderPeripheral"> | number
+    storeId?: IntWithAggregatesFilter<"OrderPeripheral"> | number
+    created_at?: DateTimeWithAggregatesFilter<"OrderPeripheral"> | Date | string
+    updated_at?: DateTimeWithAggregatesFilter<"OrderPeripheral"> | Date | string
   }
 
-  export type furnituresCreateInput = {
-    nama_furniture: string
+  export type PeripheralsCreateInput = {
+    nama_peripheral: string
     slug: string
     deskripsi: string
     harga: number
@@ -6947,54 +6588,13 @@ export namespace Prisma {
     image?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    Store?: StoreCreateNestedOneWithoutFurnitureInput
-    OrderFurniture?: OrderFurnitureCreateNestedManyWithoutFurnituresInput
+    Store?: StoreCreateNestedOneWithoutPeripheralsInput
+    OrderPeripheral?: OrderPeripheralCreateNestedManyWithoutPeripheralsInput
   }
 
-  export type furnituresUncheckedCreateInput = {
+  export type PeripheralsUncheckedCreateInput = {
     id?: number
-    nama_furniture: string
-    slug: string
-    deskripsi: string
-    harga: number
-    categories: string
-    image?: string | null
-    store_id: number
-    created_at?: Date | string
-    updated_at?: Date | string
-    OrderFurniture?: OrderFurnitureUncheckedCreateNestedManyWithoutFurnituresInput
-  }
-
-  export type furnituresUpdateInput = {
-    nama_furniture?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    deskripsi?: StringFieldUpdateOperationsInput | string
-    harga?: FloatFieldUpdateOperationsInput | number
-    categories?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    Store?: StoreUpdateOneWithoutFurnitureNestedInput
-    OrderFurniture?: OrderFurnitureUpdateManyWithoutFurnituresNestedInput
-  }
-
-  export type furnituresUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    nama_furniture?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    deskripsi?: StringFieldUpdateOperationsInput | string
-    harga?: FloatFieldUpdateOperationsInput | number
-    categories?: StringFieldUpdateOperationsInput | string
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    store_id?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    OrderFurniture?: OrderFurnitureUncheckedUpdateManyWithoutFurnituresNestedInput
-  }
-
-  export type furnituresCreateManyInput = {
-    id?: number
-    nama_furniture: string
+    nama_peripheral: string
     slug: string
     deskripsi: string
     harga: number
@@ -7003,10 +6603,51 @@ export namespace Prisma {
     store_id: number
     created_at?: Date | string
     updated_at?: Date | string
+    OrderPeripheral?: OrderPeripheralUncheckedCreateNestedManyWithoutPeripheralsInput
   }
 
-  export type furnituresUpdateManyMutationInput = {
-    nama_furniture?: StringFieldUpdateOperationsInput | string
+  export type PeripheralsUpdateInput = {
+    nama_peripheral?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    deskripsi?: StringFieldUpdateOperationsInput | string
+    harga?: FloatFieldUpdateOperationsInput | number
+    categories?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    Store?: StoreUpdateOneWithoutPeripheralsNestedInput
+    OrderPeripheral?: OrderPeripheralUpdateManyWithoutPeripheralsNestedInput
+  }
+
+  export type PeripheralsUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nama_peripheral?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    deskripsi?: StringFieldUpdateOperationsInput | string
+    harga?: FloatFieldUpdateOperationsInput | number
+    categories?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    store_id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    OrderPeripheral?: OrderPeripheralUncheckedUpdateManyWithoutPeripheralsNestedInput
+  }
+
+  export type PeripheralsCreateManyInput = {
+    id?: number
+    nama_peripheral: string
+    slug: string
+    deskripsi: string
+    harga: number
+    categories: string
+    image?: string | null
+    store_id: number
+    created_at?: Date | string
+    updated_at?: Date | string
+  }
+
+  export type PeripheralsUpdateManyMutationInput = {
+    nama_peripheral?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     deskripsi?: StringFieldUpdateOperationsInput | string
     harga?: FloatFieldUpdateOperationsInput | number
@@ -7016,9 +6657,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type furnituresUncheckedUpdateManyInput = {
+  export type PeripheralsUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nama_furniture?: StringFieldUpdateOperationsInput | string
+    nama_peripheral?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     deskripsi?: StringFieldUpdateOperationsInput | string
     harga?: FloatFieldUpdateOperationsInput | number
@@ -7029,74 +6670,74 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type cartCreateInput = {
-    id_furniture: number
+  export type CartCreateInput = {
+    id_peripherals: number
     user_email?: string | null
-    nama_furniture: string
+    nama_peripheral: string
     slug: string
     harga: number
     categories: string
     image?: string | null
   }
 
-  export type cartUncheckedCreateInput = {
+  export type CartUncheckedCreateInput = {
     id?: number
-    id_furniture: number
+    id_peripherals: number
     user_email?: string | null
-    nama_furniture: string
+    nama_peripheral: string
     slug: string
     harga: number
     categories: string
     image?: string | null
   }
 
-  export type cartUpdateInput = {
-    id_furniture?: IntFieldUpdateOperationsInput | number
+  export type CartUpdateInput = {
+    id_peripherals?: IntFieldUpdateOperationsInput | number
     user_email?: NullableStringFieldUpdateOperationsInput | string | null
-    nama_furniture?: StringFieldUpdateOperationsInput | string
+    nama_peripheral?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     harga?: FloatFieldUpdateOperationsInput | number
     categories?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type cartUncheckedUpdateInput = {
+  export type CartUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    id_furniture?: IntFieldUpdateOperationsInput | number
+    id_peripherals?: IntFieldUpdateOperationsInput | number
     user_email?: NullableStringFieldUpdateOperationsInput | string | null
-    nama_furniture?: StringFieldUpdateOperationsInput | string
+    nama_peripheral?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     harga?: FloatFieldUpdateOperationsInput | number
     categories?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type cartCreateManyInput = {
+  export type CartCreateManyInput = {
     id?: number
-    id_furniture: number
+    id_peripherals: number
     user_email?: string | null
-    nama_furniture: string
+    nama_peripheral: string
     slug: string
     harga: number
     categories: string
     image?: string | null
   }
 
-  export type cartUpdateManyMutationInput = {
-    id_furniture?: IntFieldUpdateOperationsInput | number
+  export type CartUpdateManyMutationInput = {
+    id_peripherals?: IntFieldUpdateOperationsInput | number
     user_email?: NullableStringFieldUpdateOperationsInput | string | null
-    nama_furniture?: StringFieldUpdateOperationsInput | string
+    nama_peripheral?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     harga?: FloatFieldUpdateOperationsInput | number
     categories?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
-  export type cartUncheckedUpdateManyInput = {
+  export type CartUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    id_furniture?: IntFieldUpdateOperationsInput | number
+    id_peripherals?: IntFieldUpdateOperationsInput | number
     user_email?: NullableStringFieldUpdateOperationsInput | string | null
-    nama_furniture?: StringFieldUpdateOperationsInput | string
+    nama_peripheral?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     harga?: FloatFieldUpdateOperationsInput | number
     categories?: StringFieldUpdateOperationsInput | string
@@ -7111,8 +6752,8 @@ export namespace Prisma {
     user_email: string
     created_at?: Date | string
     updated_at?: Date | string
-    furniture?: furnituresCreateNestedManyWithoutStoreInput
-    OrderFurniture?: OrderFurnitureCreateNestedManyWithoutStoreInput
+    Peripherals?: PeripheralsCreateNestedManyWithoutStoreInput
+    OrderPeripheral?: OrderPeripheralCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateInput = {
@@ -7124,8 +6765,8 @@ export namespace Prisma {
     user_email: string
     created_at?: Date | string
     updated_at?: Date | string
-    furniture?: furnituresUncheckedCreateNestedManyWithoutStoreInput
-    OrderFurniture?: OrderFurnitureUncheckedCreateNestedManyWithoutStoreInput
+    Peripherals?: PeripheralsUncheckedCreateNestedManyWithoutStoreInput
+    OrderPeripheral?: OrderPeripheralUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUpdateInput = {
@@ -7136,8 +6777,8 @@ export namespace Prisma {
     user_email?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    furniture?: furnituresUpdateManyWithoutStoreNestedInput
-    OrderFurniture?: OrderFurnitureUpdateManyWithoutStoreNestedInput
+    Peripherals?: PeripheralsUpdateManyWithoutStoreNestedInput
+    OrderPeripheral?: OrderPeripheralUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateInput = {
@@ -7149,8 +6790,8 @@ export namespace Prisma {
     user_email?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    furniture?: furnituresUncheckedUpdateManyWithoutStoreNestedInput
-    OrderFurniture?: OrderFurnitureUncheckedUpdateManyWithoutStoreNestedInput
+    Peripherals?: PeripheralsUncheckedUpdateManyWithoutStoreNestedInput
+    OrderPeripheral?: OrderPeripheralUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreCreateManyInput = {
@@ -7193,7 +6834,7 @@ export namespace Prisma {
     status: string
     created_at?: Date | string
     updated_at?: Date | string
-    OrderFurniture?: OrderFurnitureCreateNestedManyWithoutOrdersInput
+    OrderPeripheral?: OrderPeripheralCreateNestedManyWithoutOrdersInput
   }
 
   export type OrdersUncheckedCreateInput = {
@@ -7204,7 +6845,7 @@ export namespace Prisma {
     status: string
     created_at?: Date | string
     updated_at?: Date | string
-    OrderFurniture?: OrderFurnitureUncheckedCreateNestedManyWithoutOrdersInput
+    OrderPeripheral?: OrderPeripheralUncheckedCreateNestedManyWithoutOrdersInput
   }
 
   export type OrdersUpdateInput = {
@@ -7215,7 +6856,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    OrderFurniture?: OrderFurnitureUpdateManyWithoutOrdersNestedInput
+    OrderPeripheral?: OrderPeripheralUpdateManyWithoutOrdersNestedInput
   }
 
   export type OrdersUncheckedUpdateInput = {
@@ -7226,7 +6867,7 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    OrderFurniture?: OrderFurnitureUncheckedUpdateManyWithoutOrdersNestedInput
+    OrderPeripheral?: OrderPeripheralUncheckedUpdateManyWithoutOrdersNestedInput
   }
 
   export type OrdersCreateManyInput = {
@@ -7259,58 +6900,58 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OrderFurnitureCreateInput = {
+  export type OrderPeripheralCreateInput = {
     created_at?: Date | string
     updated_at?: Date | string
-    orders: OrdersCreateNestedOneWithoutOrderFurnitureInput
-    furnitures: furnituresCreateNestedOneWithoutOrderFurnitureInput
-    store: StoreCreateNestedOneWithoutOrderFurnitureInput
+    orders: OrdersCreateNestedOneWithoutOrderPeripheralInput
+    Peripherals: PeripheralsCreateNestedOneWithoutOrderPeripheralInput
+    store: StoreCreateNestedOneWithoutOrderPeripheralInput
   }
 
-  export type OrderFurnitureUncheckedCreateInput = {
+  export type OrderPeripheralUncheckedCreateInput = {
     id?: number
     orderId: string
-    furnitureId: number
+    peripheralId: number
     storeId: number
     created_at?: Date | string
     updated_at?: Date | string
   }
 
-  export type OrderFurnitureUpdateInput = {
+  export type OrderPeripheralUpdateInput = {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    orders?: OrdersUpdateOneRequiredWithoutOrderFurnitureNestedInput
-    furnitures?: furnituresUpdateOneRequiredWithoutOrderFurnitureNestedInput
-    store?: StoreUpdateOneRequiredWithoutOrderFurnitureNestedInput
+    orders?: OrdersUpdateOneRequiredWithoutOrderPeripheralNestedInput
+    Peripherals?: PeripheralsUpdateOneRequiredWithoutOrderPeripheralNestedInput
+    store?: StoreUpdateOneRequiredWithoutOrderPeripheralNestedInput
   }
 
-  export type OrderFurnitureUncheckedUpdateInput = {
+  export type OrderPeripheralUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderId?: StringFieldUpdateOperationsInput | string
-    furnitureId?: IntFieldUpdateOperationsInput | number
+    peripheralId?: IntFieldUpdateOperationsInput | number
     storeId?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OrderFurnitureCreateManyInput = {
+  export type OrderPeripheralCreateManyInput = {
     id?: number
     orderId: string
-    furnitureId: number
+    peripheralId: number
     storeId: number
     created_at?: Date | string
     updated_at?: Date | string
   }
 
-  export type OrderFurnitureUpdateManyMutationInput = {
+  export type OrderPeripheralUpdateManyMutationInput = {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OrderFurnitureUncheckedUpdateManyInput = {
+  export type OrderPeripheralUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderId?: StringFieldUpdateOperationsInput | string
-    furnitureId?: IntFieldUpdateOperationsInput | number
+    peripheralId?: IntFieldUpdateOperationsInput | number
     storeId?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7318,8 +6959,8 @@ export namespace Prisma {
 
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -7329,8 +6970,8 @@ export namespace Prisma {
 
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -7338,14 +6979,13 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
   export type FloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -7355,8 +6995,8 @@ export namespace Prisma {
 
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -7364,14 +7004,13 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -7384,10 +7023,10 @@ export namespace Prisma {
     isNot?: StoreWhereInput | null
   }
 
-  export type OrderFurnitureListRelationFilter = {
-    every?: OrderFurnitureWhereInput
-    some?: OrderFurnitureWhereInput
-    none?: OrderFurnitureWhereInput
+  export type OrderPeripheralListRelationFilter = {
+    every?: OrderPeripheralWhereInput
+    some?: OrderPeripheralWhereInput
+    none?: OrderPeripheralWhereInput
   }
 
   export type SortOrderInput = {
@@ -7395,13 +7034,13 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type OrderFurnitureOrderByRelationAggregateInput = {
+  export type OrderPeripheralOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type furnituresCountOrderByAggregateInput = {
+  export type PeripheralsCountOrderByAggregateInput = {
     id?: SortOrder
-    nama_furniture?: SortOrder
+    nama_peripheral?: SortOrder
     slug?: SortOrder
     deskripsi?: SortOrder
     harga?: SortOrder
@@ -7412,15 +7051,15 @@ export namespace Prisma {
     updated_at?: SortOrder
   }
 
-  export type furnituresAvgOrderByAggregateInput = {
+  export type PeripheralsAvgOrderByAggregateInput = {
     id?: SortOrder
     harga?: SortOrder
     store_id?: SortOrder
   }
 
-  export type furnituresMaxOrderByAggregateInput = {
+  export type PeripheralsMaxOrderByAggregateInput = {
     id?: SortOrder
-    nama_furniture?: SortOrder
+    nama_peripheral?: SortOrder
     slug?: SortOrder
     deskripsi?: SortOrder
     harga?: SortOrder
@@ -7431,9 +7070,9 @@ export namespace Prisma {
     updated_at?: SortOrder
   }
 
-  export type furnituresMinOrderByAggregateInput = {
+  export type PeripheralsMinOrderByAggregateInput = {
     id?: SortOrder
-    nama_furniture?: SortOrder
+    nama_peripheral?: SortOrder
     slug?: SortOrder
     deskripsi?: SortOrder
     harga?: SortOrder
@@ -7444,7 +7083,7 @@ export namespace Prisma {
     updated_at?: SortOrder
   }
 
-  export type furnituresSumOrderByAggregateInput = {
+  export type PeripheralsSumOrderByAggregateInput = {
     id?: SortOrder
     harga?: SortOrder
     store_id?: SortOrder
@@ -7452,8 +7091,8 @@ export namespace Prisma {
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -7468,8 +7107,8 @@ export namespace Prisma {
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -7477,7 +7116,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
@@ -7486,8 +7124,8 @@ export namespace Prisma {
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -7502,8 +7140,8 @@ export namespace Prisma {
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -7511,7 +7149,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
     not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
@@ -7520,8 +7157,8 @@ export namespace Prisma {
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -7532,63 +7169,63 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type cartSlugUser_emailCompoundUniqueInput = {
+  export type CartSlugUser_emailCompoundUniqueInput = {
     slug: string
     user_email: string
   }
 
-  export type cartCountOrderByAggregateInput = {
+  export type CartCountOrderByAggregateInput = {
     id?: SortOrder
-    id_furniture?: SortOrder
+    id_peripherals?: SortOrder
     user_email?: SortOrder
-    nama_furniture?: SortOrder
+    nama_peripheral?: SortOrder
     slug?: SortOrder
     harga?: SortOrder
     categories?: SortOrder
     image?: SortOrder
   }
 
-  export type cartAvgOrderByAggregateInput = {
+  export type CartAvgOrderByAggregateInput = {
     id?: SortOrder
-    id_furniture?: SortOrder
+    id_peripherals?: SortOrder
     harga?: SortOrder
   }
 
-  export type cartMaxOrderByAggregateInput = {
+  export type CartMaxOrderByAggregateInput = {
     id?: SortOrder
-    id_furniture?: SortOrder
+    id_peripherals?: SortOrder
     user_email?: SortOrder
-    nama_furniture?: SortOrder
+    nama_peripheral?: SortOrder
     slug?: SortOrder
     harga?: SortOrder
     categories?: SortOrder
     image?: SortOrder
   }
 
-  export type cartMinOrderByAggregateInput = {
+  export type CartMinOrderByAggregateInput = {
     id?: SortOrder
-    id_furniture?: SortOrder
+    id_peripherals?: SortOrder
     user_email?: SortOrder
-    nama_furniture?: SortOrder
+    nama_peripheral?: SortOrder
     slug?: SortOrder
     harga?: SortOrder
     categories?: SortOrder
     image?: SortOrder
   }
 
-  export type cartSumOrderByAggregateInput = {
+  export type CartSumOrderByAggregateInput = {
     id?: SortOrder
-    id_furniture?: SortOrder
+    id_peripherals?: SortOrder
     harga?: SortOrder
   }
 
-  export type FurnituresListRelationFilter = {
-    every?: furnituresWhereInput
-    some?: furnituresWhereInput
-    none?: furnituresWhereInput
+  export type PeripheralsListRelationFilter = {
+    every?: PeripheralsWhereInput
+    some?: PeripheralsWhereInput
+    none?: PeripheralsWhereInput
   }
 
-  export type furnituresOrderByRelationAggregateInput = {
+  export type PeripheralsOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7676,9 +7313,9 @@ export namespace Prisma {
     isNot?: OrdersWhereInput
   }
 
-  export type FurnituresRelationFilter = {
-    is?: furnituresWhereInput
-    isNot?: furnituresWhereInput
+  export type PeripheralsRelationFilter = {
+    is?: PeripheralsWhereInput
+    isNot?: PeripheralsWhereInput
   }
 
   export type StoreRelationFilter = {
@@ -7686,63 +7323,63 @@ export namespace Prisma {
     isNot?: StoreWhereInput
   }
 
-  export type OrderFurnitureCountOrderByAggregateInput = {
+  export type OrderPeripheralCountOrderByAggregateInput = {
     id?: SortOrder
     orderId?: SortOrder
-    furnitureId?: SortOrder
+    peripheralId?: SortOrder
     storeId?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
 
-  export type OrderFurnitureAvgOrderByAggregateInput = {
+  export type OrderPeripheralAvgOrderByAggregateInput = {
     id?: SortOrder
-    furnitureId?: SortOrder
+    peripheralId?: SortOrder
     storeId?: SortOrder
   }
 
-  export type OrderFurnitureMaxOrderByAggregateInput = {
+  export type OrderPeripheralMaxOrderByAggregateInput = {
     id?: SortOrder
     orderId?: SortOrder
-    furnitureId?: SortOrder
+    peripheralId?: SortOrder
     storeId?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
 
-  export type OrderFurnitureMinOrderByAggregateInput = {
+  export type OrderPeripheralMinOrderByAggregateInput = {
     id?: SortOrder
     orderId?: SortOrder
-    furnitureId?: SortOrder
+    peripheralId?: SortOrder
     storeId?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
 
-  export type OrderFurnitureSumOrderByAggregateInput = {
+  export type OrderPeripheralSumOrderByAggregateInput = {
     id?: SortOrder
-    furnitureId?: SortOrder
+    peripheralId?: SortOrder
     storeId?: SortOrder
   }
 
-  export type StoreCreateNestedOneWithoutFurnitureInput = {
-    create?: XOR<StoreCreateWithoutFurnitureInput, StoreUncheckedCreateWithoutFurnitureInput>
-    connectOrCreate?: StoreCreateOrConnectWithoutFurnitureInput
+  export type StoreCreateNestedOneWithoutPeripheralsInput = {
+    create?: XOR<StoreCreateWithoutPeripheralsInput, StoreUncheckedCreateWithoutPeripheralsInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutPeripheralsInput
     connect?: StoreWhereUniqueInput
   }
 
-  export type OrderFurnitureCreateNestedManyWithoutFurnituresInput = {
-    create?: XOR<OrderFurnitureCreateWithoutFurnituresInput, OrderFurnitureUncheckedCreateWithoutFurnituresInput> | OrderFurnitureCreateWithoutFurnituresInput[] | OrderFurnitureUncheckedCreateWithoutFurnituresInput[]
-    connectOrCreate?: OrderFurnitureCreateOrConnectWithoutFurnituresInput | OrderFurnitureCreateOrConnectWithoutFurnituresInput[]
-    createMany?: OrderFurnitureCreateManyFurnituresInputEnvelope
-    connect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
+  export type OrderPeripheralCreateNestedManyWithoutPeripheralsInput = {
+    create?: XOR<OrderPeripheralCreateWithoutPeripheralsInput, OrderPeripheralUncheckedCreateWithoutPeripheralsInput> | OrderPeripheralCreateWithoutPeripheralsInput[] | OrderPeripheralUncheckedCreateWithoutPeripheralsInput[]
+    connectOrCreate?: OrderPeripheralCreateOrConnectWithoutPeripheralsInput | OrderPeripheralCreateOrConnectWithoutPeripheralsInput[]
+    createMany?: OrderPeripheralCreateManyPeripheralsInputEnvelope
+    connect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
   }
 
-  export type OrderFurnitureUncheckedCreateNestedManyWithoutFurnituresInput = {
-    create?: XOR<OrderFurnitureCreateWithoutFurnituresInput, OrderFurnitureUncheckedCreateWithoutFurnituresInput> | OrderFurnitureCreateWithoutFurnituresInput[] | OrderFurnitureUncheckedCreateWithoutFurnituresInput[]
-    connectOrCreate?: OrderFurnitureCreateOrConnectWithoutFurnituresInput | OrderFurnitureCreateOrConnectWithoutFurnituresInput[]
-    createMany?: OrderFurnitureCreateManyFurnituresInputEnvelope
-    connect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
+  export type OrderPeripheralUncheckedCreateNestedManyWithoutPeripheralsInput = {
+    create?: XOR<OrderPeripheralCreateWithoutPeripheralsInput, OrderPeripheralUncheckedCreateWithoutPeripheralsInput> | OrderPeripheralCreateWithoutPeripheralsInput[] | OrderPeripheralUncheckedCreateWithoutPeripheralsInput[]
+    connectOrCreate?: OrderPeripheralCreateOrConnectWithoutPeripheralsInput | OrderPeripheralCreateOrConnectWithoutPeripheralsInput[]
+    createMany?: OrderPeripheralCreateManyPeripheralsInputEnvelope
+    connect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -7765,28 +7402,28 @@ export namespace Prisma {
     set?: Date | string
   }
 
-  export type StoreUpdateOneWithoutFurnitureNestedInput = {
-    create?: XOR<StoreCreateWithoutFurnitureInput, StoreUncheckedCreateWithoutFurnitureInput>
-    connectOrCreate?: StoreCreateOrConnectWithoutFurnitureInput
-    upsert?: StoreUpsertWithoutFurnitureInput
+  export type StoreUpdateOneWithoutPeripheralsNestedInput = {
+    create?: XOR<StoreCreateWithoutPeripheralsInput, StoreUncheckedCreateWithoutPeripheralsInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutPeripheralsInput
+    upsert?: StoreUpsertWithoutPeripheralsInput
     disconnect?: StoreWhereInput | boolean
     delete?: StoreWhereInput | boolean
     connect?: StoreWhereUniqueInput
-    update?: XOR<XOR<StoreUpdateToOneWithWhereWithoutFurnitureInput, StoreUpdateWithoutFurnitureInput>, StoreUncheckedUpdateWithoutFurnitureInput>
+    update?: XOR<XOR<StoreUpdateToOneWithWhereWithoutPeripheralsInput, StoreUpdateWithoutPeripheralsInput>, StoreUncheckedUpdateWithoutPeripheralsInput>
   }
 
-  export type OrderFurnitureUpdateManyWithoutFurnituresNestedInput = {
-    create?: XOR<OrderFurnitureCreateWithoutFurnituresInput, OrderFurnitureUncheckedCreateWithoutFurnituresInput> | OrderFurnitureCreateWithoutFurnituresInput[] | OrderFurnitureUncheckedCreateWithoutFurnituresInput[]
-    connectOrCreate?: OrderFurnitureCreateOrConnectWithoutFurnituresInput | OrderFurnitureCreateOrConnectWithoutFurnituresInput[]
-    upsert?: OrderFurnitureUpsertWithWhereUniqueWithoutFurnituresInput | OrderFurnitureUpsertWithWhereUniqueWithoutFurnituresInput[]
-    createMany?: OrderFurnitureCreateManyFurnituresInputEnvelope
-    set?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    disconnect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    delete?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    connect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    update?: OrderFurnitureUpdateWithWhereUniqueWithoutFurnituresInput | OrderFurnitureUpdateWithWhereUniqueWithoutFurnituresInput[]
-    updateMany?: OrderFurnitureUpdateManyWithWhereWithoutFurnituresInput | OrderFurnitureUpdateManyWithWhereWithoutFurnituresInput[]
-    deleteMany?: OrderFurnitureScalarWhereInput | OrderFurnitureScalarWhereInput[]
+  export type OrderPeripheralUpdateManyWithoutPeripheralsNestedInput = {
+    create?: XOR<OrderPeripheralCreateWithoutPeripheralsInput, OrderPeripheralUncheckedCreateWithoutPeripheralsInput> | OrderPeripheralCreateWithoutPeripheralsInput[] | OrderPeripheralUncheckedCreateWithoutPeripheralsInput[]
+    connectOrCreate?: OrderPeripheralCreateOrConnectWithoutPeripheralsInput | OrderPeripheralCreateOrConnectWithoutPeripheralsInput[]
+    upsert?: OrderPeripheralUpsertWithWhereUniqueWithoutPeripheralsInput | OrderPeripheralUpsertWithWhereUniqueWithoutPeripheralsInput[]
+    createMany?: OrderPeripheralCreateManyPeripheralsInputEnvelope
+    set?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    disconnect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    delete?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    connect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    update?: OrderPeripheralUpdateWithWhereUniqueWithoutPeripheralsInput | OrderPeripheralUpdateWithWhereUniqueWithoutPeripheralsInput[]
+    updateMany?: OrderPeripheralUpdateManyWithWhereWithoutPeripheralsInput | OrderPeripheralUpdateManyWithWhereWithoutPeripheralsInput[]
+    deleteMany?: OrderPeripheralScalarWhereInput | OrderPeripheralScalarWhereInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -7797,192 +7434,192 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type OrderFurnitureUncheckedUpdateManyWithoutFurnituresNestedInput = {
-    create?: XOR<OrderFurnitureCreateWithoutFurnituresInput, OrderFurnitureUncheckedCreateWithoutFurnituresInput> | OrderFurnitureCreateWithoutFurnituresInput[] | OrderFurnitureUncheckedCreateWithoutFurnituresInput[]
-    connectOrCreate?: OrderFurnitureCreateOrConnectWithoutFurnituresInput | OrderFurnitureCreateOrConnectWithoutFurnituresInput[]
-    upsert?: OrderFurnitureUpsertWithWhereUniqueWithoutFurnituresInput | OrderFurnitureUpsertWithWhereUniqueWithoutFurnituresInput[]
-    createMany?: OrderFurnitureCreateManyFurnituresInputEnvelope
-    set?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    disconnect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    delete?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    connect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    update?: OrderFurnitureUpdateWithWhereUniqueWithoutFurnituresInput | OrderFurnitureUpdateWithWhereUniqueWithoutFurnituresInput[]
-    updateMany?: OrderFurnitureUpdateManyWithWhereWithoutFurnituresInput | OrderFurnitureUpdateManyWithWhereWithoutFurnituresInput[]
-    deleteMany?: OrderFurnitureScalarWhereInput | OrderFurnitureScalarWhereInput[]
+  export type OrderPeripheralUncheckedUpdateManyWithoutPeripheralsNestedInput = {
+    create?: XOR<OrderPeripheralCreateWithoutPeripheralsInput, OrderPeripheralUncheckedCreateWithoutPeripheralsInput> | OrderPeripheralCreateWithoutPeripheralsInput[] | OrderPeripheralUncheckedCreateWithoutPeripheralsInput[]
+    connectOrCreate?: OrderPeripheralCreateOrConnectWithoutPeripheralsInput | OrderPeripheralCreateOrConnectWithoutPeripheralsInput[]
+    upsert?: OrderPeripheralUpsertWithWhereUniqueWithoutPeripheralsInput | OrderPeripheralUpsertWithWhereUniqueWithoutPeripheralsInput[]
+    createMany?: OrderPeripheralCreateManyPeripheralsInputEnvelope
+    set?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    disconnect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    delete?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    connect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    update?: OrderPeripheralUpdateWithWhereUniqueWithoutPeripheralsInput | OrderPeripheralUpdateWithWhereUniqueWithoutPeripheralsInput[]
+    updateMany?: OrderPeripheralUpdateManyWithWhereWithoutPeripheralsInput | OrderPeripheralUpdateManyWithWhereWithoutPeripheralsInput[]
+    deleteMany?: OrderPeripheralScalarWhereInput | OrderPeripheralScalarWhereInput[]
   }
 
-  export type furnituresCreateNestedManyWithoutStoreInput = {
-    create?: XOR<furnituresCreateWithoutStoreInput, furnituresUncheckedCreateWithoutStoreInput> | furnituresCreateWithoutStoreInput[] | furnituresUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: furnituresCreateOrConnectWithoutStoreInput | furnituresCreateOrConnectWithoutStoreInput[]
-    createMany?: furnituresCreateManyStoreInputEnvelope
-    connect?: furnituresWhereUniqueInput | furnituresWhereUniqueInput[]
+  export type PeripheralsCreateNestedManyWithoutStoreInput = {
+    create?: XOR<PeripheralsCreateWithoutStoreInput, PeripheralsUncheckedCreateWithoutStoreInput> | PeripheralsCreateWithoutStoreInput[] | PeripheralsUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: PeripheralsCreateOrConnectWithoutStoreInput | PeripheralsCreateOrConnectWithoutStoreInput[]
+    createMany?: PeripheralsCreateManyStoreInputEnvelope
+    connect?: PeripheralsWhereUniqueInput | PeripheralsWhereUniqueInput[]
   }
 
-  export type OrderFurnitureCreateNestedManyWithoutStoreInput = {
-    create?: XOR<OrderFurnitureCreateWithoutStoreInput, OrderFurnitureUncheckedCreateWithoutStoreInput> | OrderFurnitureCreateWithoutStoreInput[] | OrderFurnitureUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: OrderFurnitureCreateOrConnectWithoutStoreInput | OrderFurnitureCreateOrConnectWithoutStoreInput[]
-    createMany?: OrderFurnitureCreateManyStoreInputEnvelope
-    connect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
+  export type OrderPeripheralCreateNestedManyWithoutStoreInput = {
+    create?: XOR<OrderPeripheralCreateWithoutStoreInput, OrderPeripheralUncheckedCreateWithoutStoreInput> | OrderPeripheralCreateWithoutStoreInput[] | OrderPeripheralUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: OrderPeripheralCreateOrConnectWithoutStoreInput | OrderPeripheralCreateOrConnectWithoutStoreInput[]
+    createMany?: OrderPeripheralCreateManyStoreInputEnvelope
+    connect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
   }
 
-  export type furnituresUncheckedCreateNestedManyWithoutStoreInput = {
-    create?: XOR<furnituresCreateWithoutStoreInput, furnituresUncheckedCreateWithoutStoreInput> | furnituresCreateWithoutStoreInput[] | furnituresUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: furnituresCreateOrConnectWithoutStoreInput | furnituresCreateOrConnectWithoutStoreInput[]
-    createMany?: furnituresCreateManyStoreInputEnvelope
-    connect?: furnituresWhereUniqueInput | furnituresWhereUniqueInput[]
+  export type PeripheralsUncheckedCreateNestedManyWithoutStoreInput = {
+    create?: XOR<PeripheralsCreateWithoutStoreInput, PeripheralsUncheckedCreateWithoutStoreInput> | PeripheralsCreateWithoutStoreInput[] | PeripheralsUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: PeripheralsCreateOrConnectWithoutStoreInput | PeripheralsCreateOrConnectWithoutStoreInput[]
+    createMany?: PeripheralsCreateManyStoreInputEnvelope
+    connect?: PeripheralsWhereUniqueInput | PeripheralsWhereUniqueInput[]
   }
 
-  export type OrderFurnitureUncheckedCreateNestedManyWithoutStoreInput = {
-    create?: XOR<OrderFurnitureCreateWithoutStoreInput, OrderFurnitureUncheckedCreateWithoutStoreInput> | OrderFurnitureCreateWithoutStoreInput[] | OrderFurnitureUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: OrderFurnitureCreateOrConnectWithoutStoreInput | OrderFurnitureCreateOrConnectWithoutStoreInput[]
-    createMany?: OrderFurnitureCreateManyStoreInputEnvelope
-    connect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
+  export type OrderPeripheralUncheckedCreateNestedManyWithoutStoreInput = {
+    create?: XOR<OrderPeripheralCreateWithoutStoreInput, OrderPeripheralUncheckedCreateWithoutStoreInput> | OrderPeripheralCreateWithoutStoreInput[] | OrderPeripheralUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: OrderPeripheralCreateOrConnectWithoutStoreInput | OrderPeripheralCreateOrConnectWithoutStoreInput[]
+    createMany?: OrderPeripheralCreateManyStoreInputEnvelope
+    connect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
   }
 
-  export type furnituresUpdateManyWithoutStoreNestedInput = {
-    create?: XOR<furnituresCreateWithoutStoreInput, furnituresUncheckedCreateWithoutStoreInput> | furnituresCreateWithoutStoreInput[] | furnituresUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: furnituresCreateOrConnectWithoutStoreInput | furnituresCreateOrConnectWithoutStoreInput[]
-    upsert?: furnituresUpsertWithWhereUniqueWithoutStoreInput | furnituresUpsertWithWhereUniqueWithoutStoreInput[]
-    createMany?: furnituresCreateManyStoreInputEnvelope
-    set?: furnituresWhereUniqueInput | furnituresWhereUniqueInput[]
-    disconnect?: furnituresWhereUniqueInput | furnituresWhereUniqueInput[]
-    delete?: furnituresWhereUniqueInput | furnituresWhereUniqueInput[]
-    connect?: furnituresWhereUniqueInput | furnituresWhereUniqueInput[]
-    update?: furnituresUpdateWithWhereUniqueWithoutStoreInput | furnituresUpdateWithWhereUniqueWithoutStoreInput[]
-    updateMany?: furnituresUpdateManyWithWhereWithoutStoreInput | furnituresUpdateManyWithWhereWithoutStoreInput[]
-    deleteMany?: furnituresScalarWhereInput | furnituresScalarWhereInput[]
+  export type PeripheralsUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<PeripheralsCreateWithoutStoreInput, PeripheralsUncheckedCreateWithoutStoreInput> | PeripheralsCreateWithoutStoreInput[] | PeripheralsUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: PeripheralsCreateOrConnectWithoutStoreInput | PeripheralsCreateOrConnectWithoutStoreInput[]
+    upsert?: PeripheralsUpsertWithWhereUniqueWithoutStoreInput | PeripheralsUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: PeripheralsCreateManyStoreInputEnvelope
+    set?: PeripheralsWhereUniqueInput | PeripheralsWhereUniqueInput[]
+    disconnect?: PeripheralsWhereUniqueInput | PeripheralsWhereUniqueInput[]
+    delete?: PeripheralsWhereUniqueInput | PeripheralsWhereUniqueInput[]
+    connect?: PeripheralsWhereUniqueInput | PeripheralsWhereUniqueInput[]
+    update?: PeripheralsUpdateWithWhereUniqueWithoutStoreInput | PeripheralsUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: PeripheralsUpdateManyWithWhereWithoutStoreInput | PeripheralsUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: PeripheralsScalarWhereInput | PeripheralsScalarWhereInput[]
   }
 
-  export type OrderFurnitureUpdateManyWithoutStoreNestedInput = {
-    create?: XOR<OrderFurnitureCreateWithoutStoreInput, OrderFurnitureUncheckedCreateWithoutStoreInput> | OrderFurnitureCreateWithoutStoreInput[] | OrderFurnitureUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: OrderFurnitureCreateOrConnectWithoutStoreInput | OrderFurnitureCreateOrConnectWithoutStoreInput[]
-    upsert?: OrderFurnitureUpsertWithWhereUniqueWithoutStoreInput | OrderFurnitureUpsertWithWhereUniqueWithoutStoreInput[]
-    createMany?: OrderFurnitureCreateManyStoreInputEnvelope
-    set?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    disconnect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    delete?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    connect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    update?: OrderFurnitureUpdateWithWhereUniqueWithoutStoreInput | OrderFurnitureUpdateWithWhereUniqueWithoutStoreInput[]
-    updateMany?: OrderFurnitureUpdateManyWithWhereWithoutStoreInput | OrderFurnitureUpdateManyWithWhereWithoutStoreInput[]
-    deleteMany?: OrderFurnitureScalarWhereInput | OrderFurnitureScalarWhereInput[]
+  export type OrderPeripheralUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<OrderPeripheralCreateWithoutStoreInput, OrderPeripheralUncheckedCreateWithoutStoreInput> | OrderPeripheralCreateWithoutStoreInput[] | OrderPeripheralUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: OrderPeripheralCreateOrConnectWithoutStoreInput | OrderPeripheralCreateOrConnectWithoutStoreInput[]
+    upsert?: OrderPeripheralUpsertWithWhereUniqueWithoutStoreInput | OrderPeripheralUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: OrderPeripheralCreateManyStoreInputEnvelope
+    set?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    disconnect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    delete?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    connect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    update?: OrderPeripheralUpdateWithWhereUniqueWithoutStoreInput | OrderPeripheralUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: OrderPeripheralUpdateManyWithWhereWithoutStoreInput | OrderPeripheralUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: OrderPeripheralScalarWhereInput | OrderPeripheralScalarWhereInput[]
   }
 
-  export type furnituresUncheckedUpdateManyWithoutStoreNestedInput = {
-    create?: XOR<furnituresCreateWithoutStoreInput, furnituresUncheckedCreateWithoutStoreInput> | furnituresCreateWithoutStoreInput[] | furnituresUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: furnituresCreateOrConnectWithoutStoreInput | furnituresCreateOrConnectWithoutStoreInput[]
-    upsert?: furnituresUpsertWithWhereUniqueWithoutStoreInput | furnituresUpsertWithWhereUniqueWithoutStoreInput[]
-    createMany?: furnituresCreateManyStoreInputEnvelope
-    set?: furnituresWhereUniqueInput | furnituresWhereUniqueInput[]
-    disconnect?: furnituresWhereUniqueInput | furnituresWhereUniqueInput[]
-    delete?: furnituresWhereUniqueInput | furnituresWhereUniqueInput[]
-    connect?: furnituresWhereUniqueInput | furnituresWhereUniqueInput[]
-    update?: furnituresUpdateWithWhereUniqueWithoutStoreInput | furnituresUpdateWithWhereUniqueWithoutStoreInput[]
-    updateMany?: furnituresUpdateManyWithWhereWithoutStoreInput | furnituresUpdateManyWithWhereWithoutStoreInput[]
-    deleteMany?: furnituresScalarWhereInput | furnituresScalarWhereInput[]
+  export type PeripheralsUncheckedUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<PeripheralsCreateWithoutStoreInput, PeripheralsUncheckedCreateWithoutStoreInput> | PeripheralsCreateWithoutStoreInput[] | PeripheralsUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: PeripheralsCreateOrConnectWithoutStoreInput | PeripheralsCreateOrConnectWithoutStoreInput[]
+    upsert?: PeripheralsUpsertWithWhereUniqueWithoutStoreInput | PeripheralsUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: PeripheralsCreateManyStoreInputEnvelope
+    set?: PeripheralsWhereUniqueInput | PeripheralsWhereUniqueInput[]
+    disconnect?: PeripheralsWhereUniqueInput | PeripheralsWhereUniqueInput[]
+    delete?: PeripheralsWhereUniqueInput | PeripheralsWhereUniqueInput[]
+    connect?: PeripheralsWhereUniqueInput | PeripheralsWhereUniqueInput[]
+    update?: PeripheralsUpdateWithWhereUniqueWithoutStoreInput | PeripheralsUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: PeripheralsUpdateManyWithWhereWithoutStoreInput | PeripheralsUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: PeripheralsScalarWhereInput | PeripheralsScalarWhereInput[]
   }
 
-  export type OrderFurnitureUncheckedUpdateManyWithoutStoreNestedInput = {
-    create?: XOR<OrderFurnitureCreateWithoutStoreInput, OrderFurnitureUncheckedCreateWithoutStoreInput> | OrderFurnitureCreateWithoutStoreInput[] | OrderFurnitureUncheckedCreateWithoutStoreInput[]
-    connectOrCreate?: OrderFurnitureCreateOrConnectWithoutStoreInput | OrderFurnitureCreateOrConnectWithoutStoreInput[]
-    upsert?: OrderFurnitureUpsertWithWhereUniqueWithoutStoreInput | OrderFurnitureUpsertWithWhereUniqueWithoutStoreInput[]
-    createMany?: OrderFurnitureCreateManyStoreInputEnvelope
-    set?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    disconnect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    delete?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    connect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    update?: OrderFurnitureUpdateWithWhereUniqueWithoutStoreInput | OrderFurnitureUpdateWithWhereUniqueWithoutStoreInput[]
-    updateMany?: OrderFurnitureUpdateManyWithWhereWithoutStoreInput | OrderFurnitureUpdateManyWithWhereWithoutStoreInput[]
-    deleteMany?: OrderFurnitureScalarWhereInput | OrderFurnitureScalarWhereInput[]
+  export type OrderPeripheralUncheckedUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<OrderPeripheralCreateWithoutStoreInput, OrderPeripheralUncheckedCreateWithoutStoreInput> | OrderPeripheralCreateWithoutStoreInput[] | OrderPeripheralUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: OrderPeripheralCreateOrConnectWithoutStoreInput | OrderPeripheralCreateOrConnectWithoutStoreInput[]
+    upsert?: OrderPeripheralUpsertWithWhereUniqueWithoutStoreInput | OrderPeripheralUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: OrderPeripheralCreateManyStoreInputEnvelope
+    set?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    disconnect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    delete?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    connect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    update?: OrderPeripheralUpdateWithWhereUniqueWithoutStoreInput | OrderPeripheralUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: OrderPeripheralUpdateManyWithWhereWithoutStoreInput | OrderPeripheralUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: OrderPeripheralScalarWhereInput | OrderPeripheralScalarWhereInput[]
   }
 
-  export type OrderFurnitureCreateNestedManyWithoutOrdersInput = {
-    create?: XOR<OrderFurnitureCreateWithoutOrdersInput, OrderFurnitureUncheckedCreateWithoutOrdersInput> | OrderFurnitureCreateWithoutOrdersInput[] | OrderFurnitureUncheckedCreateWithoutOrdersInput[]
-    connectOrCreate?: OrderFurnitureCreateOrConnectWithoutOrdersInput | OrderFurnitureCreateOrConnectWithoutOrdersInput[]
-    createMany?: OrderFurnitureCreateManyOrdersInputEnvelope
-    connect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
+  export type OrderPeripheralCreateNestedManyWithoutOrdersInput = {
+    create?: XOR<OrderPeripheralCreateWithoutOrdersInput, OrderPeripheralUncheckedCreateWithoutOrdersInput> | OrderPeripheralCreateWithoutOrdersInput[] | OrderPeripheralUncheckedCreateWithoutOrdersInput[]
+    connectOrCreate?: OrderPeripheralCreateOrConnectWithoutOrdersInput | OrderPeripheralCreateOrConnectWithoutOrdersInput[]
+    createMany?: OrderPeripheralCreateManyOrdersInputEnvelope
+    connect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
   }
 
-  export type OrderFurnitureUncheckedCreateNestedManyWithoutOrdersInput = {
-    create?: XOR<OrderFurnitureCreateWithoutOrdersInput, OrderFurnitureUncheckedCreateWithoutOrdersInput> | OrderFurnitureCreateWithoutOrdersInput[] | OrderFurnitureUncheckedCreateWithoutOrdersInput[]
-    connectOrCreate?: OrderFurnitureCreateOrConnectWithoutOrdersInput | OrderFurnitureCreateOrConnectWithoutOrdersInput[]
-    createMany?: OrderFurnitureCreateManyOrdersInputEnvelope
-    connect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
+  export type OrderPeripheralUncheckedCreateNestedManyWithoutOrdersInput = {
+    create?: XOR<OrderPeripheralCreateWithoutOrdersInput, OrderPeripheralUncheckedCreateWithoutOrdersInput> | OrderPeripheralCreateWithoutOrdersInput[] | OrderPeripheralUncheckedCreateWithoutOrdersInput[]
+    connectOrCreate?: OrderPeripheralCreateOrConnectWithoutOrdersInput | OrderPeripheralCreateOrConnectWithoutOrdersInput[]
+    createMany?: OrderPeripheralCreateManyOrdersInputEnvelope
+    connect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
   }
 
-  export type OrderFurnitureUpdateManyWithoutOrdersNestedInput = {
-    create?: XOR<OrderFurnitureCreateWithoutOrdersInput, OrderFurnitureUncheckedCreateWithoutOrdersInput> | OrderFurnitureCreateWithoutOrdersInput[] | OrderFurnitureUncheckedCreateWithoutOrdersInput[]
-    connectOrCreate?: OrderFurnitureCreateOrConnectWithoutOrdersInput | OrderFurnitureCreateOrConnectWithoutOrdersInput[]
-    upsert?: OrderFurnitureUpsertWithWhereUniqueWithoutOrdersInput | OrderFurnitureUpsertWithWhereUniqueWithoutOrdersInput[]
-    createMany?: OrderFurnitureCreateManyOrdersInputEnvelope
-    set?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    disconnect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    delete?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    connect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    update?: OrderFurnitureUpdateWithWhereUniqueWithoutOrdersInput | OrderFurnitureUpdateWithWhereUniqueWithoutOrdersInput[]
-    updateMany?: OrderFurnitureUpdateManyWithWhereWithoutOrdersInput | OrderFurnitureUpdateManyWithWhereWithoutOrdersInput[]
-    deleteMany?: OrderFurnitureScalarWhereInput | OrderFurnitureScalarWhereInput[]
+  export type OrderPeripheralUpdateManyWithoutOrdersNestedInput = {
+    create?: XOR<OrderPeripheralCreateWithoutOrdersInput, OrderPeripheralUncheckedCreateWithoutOrdersInput> | OrderPeripheralCreateWithoutOrdersInput[] | OrderPeripheralUncheckedCreateWithoutOrdersInput[]
+    connectOrCreate?: OrderPeripheralCreateOrConnectWithoutOrdersInput | OrderPeripheralCreateOrConnectWithoutOrdersInput[]
+    upsert?: OrderPeripheralUpsertWithWhereUniqueWithoutOrdersInput | OrderPeripheralUpsertWithWhereUniqueWithoutOrdersInput[]
+    createMany?: OrderPeripheralCreateManyOrdersInputEnvelope
+    set?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    disconnect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    delete?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    connect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    update?: OrderPeripheralUpdateWithWhereUniqueWithoutOrdersInput | OrderPeripheralUpdateWithWhereUniqueWithoutOrdersInput[]
+    updateMany?: OrderPeripheralUpdateManyWithWhereWithoutOrdersInput | OrderPeripheralUpdateManyWithWhereWithoutOrdersInput[]
+    deleteMany?: OrderPeripheralScalarWhereInput | OrderPeripheralScalarWhereInput[]
   }
 
-  export type OrderFurnitureUncheckedUpdateManyWithoutOrdersNestedInput = {
-    create?: XOR<OrderFurnitureCreateWithoutOrdersInput, OrderFurnitureUncheckedCreateWithoutOrdersInput> | OrderFurnitureCreateWithoutOrdersInput[] | OrderFurnitureUncheckedCreateWithoutOrdersInput[]
-    connectOrCreate?: OrderFurnitureCreateOrConnectWithoutOrdersInput | OrderFurnitureCreateOrConnectWithoutOrdersInput[]
-    upsert?: OrderFurnitureUpsertWithWhereUniqueWithoutOrdersInput | OrderFurnitureUpsertWithWhereUniqueWithoutOrdersInput[]
-    createMany?: OrderFurnitureCreateManyOrdersInputEnvelope
-    set?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    disconnect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    delete?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    connect?: OrderFurnitureWhereUniqueInput | OrderFurnitureWhereUniqueInput[]
-    update?: OrderFurnitureUpdateWithWhereUniqueWithoutOrdersInput | OrderFurnitureUpdateWithWhereUniqueWithoutOrdersInput[]
-    updateMany?: OrderFurnitureUpdateManyWithWhereWithoutOrdersInput | OrderFurnitureUpdateManyWithWhereWithoutOrdersInput[]
-    deleteMany?: OrderFurnitureScalarWhereInput | OrderFurnitureScalarWhereInput[]
+  export type OrderPeripheralUncheckedUpdateManyWithoutOrdersNestedInput = {
+    create?: XOR<OrderPeripheralCreateWithoutOrdersInput, OrderPeripheralUncheckedCreateWithoutOrdersInput> | OrderPeripheralCreateWithoutOrdersInput[] | OrderPeripheralUncheckedCreateWithoutOrdersInput[]
+    connectOrCreate?: OrderPeripheralCreateOrConnectWithoutOrdersInput | OrderPeripheralCreateOrConnectWithoutOrdersInput[]
+    upsert?: OrderPeripheralUpsertWithWhereUniqueWithoutOrdersInput | OrderPeripheralUpsertWithWhereUniqueWithoutOrdersInput[]
+    createMany?: OrderPeripheralCreateManyOrdersInputEnvelope
+    set?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    disconnect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    delete?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    connect?: OrderPeripheralWhereUniqueInput | OrderPeripheralWhereUniqueInput[]
+    update?: OrderPeripheralUpdateWithWhereUniqueWithoutOrdersInput | OrderPeripheralUpdateWithWhereUniqueWithoutOrdersInput[]
+    updateMany?: OrderPeripheralUpdateManyWithWhereWithoutOrdersInput | OrderPeripheralUpdateManyWithWhereWithoutOrdersInput[]
+    deleteMany?: OrderPeripheralScalarWhereInput | OrderPeripheralScalarWhereInput[]
   }
 
-  export type OrdersCreateNestedOneWithoutOrderFurnitureInput = {
-    create?: XOR<OrdersCreateWithoutOrderFurnitureInput, OrdersUncheckedCreateWithoutOrderFurnitureInput>
-    connectOrCreate?: OrdersCreateOrConnectWithoutOrderFurnitureInput
+  export type OrdersCreateNestedOneWithoutOrderPeripheralInput = {
+    create?: XOR<OrdersCreateWithoutOrderPeripheralInput, OrdersUncheckedCreateWithoutOrderPeripheralInput>
+    connectOrCreate?: OrdersCreateOrConnectWithoutOrderPeripheralInput
     connect?: OrdersWhereUniqueInput
   }
 
-  export type furnituresCreateNestedOneWithoutOrderFurnitureInput = {
-    create?: XOR<furnituresCreateWithoutOrderFurnitureInput, furnituresUncheckedCreateWithoutOrderFurnitureInput>
-    connectOrCreate?: furnituresCreateOrConnectWithoutOrderFurnitureInput
-    connect?: furnituresWhereUniqueInput
+  export type PeripheralsCreateNestedOneWithoutOrderPeripheralInput = {
+    create?: XOR<PeripheralsCreateWithoutOrderPeripheralInput, PeripheralsUncheckedCreateWithoutOrderPeripheralInput>
+    connectOrCreate?: PeripheralsCreateOrConnectWithoutOrderPeripheralInput
+    connect?: PeripheralsWhereUniqueInput
   }
 
-  export type StoreCreateNestedOneWithoutOrderFurnitureInput = {
-    create?: XOR<StoreCreateWithoutOrderFurnitureInput, StoreUncheckedCreateWithoutOrderFurnitureInput>
-    connectOrCreate?: StoreCreateOrConnectWithoutOrderFurnitureInput
+  export type StoreCreateNestedOneWithoutOrderPeripheralInput = {
+    create?: XOR<StoreCreateWithoutOrderPeripheralInput, StoreUncheckedCreateWithoutOrderPeripheralInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutOrderPeripheralInput
     connect?: StoreWhereUniqueInput
   }
 
-  export type OrdersUpdateOneRequiredWithoutOrderFurnitureNestedInput = {
-    create?: XOR<OrdersCreateWithoutOrderFurnitureInput, OrdersUncheckedCreateWithoutOrderFurnitureInput>
-    connectOrCreate?: OrdersCreateOrConnectWithoutOrderFurnitureInput
-    upsert?: OrdersUpsertWithoutOrderFurnitureInput
+  export type OrdersUpdateOneRequiredWithoutOrderPeripheralNestedInput = {
+    create?: XOR<OrdersCreateWithoutOrderPeripheralInput, OrdersUncheckedCreateWithoutOrderPeripheralInput>
+    connectOrCreate?: OrdersCreateOrConnectWithoutOrderPeripheralInput
+    upsert?: OrdersUpsertWithoutOrderPeripheralInput
     connect?: OrdersWhereUniqueInput
-    update?: XOR<XOR<OrdersUpdateToOneWithWhereWithoutOrderFurnitureInput, OrdersUpdateWithoutOrderFurnitureInput>, OrdersUncheckedUpdateWithoutOrderFurnitureInput>
+    update?: XOR<XOR<OrdersUpdateToOneWithWhereWithoutOrderPeripheralInput, OrdersUpdateWithoutOrderPeripheralInput>, OrdersUncheckedUpdateWithoutOrderPeripheralInput>
   }
 
-  export type furnituresUpdateOneRequiredWithoutOrderFurnitureNestedInput = {
-    create?: XOR<furnituresCreateWithoutOrderFurnitureInput, furnituresUncheckedCreateWithoutOrderFurnitureInput>
-    connectOrCreate?: furnituresCreateOrConnectWithoutOrderFurnitureInput
-    upsert?: furnituresUpsertWithoutOrderFurnitureInput
-    connect?: furnituresWhereUniqueInput
-    update?: XOR<XOR<furnituresUpdateToOneWithWhereWithoutOrderFurnitureInput, furnituresUpdateWithoutOrderFurnitureInput>, furnituresUncheckedUpdateWithoutOrderFurnitureInput>
+  export type PeripheralsUpdateOneRequiredWithoutOrderPeripheralNestedInput = {
+    create?: XOR<PeripheralsCreateWithoutOrderPeripheralInput, PeripheralsUncheckedCreateWithoutOrderPeripheralInput>
+    connectOrCreate?: PeripheralsCreateOrConnectWithoutOrderPeripheralInput
+    upsert?: PeripheralsUpsertWithoutOrderPeripheralInput
+    connect?: PeripheralsWhereUniqueInput
+    update?: XOR<XOR<PeripheralsUpdateToOneWithWhereWithoutOrderPeripheralInput, PeripheralsUpdateWithoutOrderPeripheralInput>, PeripheralsUncheckedUpdateWithoutOrderPeripheralInput>
   }
 
-  export type StoreUpdateOneRequiredWithoutOrderFurnitureNestedInput = {
-    create?: XOR<StoreCreateWithoutOrderFurnitureInput, StoreUncheckedCreateWithoutOrderFurnitureInput>
-    connectOrCreate?: StoreCreateOrConnectWithoutOrderFurnitureInput
-    upsert?: StoreUpsertWithoutOrderFurnitureInput
+  export type StoreUpdateOneRequiredWithoutOrderPeripheralNestedInput = {
+    create?: XOR<StoreCreateWithoutOrderPeripheralInput, StoreUncheckedCreateWithoutOrderPeripheralInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutOrderPeripheralInput
+    upsert?: StoreUpsertWithoutOrderPeripheralInput
     connect?: StoreWhereUniqueInput
-    update?: XOR<XOR<StoreUpdateToOneWithWhereWithoutOrderFurnitureInput, StoreUpdateWithoutOrderFurnitureInput>, StoreUncheckedUpdateWithoutOrderFurnitureInput>
+    update?: XOR<XOR<StoreUpdateToOneWithWhereWithoutOrderPeripheralInput, StoreUpdateWithoutOrderPeripheralInput>, StoreUncheckedUpdateWithoutOrderPeripheralInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -7992,8 +7629,8 @@ export namespace Prisma {
 
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -8006,8 +7643,8 @@ export namespace Prisma {
 
   export type NestedFloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -8017,8 +7654,8 @@ export namespace Prisma {
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -8031,8 +7668,8 @@ export namespace Prisma {
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -8042,8 +7679,8 @@ export namespace Prisma {
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -8058,8 +7695,8 @@ export namespace Prisma {
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -8075,8 +7712,8 @@ export namespace Prisma {
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -8091,8 +7728,8 @@ export namespace Prisma {
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -8108,8 +7745,8 @@ export namespace Prisma {
 
   export type NestedIntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -8119,8 +7756,8 @@ export namespace Prisma {
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -8131,7 +7768,7 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type StoreCreateWithoutFurnitureInput = {
+  export type StoreCreateWithoutPeripheralsInput = {
     nama_toko: string
     slug?: string | null
     deskripsi?: string | null
@@ -8139,10 +7776,10 @@ export namespace Prisma {
     user_email: string
     created_at?: Date | string
     updated_at?: Date | string
-    OrderFurniture?: OrderFurnitureCreateNestedManyWithoutStoreInput
+    OrderPeripheral?: OrderPeripheralCreateNestedManyWithoutStoreInput
   }
 
-  export type StoreUncheckedCreateWithoutFurnitureInput = {
+  export type StoreUncheckedCreateWithoutPeripheralsInput = {
     id?: number
     nama_toko: string
     slug?: string | null
@@ -8151,22 +7788,22 @@ export namespace Prisma {
     user_email: string
     created_at?: Date | string
     updated_at?: Date | string
-    OrderFurniture?: OrderFurnitureUncheckedCreateNestedManyWithoutStoreInput
+    OrderPeripheral?: OrderPeripheralUncheckedCreateNestedManyWithoutStoreInput
   }
 
-  export type StoreCreateOrConnectWithoutFurnitureInput = {
+  export type StoreCreateOrConnectWithoutPeripheralsInput = {
     where: StoreWhereUniqueInput
-    create: XOR<StoreCreateWithoutFurnitureInput, StoreUncheckedCreateWithoutFurnitureInput>
+    create: XOR<StoreCreateWithoutPeripheralsInput, StoreUncheckedCreateWithoutPeripheralsInput>
   }
 
-  export type OrderFurnitureCreateWithoutFurnituresInput = {
+  export type OrderPeripheralCreateWithoutPeripheralsInput = {
     created_at?: Date | string
     updated_at?: Date | string
-    orders: OrdersCreateNestedOneWithoutOrderFurnitureInput
-    store: StoreCreateNestedOneWithoutOrderFurnitureInput
+    orders: OrdersCreateNestedOneWithoutOrderPeripheralInput
+    store: StoreCreateNestedOneWithoutOrderPeripheralInput
   }
 
-  export type OrderFurnitureUncheckedCreateWithoutFurnituresInput = {
+  export type OrderPeripheralUncheckedCreateWithoutPeripheralsInput = {
     id?: number
     orderId: string
     storeId: number
@@ -8174,28 +7811,28 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
-  export type OrderFurnitureCreateOrConnectWithoutFurnituresInput = {
-    where: OrderFurnitureWhereUniqueInput
-    create: XOR<OrderFurnitureCreateWithoutFurnituresInput, OrderFurnitureUncheckedCreateWithoutFurnituresInput>
+  export type OrderPeripheralCreateOrConnectWithoutPeripheralsInput = {
+    where: OrderPeripheralWhereUniqueInput
+    create: XOR<OrderPeripheralCreateWithoutPeripheralsInput, OrderPeripheralUncheckedCreateWithoutPeripheralsInput>
   }
 
-  export type OrderFurnitureCreateManyFurnituresInputEnvelope = {
-    data: OrderFurnitureCreateManyFurnituresInput | OrderFurnitureCreateManyFurnituresInput[]
+  export type OrderPeripheralCreateManyPeripheralsInputEnvelope = {
+    data: OrderPeripheralCreateManyPeripheralsInput | OrderPeripheralCreateManyPeripheralsInput[]
     skipDuplicates?: boolean
   }
 
-  export type StoreUpsertWithoutFurnitureInput = {
-    update: XOR<StoreUpdateWithoutFurnitureInput, StoreUncheckedUpdateWithoutFurnitureInput>
-    create: XOR<StoreCreateWithoutFurnitureInput, StoreUncheckedCreateWithoutFurnitureInput>
+  export type StoreUpsertWithoutPeripheralsInput = {
+    update: XOR<StoreUpdateWithoutPeripheralsInput, StoreUncheckedUpdateWithoutPeripheralsInput>
+    create: XOR<StoreCreateWithoutPeripheralsInput, StoreUncheckedCreateWithoutPeripheralsInput>
     where?: StoreWhereInput
   }
 
-  export type StoreUpdateToOneWithWhereWithoutFurnitureInput = {
+  export type StoreUpdateToOneWithWhereWithoutPeripheralsInput = {
     where?: StoreWhereInput
-    data: XOR<StoreUpdateWithoutFurnitureInput, StoreUncheckedUpdateWithoutFurnitureInput>
+    data: XOR<StoreUpdateWithoutPeripheralsInput, StoreUncheckedUpdateWithoutPeripheralsInput>
   }
 
-  export type StoreUpdateWithoutFurnitureInput = {
+  export type StoreUpdateWithoutPeripheralsInput = {
     nama_toko?: StringFieldUpdateOperationsInput | string
     slug?: NullableStringFieldUpdateOperationsInput | string | null
     deskripsi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8203,10 +7840,10 @@ export namespace Prisma {
     user_email?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    OrderFurniture?: OrderFurnitureUpdateManyWithoutStoreNestedInput
+    OrderPeripheral?: OrderPeripheralUpdateManyWithoutStoreNestedInput
   }
 
-  export type StoreUncheckedUpdateWithoutFurnitureInput = {
+  export type StoreUncheckedUpdateWithoutPeripheralsInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama_toko?: StringFieldUpdateOperationsInput | string
     slug?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8215,39 +7852,39 @@ export namespace Prisma {
     user_email?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    OrderFurniture?: OrderFurnitureUncheckedUpdateManyWithoutStoreNestedInput
+    OrderPeripheral?: OrderPeripheralUncheckedUpdateManyWithoutStoreNestedInput
   }
 
-  export type OrderFurnitureUpsertWithWhereUniqueWithoutFurnituresInput = {
-    where: OrderFurnitureWhereUniqueInput
-    update: XOR<OrderFurnitureUpdateWithoutFurnituresInput, OrderFurnitureUncheckedUpdateWithoutFurnituresInput>
-    create: XOR<OrderFurnitureCreateWithoutFurnituresInput, OrderFurnitureUncheckedCreateWithoutFurnituresInput>
+  export type OrderPeripheralUpsertWithWhereUniqueWithoutPeripheralsInput = {
+    where: OrderPeripheralWhereUniqueInput
+    update: XOR<OrderPeripheralUpdateWithoutPeripheralsInput, OrderPeripheralUncheckedUpdateWithoutPeripheralsInput>
+    create: XOR<OrderPeripheralCreateWithoutPeripheralsInput, OrderPeripheralUncheckedCreateWithoutPeripheralsInput>
   }
 
-  export type OrderFurnitureUpdateWithWhereUniqueWithoutFurnituresInput = {
-    where: OrderFurnitureWhereUniqueInput
-    data: XOR<OrderFurnitureUpdateWithoutFurnituresInput, OrderFurnitureUncheckedUpdateWithoutFurnituresInput>
+  export type OrderPeripheralUpdateWithWhereUniqueWithoutPeripheralsInput = {
+    where: OrderPeripheralWhereUniqueInput
+    data: XOR<OrderPeripheralUpdateWithoutPeripheralsInput, OrderPeripheralUncheckedUpdateWithoutPeripheralsInput>
   }
 
-  export type OrderFurnitureUpdateManyWithWhereWithoutFurnituresInput = {
-    where: OrderFurnitureScalarWhereInput
-    data: XOR<OrderFurnitureUpdateManyMutationInput, OrderFurnitureUncheckedUpdateManyWithoutFurnituresInput>
+  export type OrderPeripheralUpdateManyWithWhereWithoutPeripheralsInput = {
+    where: OrderPeripheralScalarWhereInput
+    data: XOR<OrderPeripheralUpdateManyMutationInput, OrderPeripheralUncheckedUpdateManyWithoutPeripheralsInput>
   }
 
-  export type OrderFurnitureScalarWhereInput = {
-    AND?: OrderFurnitureScalarWhereInput | OrderFurnitureScalarWhereInput[]
-    OR?: OrderFurnitureScalarWhereInput[]
-    NOT?: OrderFurnitureScalarWhereInput | OrderFurnitureScalarWhereInput[]
-    id?: IntFilter<"OrderFurniture"> | number
-    orderId?: StringFilter<"OrderFurniture"> | string
-    furnitureId?: IntFilter<"OrderFurniture"> | number
-    storeId?: IntFilter<"OrderFurniture"> | number
-    created_at?: DateTimeFilter<"OrderFurniture"> | Date | string
-    updated_at?: DateTimeFilter<"OrderFurniture"> | Date | string
+  export type OrderPeripheralScalarWhereInput = {
+    AND?: OrderPeripheralScalarWhereInput | OrderPeripheralScalarWhereInput[]
+    OR?: OrderPeripheralScalarWhereInput[]
+    NOT?: OrderPeripheralScalarWhereInput | OrderPeripheralScalarWhereInput[]
+    id?: IntFilter<"OrderPeripheral"> | number
+    orderId?: StringFilter<"OrderPeripheral"> | string
+    peripheralId?: IntFilter<"OrderPeripheral"> | number
+    storeId?: IntFilter<"OrderPeripheral"> | number
+    created_at?: DateTimeFilter<"OrderPeripheral"> | Date | string
+    updated_at?: DateTimeFilter<"OrderPeripheral"> | Date | string
   }
 
-  export type furnituresCreateWithoutStoreInput = {
-    nama_furniture: string
+  export type PeripheralsCreateWithoutStoreInput = {
+    nama_peripheral: string
     slug: string
     deskripsi: string
     harga: number
@@ -8255,12 +7892,12 @@ export namespace Prisma {
     image?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    OrderFurniture?: OrderFurnitureCreateNestedManyWithoutFurnituresInput
+    OrderPeripheral?: OrderPeripheralCreateNestedManyWithoutPeripheralsInput
   }
 
-  export type furnituresUncheckedCreateWithoutStoreInput = {
+  export type PeripheralsUncheckedCreateWithoutStoreInput = {
     id?: number
-    nama_furniture: string
+    nama_peripheral: string
     slug: string
     deskripsi: string
     harga: number
@@ -8268,134 +7905,134 @@ export namespace Prisma {
     image?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    OrderFurniture?: OrderFurnitureUncheckedCreateNestedManyWithoutFurnituresInput
+    OrderPeripheral?: OrderPeripheralUncheckedCreateNestedManyWithoutPeripheralsInput
   }
 
-  export type furnituresCreateOrConnectWithoutStoreInput = {
-    where: furnituresWhereUniqueInput
-    create: XOR<furnituresCreateWithoutStoreInput, furnituresUncheckedCreateWithoutStoreInput>
+  export type PeripheralsCreateOrConnectWithoutStoreInput = {
+    where: PeripheralsWhereUniqueInput
+    create: XOR<PeripheralsCreateWithoutStoreInput, PeripheralsUncheckedCreateWithoutStoreInput>
   }
 
-  export type furnituresCreateManyStoreInputEnvelope = {
-    data: furnituresCreateManyStoreInput | furnituresCreateManyStoreInput[]
+  export type PeripheralsCreateManyStoreInputEnvelope = {
+    data: PeripheralsCreateManyStoreInput | PeripheralsCreateManyStoreInput[]
     skipDuplicates?: boolean
   }
 
-  export type OrderFurnitureCreateWithoutStoreInput = {
+  export type OrderPeripheralCreateWithoutStoreInput = {
     created_at?: Date | string
     updated_at?: Date | string
-    orders: OrdersCreateNestedOneWithoutOrderFurnitureInput
-    furnitures: furnituresCreateNestedOneWithoutOrderFurnitureInput
+    orders: OrdersCreateNestedOneWithoutOrderPeripheralInput
+    Peripherals: PeripheralsCreateNestedOneWithoutOrderPeripheralInput
   }
 
-  export type OrderFurnitureUncheckedCreateWithoutStoreInput = {
+  export type OrderPeripheralUncheckedCreateWithoutStoreInput = {
     id?: number
     orderId: string
-    furnitureId: number
+    peripheralId: number
     created_at?: Date | string
     updated_at?: Date | string
   }
 
-  export type OrderFurnitureCreateOrConnectWithoutStoreInput = {
-    where: OrderFurnitureWhereUniqueInput
-    create: XOR<OrderFurnitureCreateWithoutStoreInput, OrderFurnitureUncheckedCreateWithoutStoreInput>
+  export type OrderPeripheralCreateOrConnectWithoutStoreInput = {
+    where: OrderPeripheralWhereUniqueInput
+    create: XOR<OrderPeripheralCreateWithoutStoreInput, OrderPeripheralUncheckedCreateWithoutStoreInput>
   }
 
-  export type OrderFurnitureCreateManyStoreInputEnvelope = {
-    data: OrderFurnitureCreateManyStoreInput | OrderFurnitureCreateManyStoreInput[]
+  export type OrderPeripheralCreateManyStoreInputEnvelope = {
+    data: OrderPeripheralCreateManyStoreInput | OrderPeripheralCreateManyStoreInput[]
     skipDuplicates?: boolean
   }
 
-  export type furnituresUpsertWithWhereUniqueWithoutStoreInput = {
-    where: furnituresWhereUniqueInput
-    update: XOR<furnituresUpdateWithoutStoreInput, furnituresUncheckedUpdateWithoutStoreInput>
-    create: XOR<furnituresCreateWithoutStoreInput, furnituresUncheckedCreateWithoutStoreInput>
+  export type PeripheralsUpsertWithWhereUniqueWithoutStoreInput = {
+    where: PeripheralsWhereUniqueInput
+    update: XOR<PeripheralsUpdateWithoutStoreInput, PeripheralsUncheckedUpdateWithoutStoreInput>
+    create: XOR<PeripheralsCreateWithoutStoreInput, PeripheralsUncheckedCreateWithoutStoreInput>
   }
 
-  export type furnituresUpdateWithWhereUniqueWithoutStoreInput = {
-    where: furnituresWhereUniqueInput
-    data: XOR<furnituresUpdateWithoutStoreInput, furnituresUncheckedUpdateWithoutStoreInput>
+  export type PeripheralsUpdateWithWhereUniqueWithoutStoreInput = {
+    where: PeripheralsWhereUniqueInput
+    data: XOR<PeripheralsUpdateWithoutStoreInput, PeripheralsUncheckedUpdateWithoutStoreInput>
   }
 
-  export type furnituresUpdateManyWithWhereWithoutStoreInput = {
-    where: furnituresScalarWhereInput
-    data: XOR<furnituresUpdateManyMutationInput, furnituresUncheckedUpdateManyWithoutStoreInput>
+  export type PeripheralsUpdateManyWithWhereWithoutStoreInput = {
+    where: PeripheralsScalarWhereInput
+    data: XOR<PeripheralsUpdateManyMutationInput, PeripheralsUncheckedUpdateManyWithoutStoreInput>
   }
 
-  export type furnituresScalarWhereInput = {
-    AND?: furnituresScalarWhereInput | furnituresScalarWhereInput[]
-    OR?: furnituresScalarWhereInput[]
-    NOT?: furnituresScalarWhereInput | furnituresScalarWhereInput[]
-    id?: IntFilter<"furnitures"> | number
-    nama_furniture?: StringFilter<"furnitures"> | string
-    slug?: StringFilter<"furnitures"> | string
-    deskripsi?: StringFilter<"furnitures"> | string
-    harga?: FloatFilter<"furnitures"> | number
-    categories?: StringFilter<"furnitures"> | string
-    image?: StringNullableFilter<"furnitures"> | string | null
-    store_id?: IntFilter<"furnitures"> | number
-    created_at?: DateTimeFilter<"furnitures"> | Date | string
-    updated_at?: DateTimeFilter<"furnitures"> | Date | string
+  export type PeripheralsScalarWhereInput = {
+    AND?: PeripheralsScalarWhereInput | PeripheralsScalarWhereInput[]
+    OR?: PeripheralsScalarWhereInput[]
+    NOT?: PeripheralsScalarWhereInput | PeripheralsScalarWhereInput[]
+    id?: IntFilter<"Peripherals"> | number
+    nama_peripheral?: StringFilter<"Peripherals"> | string
+    slug?: StringFilter<"Peripherals"> | string
+    deskripsi?: StringFilter<"Peripherals"> | string
+    harga?: FloatFilter<"Peripherals"> | number
+    categories?: StringFilter<"Peripherals"> | string
+    image?: StringNullableFilter<"Peripherals"> | string | null
+    store_id?: IntFilter<"Peripherals"> | number
+    created_at?: DateTimeFilter<"Peripherals"> | Date | string
+    updated_at?: DateTimeFilter<"Peripherals"> | Date | string
   }
 
-  export type OrderFurnitureUpsertWithWhereUniqueWithoutStoreInput = {
-    where: OrderFurnitureWhereUniqueInput
-    update: XOR<OrderFurnitureUpdateWithoutStoreInput, OrderFurnitureUncheckedUpdateWithoutStoreInput>
-    create: XOR<OrderFurnitureCreateWithoutStoreInput, OrderFurnitureUncheckedCreateWithoutStoreInput>
+  export type OrderPeripheralUpsertWithWhereUniqueWithoutStoreInput = {
+    where: OrderPeripheralWhereUniqueInput
+    update: XOR<OrderPeripheralUpdateWithoutStoreInput, OrderPeripheralUncheckedUpdateWithoutStoreInput>
+    create: XOR<OrderPeripheralCreateWithoutStoreInput, OrderPeripheralUncheckedCreateWithoutStoreInput>
   }
 
-  export type OrderFurnitureUpdateWithWhereUniqueWithoutStoreInput = {
-    where: OrderFurnitureWhereUniqueInput
-    data: XOR<OrderFurnitureUpdateWithoutStoreInput, OrderFurnitureUncheckedUpdateWithoutStoreInput>
+  export type OrderPeripheralUpdateWithWhereUniqueWithoutStoreInput = {
+    where: OrderPeripheralWhereUniqueInput
+    data: XOR<OrderPeripheralUpdateWithoutStoreInput, OrderPeripheralUncheckedUpdateWithoutStoreInput>
   }
 
-  export type OrderFurnitureUpdateManyWithWhereWithoutStoreInput = {
-    where: OrderFurnitureScalarWhereInput
-    data: XOR<OrderFurnitureUpdateManyMutationInput, OrderFurnitureUncheckedUpdateManyWithoutStoreInput>
+  export type OrderPeripheralUpdateManyWithWhereWithoutStoreInput = {
+    where: OrderPeripheralScalarWhereInput
+    data: XOR<OrderPeripheralUpdateManyMutationInput, OrderPeripheralUncheckedUpdateManyWithoutStoreInput>
   }
 
-  export type OrderFurnitureCreateWithoutOrdersInput = {
+  export type OrderPeripheralCreateWithoutOrdersInput = {
     created_at?: Date | string
     updated_at?: Date | string
-    furnitures: furnituresCreateNestedOneWithoutOrderFurnitureInput
-    store: StoreCreateNestedOneWithoutOrderFurnitureInput
+    Peripherals: PeripheralsCreateNestedOneWithoutOrderPeripheralInput
+    store: StoreCreateNestedOneWithoutOrderPeripheralInput
   }
 
-  export type OrderFurnitureUncheckedCreateWithoutOrdersInput = {
+  export type OrderPeripheralUncheckedCreateWithoutOrdersInput = {
     id?: number
-    furnitureId: number
+    peripheralId: number
     storeId: number
     created_at?: Date | string
     updated_at?: Date | string
   }
 
-  export type OrderFurnitureCreateOrConnectWithoutOrdersInput = {
-    where: OrderFurnitureWhereUniqueInput
-    create: XOR<OrderFurnitureCreateWithoutOrdersInput, OrderFurnitureUncheckedCreateWithoutOrdersInput>
+  export type OrderPeripheralCreateOrConnectWithoutOrdersInput = {
+    where: OrderPeripheralWhereUniqueInput
+    create: XOR<OrderPeripheralCreateWithoutOrdersInput, OrderPeripheralUncheckedCreateWithoutOrdersInput>
   }
 
-  export type OrderFurnitureCreateManyOrdersInputEnvelope = {
-    data: OrderFurnitureCreateManyOrdersInput | OrderFurnitureCreateManyOrdersInput[]
+  export type OrderPeripheralCreateManyOrdersInputEnvelope = {
+    data: OrderPeripheralCreateManyOrdersInput | OrderPeripheralCreateManyOrdersInput[]
     skipDuplicates?: boolean
   }
 
-  export type OrderFurnitureUpsertWithWhereUniqueWithoutOrdersInput = {
-    where: OrderFurnitureWhereUniqueInput
-    update: XOR<OrderFurnitureUpdateWithoutOrdersInput, OrderFurnitureUncheckedUpdateWithoutOrdersInput>
-    create: XOR<OrderFurnitureCreateWithoutOrdersInput, OrderFurnitureUncheckedCreateWithoutOrdersInput>
+  export type OrderPeripheralUpsertWithWhereUniqueWithoutOrdersInput = {
+    where: OrderPeripheralWhereUniqueInput
+    update: XOR<OrderPeripheralUpdateWithoutOrdersInput, OrderPeripheralUncheckedUpdateWithoutOrdersInput>
+    create: XOR<OrderPeripheralCreateWithoutOrdersInput, OrderPeripheralUncheckedCreateWithoutOrdersInput>
   }
 
-  export type OrderFurnitureUpdateWithWhereUniqueWithoutOrdersInput = {
-    where: OrderFurnitureWhereUniqueInput
-    data: XOR<OrderFurnitureUpdateWithoutOrdersInput, OrderFurnitureUncheckedUpdateWithoutOrdersInput>
+  export type OrderPeripheralUpdateWithWhereUniqueWithoutOrdersInput = {
+    where: OrderPeripheralWhereUniqueInput
+    data: XOR<OrderPeripheralUpdateWithoutOrdersInput, OrderPeripheralUncheckedUpdateWithoutOrdersInput>
   }
 
-  export type OrderFurnitureUpdateManyWithWhereWithoutOrdersInput = {
-    where: OrderFurnitureScalarWhereInput
-    data: XOR<OrderFurnitureUpdateManyMutationInput, OrderFurnitureUncheckedUpdateManyWithoutOrdersInput>
+  export type OrderPeripheralUpdateManyWithWhereWithoutOrdersInput = {
+    where: OrderPeripheralScalarWhereInput
+    data: XOR<OrderPeripheralUpdateManyMutationInput, OrderPeripheralUncheckedUpdateManyWithoutOrdersInput>
   }
 
-  export type OrdersCreateWithoutOrderFurnitureInput = {
+  export type OrdersCreateWithoutOrderPeripheralInput = {
     id: string
     user_email: string
     total_harga: number
@@ -8405,7 +8042,7 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
-  export type OrdersUncheckedCreateWithoutOrderFurnitureInput = {
+  export type OrdersUncheckedCreateWithoutOrderPeripheralInput = {
     id: string
     user_email: string
     total_harga: number
@@ -8415,13 +8052,13 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
-  export type OrdersCreateOrConnectWithoutOrderFurnitureInput = {
+  export type OrdersCreateOrConnectWithoutOrderPeripheralInput = {
     where: OrdersWhereUniqueInput
-    create: XOR<OrdersCreateWithoutOrderFurnitureInput, OrdersUncheckedCreateWithoutOrderFurnitureInput>
+    create: XOR<OrdersCreateWithoutOrderPeripheralInput, OrdersUncheckedCreateWithoutOrderPeripheralInput>
   }
 
-  export type furnituresCreateWithoutOrderFurnitureInput = {
-    nama_furniture: string
+  export type PeripheralsCreateWithoutOrderPeripheralInput = {
+    nama_peripheral: string
     slug: string
     deskripsi: string
     harga: number
@@ -8429,12 +8066,12 @@ export namespace Prisma {
     image?: string | null
     created_at?: Date | string
     updated_at?: Date | string
-    Store?: StoreCreateNestedOneWithoutFurnitureInput
+    Store?: StoreCreateNestedOneWithoutPeripheralsInput
   }
 
-  export type furnituresUncheckedCreateWithoutOrderFurnitureInput = {
+  export type PeripheralsUncheckedCreateWithoutOrderPeripheralInput = {
     id?: number
-    nama_furniture: string
+    nama_peripheral: string
     slug: string
     deskripsi: string
     harga: number
@@ -8445,12 +8082,12 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
-  export type furnituresCreateOrConnectWithoutOrderFurnitureInput = {
-    where: furnituresWhereUniqueInput
-    create: XOR<furnituresCreateWithoutOrderFurnitureInput, furnituresUncheckedCreateWithoutOrderFurnitureInput>
+  export type PeripheralsCreateOrConnectWithoutOrderPeripheralInput = {
+    where: PeripheralsWhereUniqueInput
+    create: XOR<PeripheralsCreateWithoutOrderPeripheralInput, PeripheralsUncheckedCreateWithoutOrderPeripheralInput>
   }
 
-  export type StoreCreateWithoutOrderFurnitureInput = {
+  export type StoreCreateWithoutOrderPeripheralInput = {
     nama_toko: string
     slug?: string | null
     deskripsi?: string | null
@@ -8458,10 +8095,10 @@ export namespace Prisma {
     user_email: string
     created_at?: Date | string
     updated_at?: Date | string
-    furniture?: furnituresCreateNestedManyWithoutStoreInput
+    Peripherals?: PeripheralsCreateNestedManyWithoutStoreInput
   }
 
-  export type StoreUncheckedCreateWithoutOrderFurnitureInput = {
+  export type StoreUncheckedCreateWithoutOrderPeripheralInput = {
     id?: number
     nama_toko: string
     slug?: string | null
@@ -8470,26 +8107,26 @@ export namespace Prisma {
     user_email: string
     created_at?: Date | string
     updated_at?: Date | string
-    furniture?: furnituresUncheckedCreateNestedManyWithoutStoreInput
+    Peripherals?: PeripheralsUncheckedCreateNestedManyWithoutStoreInput
   }
 
-  export type StoreCreateOrConnectWithoutOrderFurnitureInput = {
+  export type StoreCreateOrConnectWithoutOrderPeripheralInput = {
     where: StoreWhereUniqueInput
-    create: XOR<StoreCreateWithoutOrderFurnitureInput, StoreUncheckedCreateWithoutOrderFurnitureInput>
+    create: XOR<StoreCreateWithoutOrderPeripheralInput, StoreUncheckedCreateWithoutOrderPeripheralInput>
   }
 
-  export type OrdersUpsertWithoutOrderFurnitureInput = {
-    update: XOR<OrdersUpdateWithoutOrderFurnitureInput, OrdersUncheckedUpdateWithoutOrderFurnitureInput>
-    create: XOR<OrdersCreateWithoutOrderFurnitureInput, OrdersUncheckedCreateWithoutOrderFurnitureInput>
+  export type OrdersUpsertWithoutOrderPeripheralInput = {
+    update: XOR<OrdersUpdateWithoutOrderPeripheralInput, OrdersUncheckedUpdateWithoutOrderPeripheralInput>
+    create: XOR<OrdersCreateWithoutOrderPeripheralInput, OrdersUncheckedCreateWithoutOrderPeripheralInput>
     where?: OrdersWhereInput
   }
 
-  export type OrdersUpdateToOneWithWhereWithoutOrderFurnitureInput = {
+  export type OrdersUpdateToOneWithWhereWithoutOrderPeripheralInput = {
     where?: OrdersWhereInput
-    data: XOR<OrdersUpdateWithoutOrderFurnitureInput, OrdersUncheckedUpdateWithoutOrderFurnitureInput>
+    data: XOR<OrdersUpdateWithoutOrderPeripheralInput, OrdersUncheckedUpdateWithoutOrderPeripheralInput>
   }
 
-  export type OrdersUpdateWithoutOrderFurnitureInput = {
+  export type OrdersUpdateWithoutOrderPeripheralInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_email?: StringFieldUpdateOperationsInput | string
     total_harga?: FloatFieldUpdateOperationsInput | number
@@ -8499,7 +8136,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OrdersUncheckedUpdateWithoutOrderFurnitureInput = {
+  export type OrdersUncheckedUpdateWithoutOrderPeripheralInput = {
     id?: StringFieldUpdateOperationsInput | string
     user_email?: StringFieldUpdateOperationsInput | string
     total_harga?: FloatFieldUpdateOperationsInput | number
@@ -8509,19 +8146,19 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type furnituresUpsertWithoutOrderFurnitureInput = {
-    update: XOR<furnituresUpdateWithoutOrderFurnitureInput, furnituresUncheckedUpdateWithoutOrderFurnitureInput>
-    create: XOR<furnituresCreateWithoutOrderFurnitureInput, furnituresUncheckedCreateWithoutOrderFurnitureInput>
-    where?: furnituresWhereInput
+  export type PeripheralsUpsertWithoutOrderPeripheralInput = {
+    update: XOR<PeripheralsUpdateWithoutOrderPeripheralInput, PeripheralsUncheckedUpdateWithoutOrderPeripheralInput>
+    create: XOR<PeripheralsCreateWithoutOrderPeripheralInput, PeripheralsUncheckedCreateWithoutOrderPeripheralInput>
+    where?: PeripheralsWhereInput
   }
 
-  export type furnituresUpdateToOneWithWhereWithoutOrderFurnitureInput = {
-    where?: furnituresWhereInput
-    data: XOR<furnituresUpdateWithoutOrderFurnitureInput, furnituresUncheckedUpdateWithoutOrderFurnitureInput>
+  export type PeripheralsUpdateToOneWithWhereWithoutOrderPeripheralInput = {
+    where?: PeripheralsWhereInput
+    data: XOR<PeripheralsUpdateWithoutOrderPeripheralInput, PeripheralsUncheckedUpdateWithoutOrderPeripheralInput>
   }
 
-  export type furnituresUpdateWithoutOrderFurnitureInput = {
-    nama_furniture?: StringFieldUpdateOperationsInput | string
+  export type PeripheralsUpdateWithoutOrderPeripheralInput = {
+    nama_peripheral?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     deskripsi?: StringFieldUpdateOperationsInput | string
     harga?: FloatFieldUpdateOperationsInput | number
@@ -8529,12 +8166,12 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    Store?: StoreUpdateOneWithoutFurnitureNestedInput
+    Store?: StoreUpdateOneWithoutPeripheralsNestedInput
   }
 
-  export type furnituresUncheckedUpdateWithoutOrderFurnitureInput = {
+  export type PeripheralsUncheckedUpdateWithoutOrderPeripheralInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nama_furniture?: StringFieldUpdateOperationsInput | string
+    nama_peripheral?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     deskripsi?: StringFieldUpdateOperationsInput | string
     harga?: FloatFieldUpdateOperationsInput | number
@@ -8545,18 +8182,18 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type StoreUpsertWithoutOrderFurnitureInput = {
-    update: XOR<StoreUpdateWithoutOrderFurnitureInput, StoreUncheckedUpdateWithoutOrderFurnitureInput>
-    create: XOR<StoreCreateWithoutOrderFurnitureInput, StoreUncheckedCreateWithoutOrderFurnitureInput>
+  export type StoreUpsertWithoutOrderPeripheralInput = {
+    update: XOR<StoreUpdateWithoutOrderPeripheralInput, StoreUncheckedUpdateWithoutOrderPeripheralInput>
+    create: XOR<StoreCreateWithoutOrderPeripheralInput, StoreUncheckedCreateWithoutOrderPeripheralInput>
     where?: StoreWhereInput
   }
 
-  export type StoreUpdateToOneWithWhereWithoutOrderFurnitureInput = {
+  export type StoreUpdateToOneWithWhereWithoutOrderPeripheralInput = {
     where?: StoreWhereInput
-    data: XOR<StoreUpdateWithoutOrderFurnitureInput, StoreUncheckedUpdateWithoutOrderFurnitureInput>
+    data: XOR<StoreUpdateWithoutOrderPeripheralInput, StoreUncheckedUpdateWithoutOrderPeripheralInput>
   }
 
-  export type StoreUpdateWithoutOrderFurnitureInput = {
+  export type StoreUpdateWithoutOrderPeripheralInput = {
     nama_toko?: StringFieldUpdateOperationsInput | string
     slug?: NullableStringFieldUpdateOperationsInput | string | null
     deskripsi?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8564,10 +8201,10 @@ export namespace Prisma {
     user_email?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    furniture?: furnituresUpdateManyWithoutStoreNestedInput
+    Peripherals?: PeripheralsUpdateManyWithoutStoreNestedInput
   }
 
-  export type StoreUncheckedUpdateWithoutOrderFurnitureInput = {
+  export type StoreUncheckedUpdateWithoutOrderPeripheralInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama_toko?: StringFieldUpdateOperationsInput | string
     slug?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8576,10 +8213,10 @@ export namespace Prisma {
     user_email?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    furniture?: furnituresUncheckedUpdateManyWithoutStoreNestedInput
+    Peripherals?: PeripheralsUncheckedUpdateManyWithoutStoreNestedInput
   }
 
-  export type OrderFurnitureCreateManyFurnituresInput = {
+  export type OrderPeripheralCreateManyPeripheralsInput = {
     id?: number
     orderId: string
     storeId: number
@@ -8587,14 +8224,14 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
-  export type OrderFurnitureUpdateWithoutFurnituresInput = {
+  export type OrderPeripheralUpdateWithoutPeripheralsInput = {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    orders?: OrdersUpdateOneRequiredWithoutOrderFurnitureNestedInput
-    store?: StoreUpdateOneRequiredWithoutOrderFurnitureNestedInput
+    orders?: OrdersUpdateOneRequiredWithoutOrderPeripheralNestedInput
+    store?: StoreUpdateOneRequiredWithoutOrderPeripheralNestedInput
   }
 
-  export type OrderFurnitureUncheckedUpdateWithoutFurnituresInput = {
+  export type OrderPeripheralUncheckedUpdateWithoutPeripheralsInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderId?: StringFieldUpdateOperationsInput | string
     storeId?: IntFieldUpdateOperationsInput | number
@@ -8602,7 +8239,7 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OrderFurnitureUncheckedUpdateManyWithoutFurnituresInput = {
+  export type OrderPeripheralUncheckedUpdateManyWithoutPeripheralsInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderId?: StringFieldUpdateOperationsInput | string
     storeId?: IntFieldUpdateOperationsInput | number
@@ -8610,9 +8247,9 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type furnituresCreateManyStoreInput = {
+  export type PeripheralsCreateManyStoreInput = {
     id?: number
-    nama_furniture: string
+    nama_peripheral: string
     slug: string
     deskripsi: string
     harga: number
@@ -8622,16 +8259,16 @@ export namespace Prisma {
     updated_at?: Date | string
   }
 
-  export type OrderFurnitureCreateManyStoreInput = {
+  export type OrderPeripheralCreateManyStoreInput = {
     id?: number
     orderId: string
-    furnitureId: number
+    peripheralId: number
     created_at?: Date | string
     updated_at?: Date | string
   }
 
-  export type furnituresUpdateWithoutStoreInput = {
-    nama_furniture?: StringFieldUpdateOperationsInput | string
+  export type PeripheralsUpdateWithoutStoreInput = {
+    nama_peripheral?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     deskripsi?: StringFieldUpdateOperationsInput | string
     harga?: FloatFieldUpdateOperationsInput | number
@@ -8639,12 +8276,12 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    OrderFurniture?: OrderFurnitureUpdateManyWithoutFurnituresNestedInput
+    OrderPeripheral?: OrderPeripheralUpdateManyWithoutPeripheralsNestedInput
   }
 
-  export type furnituresUncheckedUpdateWithoutStoreInput = {
+  export type PeripheralsUncheckedUpdateWithoutStoreInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nama_furniture?: StringFieldUpdateOperationsInput | string
+    nama_peripheral?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     deskripsi?: StringFieldUpdateOperationsInput | string
     harga?: FloatFieldUpdateOperationsInput | number
@@ -8652,12 +8289,12 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    OrderFurniture?: OrderFurnitureUncheckedUpdateManyWithoutFurnituresNestedInput
+    OrderPeripheral?: OrderPeripheralUncheckedUpdateManyWithoutPeripheralsNestedInput
   }
 
-  export type furnituresUncheckedUpdateManyWithoutStoreInput = {
+  export type PeripheralsUncheckedUpdateManyWithoutStoreInput = {
     id?: IntFieldUpdateOperationsInput | number
-    nama_furniture?: StringFieldUpdateOperationsInput | string
+    nama_peripheral?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     deskripsi?: StringFieldUpdateOperationsInput | string
     harga?: FloatFieldUpdateOperationsInput | number
@@ -8667,55 +8304,55 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OrderFurnitureUpdateWithoutStoreInput = {
+  export type OrderPeripheralUpdateWithoutStoreInput = {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    orders?: OrdersUpdateOneRequiredWithoutOrderFurnitureNestedInput
-    furnitures?: furnituresUpdateOneRequiredWithoutOrderFurnitureNestedInput
+    orders?: OrdersUpdateOneRequiredWithoutOrderPeripheralNestedInput
+    Peripherals?: PeripheralsUpdateOneRequiredWithoutOrderPeripheralNestedInput
   }
 
-  export type OrderFurnitureUncheckedUpdateWithoutStoreInput = {
+  export type OrderPeripheralUncheckedUpdateWithoutStoreInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderId?: StringFieldUpdateOperationsInput | string
-    furnitureId?: IntFieldUpdateOperationsInput | number
+    peripheralId?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OrderFurnitureUncheckedUpdateManyWithoutStoreInput = {
+  export type OrderPeripheralUncheckedUpdateManyWithoutStoreInput = {
     id?: IntFieldUpdateOperationsInput | number
     orderId?: StringFieldUpdateOperationsInput | string
-    furnitureId?: IntFieldUpdateOperationsInput | number
+    peripheralId?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OrderFurnitureCreateManyOrdersInput = {
+  export type OrderPeripheralCreateManyOrdersInput = {
     id?: number
-    furnitureId: number
+    peripheralId: number
     storeId: number
     created_at?: Date | string
     updated_at?: Date | string
   }
 
-  export type OrderFurnitureUpdateWithoutOrdersInput = {
+  export type OrderPeripheralUpdateWithoutOrdersInput = {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    furnitures?: furnituresUpdateOneRequiredWithoutOrderFurnitureNestedInput
-    store?: StoreUpdateOneRequiredWithoutOrderFurnitureNestedInput
+    Peripherals?: PeripheralsUpdateOneRequiredWithoutOrderPeripheralNestedInput
+    store?: StoreUpdateOneRequiredWithoutOrderPeripheralNestedInput
   }
 
-  export type OrderFurnitureUncheckedUpdateWithoutOrdersInput = {
+  export type OrderPeripheralUncheckedUpdateWithoutOrdersInput = {
     id?: IntFieldUpdateOperationsInput | number
-    furnitureId?: IntFieldUpdateOperationsInput | number
+    peripheralId?: IntFieldUpdateOperationsInput | number
     storeId?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type OrderFurnitureUncheckedUpdateManyWithoutOrdersInput = {
+  export type OrderPeripheralUncheckedUpdateManyWithoutOrdersInput = {
     id?: IntFieldUpdateOperationsInput | number
-    furnitureId?: IntFieldUpdateOperationsInput | number
+    peripheralId?: IntFieldUpdateOperationsInput | number
     storeId?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8727,9 +8364,9 @@ export namespace Prisma {
    * Aliases for legacy arg types
    */
     /**
-     * @deprecated Use FurnituresCountOutputTypeDefaultArgs instead
+     * @deprecated Use PeripheralsCountOutputTypeDefaultArgs instead
      */
-    export type FurnituresCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = FurnituresCountOutputTypeDefaultArgs<ExtArgs>
+    export type PeripheralsCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PeripheralsCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use StoreCountOutputTypeDefaultArgs instead
      */
@@ -8739,13 +8376,13 @@ export namespace Prisma {
      */
     export type OrdersCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = OrdersCountOutputTypeDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use furnituresDefaultArgs instead
+     * @deprecated Use PeripheralsDefaultArgs instead
      */
-    export type furnituresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = furnituresDefaultArgs<ExtArgs>
+    export type PeripheralsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = PeripheralsDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use cartDefaultArgs instead
+     * @deprecated Use CartDefaultArgs instead
      */
-    export type cartArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = cartDefaultArgs<ExtArgs>
+    export type CartArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = CartDefaultArgs<ExtArgs>
     /**
      * @deprecated Use StoreDefaultArgs instead
      */
@@ -8755,9 +8392,9 @@ export namespace Prisma {
      */
     export type OrdersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = OrdersDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use OrderFurnitureDefaultArgs instead
+     * @deprecated Use OrderPeripheralDefaultArgs instead
      */
-    export type OrderFurnitureArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = OrderFurnitureDefaultArgs<ExtArgs>
+    export type OrderPeripheralArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = OrderPeripheralDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

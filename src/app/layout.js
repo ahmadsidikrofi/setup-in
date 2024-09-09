@@ -8,16 +8,17 @@ import Footer from '@/components/Footer';
 const poppins = Poppins({ subsets: ['latin'], weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'] })
 
 export const metadata = {
-  title: 'FurniCraft',
+  title: 'Setup-in',
   description: 'Memberikan layanan konsultasi gratis kepada setiap pelanggan untuk memahami kebutuhan dan preferensi mereka terhadap ruangan interior yang ingin dibuat.',
 }
 
 
 export default async function RootLayout({ children }) {
   const authUser = await authUserGithub()
-  const countCart = await prisma.cart.count({ 
-    where: { user_email: authUser?.email }
-  })
+  // const countCart = await prisma.Cart.count({ 
+  //   where: { user_email: authUser?.email }
+  // })
+  const countCart = 0
   return (
     <html lang="en">
       <head>

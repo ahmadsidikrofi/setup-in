@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import FormSettingStore from "@/components/FormSettingStore"
 import prisma from "@/libs/prisma"
 import { authUserGithub } from "@/libs/auth"
-import SearchFurnitureDashboard from "@/components/SearchFurnitureDashboard"
+import SearchProductDashboard from "@/components/SearchProductDashboard"
 
 const detailStore = async (slug) => {
     const dataStore = await prisma.Store.findUnique({
@@ -17,7 +17,7 @@ const StoreDashboardPage = async ({ params }) => {
     const detailData = await detailStore(slug)
     const authUser = authUserGithub()
     const email = authUser?.email
-    const initialFurnitures = await prisma?.furnitures?.findMany({
+    const initialPeripherals = await prisma?.Peripherals?.findMany({
         where: { store_id: detailData.id },
         orderBy: { id: 'desc' }
     })
@@ -40,7 +40,7 @@ const StoreDashboardPage = async ({ params }) => {
                     <Separator className="my-3 w-[80vw] md:w-[72vw] max-sm:w-[84vw]" />
                     <TabsContent value="products" className="lg:w-[70vw] md:w-[90vw] sm:w-[90vw] max-sm:w-[90vw]">
                         <div className="">
-                            <SearchFurnitureDashboard initialFurnitures={initialFurnitures} detailData={detailData}/>
+                            <SearchProductDashboard initialPeripherals={initialPeripherals} detailData={detailData}/>
                         </div>
                     </TabsContent>
 
