@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation"
 import toast, { Toaster } from 'react-hot-toast';
 import FurnitureSkeleton from "./skeleton/FurnitureSkeleton"
 
-const FurnituresCard = ({ furnitures, authUser, cartData }) => {
+const PeripheralsCard = ({ peripherals, authUser }) => {
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(true)
     const [localCart, setLocalCart] = useState([])
@@ -20,30 +20,23 @@ const FurnituresCard = ({ furnitures, authUser, cartData }) => {
         setLocalCart(storedCart)
     }, [])
 
-    const addToCart = async (furniture, e) => {
+    const addToCart = async (peripherals, e) => {
         e.preventDefault()
-        const isLocalFurnitureExists = localCart.some((item) => item.slug === furniture.slug)
+        const isLocalPeripheralsExists = localCart.some((item) => item.slug === peripherals.slug)
         if (!authUser) {
-            if (isLocalFurnitureExists) {
-                toast.success("Furniture sudah tersedia dalam keranjang")
+            if (isLocalPeripheralsExists) {
+                toast.success("peripherals sudah tersedia dalam keranjang")
                 return
             }
-        // } else {
-        //     const res = await axios.get(`/api/v1/cart?slug=${furniture.slug}&user_email=${authUser?.email}`)
-        //     if (res.data.exists) {
-        //         toast.success("Furniture sudah tersedia dalam keranjang")
-        //         return
-        //     }
-        // }
         }
         const data = {
-            furniture_id: furniture.id,
-            nama_furniture: furniture.nama_furniture,
-            harga: furniture.harga,
-            categories: furniture.categories,
-            image: furniture.image,
-            id_furniture: furniture.id,
-            slug: furniture.slug,
+            peripheral_id: peripherals.id,
+            nama_peripheral: peripherals.nama_peripheral,
+            harga: peripherals.harga,
+            categories: peripherals.categories,
+            image: peripherals.image,
+            id_peripherals: peripherals.id,
+            slug: peripherals.slug,
             user_email: authUser?.email,
         }
         
@@ -54,20 +47,20 @@ const FurnituresCard = ({ furnitures, authUser, cartData }) => {
                 if (res.data.status === 200) {
                     toast.loading("Tunggu...", { duration: 1000 })
                     setTimeout(() => {
-                        toast.success("Furniture berhasil masuk keranjang")
+                        toast.success("Peripheral berhasil masuk keranjang")
                         router.refresh()
                     }, 1000)
                 } else {
-                    toast.success("Furniture sudah tersedia dalam keranjang")
-                    console.error("Gagal menambahkan furniture ke keranjang")
+                    toast.success("Peripheral sudah tersedia dalam keranjang")
+                    console.error("Gagal menambahkan Peripheral ke keranjang")
                 }
             } catch (error) {
                 console.error("Gagal menambahkan furnitur ke keranjang", error);
-                toast.success("Furniture sudah tersedia dalam keranjang");
+                toast.success("Peripheral sudah tersedia dalam keranjang");
             }
         } else {
             // Jika user tidak login, hanya tampilkan pesan sukses
-            toast.success("Furniture berhasil masuk keranjang")
+            toast.success("Peripheral berhasil masuk keranjang")
             const updatedLocalCart = [...localCart, data]
             setLocalCart(updatedLocalCart)
             localStorage.setItem('local-cart', JSON.stringify(updatedLocalCart))
@@ -78,26 +71,26 @@ const FurnituresCard = ({ furnitures, authUser, cartData }) => {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 my-12">
             <Toaster />
-            {furnitures?.map((furniture) => (
-                <div key={furniture.id}>
+            {peripherals?.map((peripheral) => (
+                <div key={peripheral.id}>
                 {isLoading ? <FurnitureSkeleton setIsLoading={setIsLoading}/> :
                     // /furnitures/edit/${furniture.slug}
                     <div>
-                        <Link href={`/furnitures/${furniture.slug}`}>
+                        <Link href={`/peripherals/${peripheral.slug}`}>
                             <div className="p-2 border-color-accent border-[1px] text-color-secondary rounded-[23px] shadow-xl hover:shadow-2xl transition-all ease-linear">
-                                <Image src={furniture.image || ''} width={768} height={768} alt="..." className="w-full object-cover xl:h-64 md:h-64 h-96 rounded-[20px] hover:transition-all hover:scale-[1.08]" />
+                                <Image src={peripheral.image || ''} width={768} height={768} alt="..." className="w-full object-cover xl:h-64 md:h-64 h-96 rounded-[20px] hover:transition-all hover:scale-[1.08]" />
                                 <div className="p-2">
-                                    <p className="font-normal text-sm py-2">{furniture.categories}</p>
+                                    <p className="font-normal text-sm py-2">{peripheral.categories}</p>
                                     <p className="font-semibold text-xl mb-5">
-                                        {furniture.nama_furniture.length > 19 ? 
-                                            furniture.nama_furniture.substring(0, 15) + "..." 
-                                            : furniture.nama_furniture
+                                        {peripheral.nama_peripheral.length > 19 ? 
+                                            peripheral.nama_peripheral.substring(0, 15) + "..." 
+                                            : peripheral.nama_peripheral
                                         }
                                     </p>
                                     <div className="flex justify-between items-center">
-                                        <p className="font-semibold text-lg text-color-accent2">Rp {furniture.harga.toLocaleString("id-ID", {minimumFractionDigits: 2})}</p>
-                                        <button onClick={(e) => addToCart(furniture, e)} >
-                                            <ShoppingCart size={36} className="cart-now p-2 border-[1px] bg-color-thin border-color-accent text-color-accent2 rounded-full hover:scale-[1.15] transition-all ease-linear hover:shadow-lg hover:bg-color-accent2 hover:text-color-primary" />
+                                        <p className="font-semibold text-lg text-color-accent2">Rp {peripheral.harga.toLocaleString("id-ID", {minimumFractionDigits: 2})}</p>
+                                        <button onClick={(e) => addToCart(peripheral, e)} >
+                                            <ShoppingCart size={36} className="cart-now p-2 border-[1px] bg-amber-100 border-color-accent text-color-accent2 rounded-full hover:scale-[1.15] transition-all ease-linear hover:shadow-lg hover:bg-color-accent2 hover:text-color-primary" />
                                         </button>
                                     </div>
                                 </div>
@@ -110,4 +103,4 @@ const FurnituresCard = ({ furnitures, authUser, cartData }) => {
         </div>
     )
 }
-export default FurnituresCard
+export default PeripheralsCard

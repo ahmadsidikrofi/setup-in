@@ -2477,7 +2477,7 @@ export namespace Prisma {
   export type CartGroupByOutputType = {
     id: number
     id_peripherals: number
-    user_email: string | null
+    user_email: string
     nama_peripheral: string
     slug: string
     harga: number
@@ -2534,7 +2534,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       id_peripherals: number
-      user_email: string | null
+      user_email: string
       nama_peripheral: string
       slug: string
       harga: number
@@ -6305,7 +6305,7 @@ export namespace Prisma {
     NOT?: CartWhereInput | CartWhereInput[]
     id?: IntFilter<"Cart"> | number
     id_peripherals?: IntFilter<"Cart"> | number
-    user_email?: StringNullableFilter<"Cart"> | string | null
+    user_email?: StringFilter<"Cart"> | string
     nama_peripheral?: StringFilter<"Cart"> | string
     slug?: StringFilter<"Cart"> | string
     harga?: FloatFilter<"Cart"> | number
@@ -6316,7 +6316,7 @@ export namespace Prisma {
   export type CartOrderByWithRelationInput = {
     id?: SortOrder
     id_peripherals?: SortOrder
-    user_email?: SortOrderInput | SortOrder
+    user_email?: SortOrder
     nama_peripheral?: SortOrder
     slug?: SortOrder
     harga?: SortOrder
@@ -6331,7 +6331,7 @@ export namespace Prisma {
     OR?: CartWhereInput[]
     NOT?: CartWhereInput | CartWhereInput[]
     id_peripherals?: IntFilter<"Cart"> | number
-    user_email?: StringNullableFilter<"Cart"> | string | null
+    user_email?: StringFilter<"Cart"> | string
     nama_peripheral?: StringFilter<"Cart"> | string
     slug?: StringFilter<"Cart"> | string
     harga?: FloatFilter<"Cart"> | number
@@ -6342,7 +6342,7 @@ export namespace Prisma {
   export type CartOrderByWithAggregationInput = {
     id?: SortOrder
     id_peripherals?: SortOrder
-    user_email?: SortOrderInput | SortOrder
+    user_email?: SortOrder
     nama_peripheral?: SortOrder
     slug?: SortOrder
     harga?: SortOrder
@@ -6361,7 +6361,7 @@ export namespace Prisma {
     NOT?: CartScalarWhereWithAggregatesInput | CartScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Cart"> | number
     id_peripherals?: IntWithAggregatesFilter<"Cart"> | number
-    user_email?: StringNullableWithAggregatesFilter<"Cart"> | string | null
+    user_email?: StringWithAggregatesFilter<"Cart"> | string
     nama_peripheral?: StringWithAggregatesFilter<"Cart"> | string
     slug?: StringWithAggregatesFilter<"Cart"> | string
     harga?: FloatWithAggregatesFilter<"Cart"> | number
@@ -6672,7 +6672,7 @@ export namespace Prisma {
 
   export type CartCreateInput = {
     id_peripherals: number
-    user_email?: string | null
+    user_email: string
     nama_peripheral: string
     slug: string
     harga: number
@@ -6683,7 +6683,7 @@ export namespace Prisma {
   export type CartUncheckedCreateInput = {
     id?: number
     id_peripherals: number
-    user_email?: string | null
+    user_email: string
     nama_peripheral: string
     slug: string
     harga: number
@@ -6693,7 +6693,7 @@ export namespace Prisma {
 
   export type CartUpdateInput = {
     id_peripherals?: IntFieldUpdateOperationsInput | number
-    user_email?: NullableStringFieldUpdateOperationsInput | string | null
+    user_email?: StringFieldUpdateOperationsInput | string
     nama_peripheral?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     harga?: FloatFieldUpdateOperationsInput | number
@@ -6704,7 +6704,7 @@ export namespace Prisma {
   export type CartUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     id_peripherals?: IntFieldUpdateOperationsInput | number
-    user_email?: NullableStringFieldUpdateOperationsInput | string | null
+    user_email?: StringFieldUpdateOperationsInput | string
     nama_peripheral?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     harga?: FloatFieldUpdateOperationsInput | number
@@ -6715,7 +6715,7 @@ export namespace Prisma {
   export type CartCreateManyInput = {
     id?: number
     id_peripherals: number
-    user_email?: string | null
+    user_email: string
     nama_peripheral: string
     slug: string
     harga: number
@@ -6725,7 +6725,7 @@ export namespace Prisma {
 
   export type CartUpdateManyMutationInput = {
     id_peripherals?: IntFieldUpdateOperationsInput | number
-    user_email?: NullableStringFieldUpdateOperationsInput | string | null
+    user_email?: StringFieldUpdateOperationsInput | string
     nama_peripheral?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     harga?: FloatFieldUpdateOperationsInput | number
@@ -6736,7 +6736,7 @@ export namespace Prisma {
   export type CartUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     id_peripherals?: IntFieldUpdateOperationsInput | number
-    user_email?: NullableStringFieldUpdateOperationsInput | string | null
+    user_email?: StringFieldUpdateOperationsInput | string
     nama_peripheral?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     harga?: FloatFieldUpdateOperationsInput | number

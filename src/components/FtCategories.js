@@ -7,16 +7,15 @@ import { authUserGithub } from "@/libs/auth"
 
 const FtCategories = async() => {
     const authUser = await authUserGithub()
-    const categories = 0
-    // const categories = await prisma?.DeskProduct.groupBy({
-    //     select: {
-    //         categories: true,
-    //     },
-    //     by: ["categories"],
-    //     _count: {
-    //         _all: true
-    //     }
-    // })
+    const categories = await prisma?.peripherals.groupBy({
+        select: {
+            categories: true,
+        },
+        by: ["categories"],
+        _count: {
+            _all: true
+        }
+    })
     return (
         <div className="ftCategories">
             {/* {authUser === false && <HomeTour />} */}
@@ -26,7 +25,7 @@ const FtCategories = async() => {
                 linkContent="Explore the categories" 
                 linkHeader="/categories"
             />
-            {/* <CategoriesCard categories={categories} authUser={authUser}/>             */}
+            <CategoriesCard categories={categories} authUser={authUser}/>            
         </div>
     )
 }

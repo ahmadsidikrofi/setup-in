@@ -1,4 +1,4 @@
-import FormUpdateFurniture from "@/components/FormUpdateFurniture"
+import FormUpdatePeripheral from "@/components/FormUpdatePeripheral"
 import { Separator } from "@/components/ui/separator"
 import prisma from "@/libs/prisma"
 
@@ -9,16 +9,16 @@ const storeId = async (slug) => {
     return dataStore
 }
 const peripheralId = async (slugPeripheral) => {
-    const dataFurniture = await prisma.peripherals.findUnique({
+    const dataPeripheral = await prisma.peripherals.findUnique({
         where: { slug: slugPeripheral }
     })
-    return dataFurniture
+    return dataPeripheral
 }
 const UpdateFurniture = async ({ params }) => {
     const { slug } = params
     const { slugPeripheral } = params
     const dataStore = await storeId(slug)
-    const dataFurniture = await peripheralId(slugPeripheral)
+    const dataPeripheral = await peripheralId(slugPeripheral)
     return (
         <main>
             <div className="space-y-0.5 lg:px-6 w-[73vw]">
@@ -34,7 +34,7 @@ const UpdateFurniture = async ({ params }) => {
                     Edit your furniture from your store
                 </p>
                 <div className="mt-5">
-                    <FormUpdateFurniture storeId={dataStore.id} slugStore={dataStore.slug} dataFurniture={dataFurniture}/>
+                    <FormUpdatePeripheral storeId={dataStore.id} slugStore={dataStore.slug} dataPeripheral={dataPeripheral}/>
                 </div>
             </div>
         </main>

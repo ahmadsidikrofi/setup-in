@@ -2,7 +2,7 @@ import CategoriesCard from "@/components/CategoriesCard"
 import prisma from "@/libs/prisma"
 
 const Categories = async () => {
-    const categories = await prisma?.furnitures.groupBy({
+    const categories = await prisma?.peripherals.groupBy({
         select: {
             categories: true
         },
@@ -11,13 +11,13 @@ const Categories = async () => {
             _all: true
         }
     })
-    const countCategory = await prisma?.furnitures.count()
+    const countCategory = await prisma?.peripherals.count()
     return (
         <main className="px-16 pt-16">
             <div className="flex justify-between items-center">
                 <div>
                     <h3 className="font-bold text-4xl text-color-accent2">Categories ({countCategory})</h3>
-                    <p className="text-sm font-normal text-color-grey py-2">Explore all categories from our furniture</p>
+                    <p className="text-sm font-normal text-color-grey py-2">Explore all categories from our peripherals</p>
                 </div>
             </div>
             <CategoriesCard categories={categories} />

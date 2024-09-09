@@ -1,5 +1,5 @@
 'use client'
-import { X, XCircle, XLogo } from "@phosphor-icons/react"
+import {  XLogo } from "@phosphor-icons/react"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
@@ -9,7 +9,7 @@ const DeleteCartButton = ({ detailSlug, toast, detailLocalSlug, updateLocalCart 
     const router = useRouter()
     useEffect(() => {
         const fetchUser = async () => {
-            const { data } = await axios.get('/api/v1/cart/check');
+            const { data } = await axios.get('/api/v1/cart/check')
             setAuthUser(data.user)
         }
         fetchUser()
@@ -21,7 +21,7 @@ const DeleteCartButton = ({ detailSlug, toast, detailLocalSlug, updateLocalCart 
             localStorage.setItem('local-cart', JSON.stringify(deleteCartItem))
             toast.loading("Tunggu...", { duration: 1000 })
             setTimeout(() => {
-                toast.success("Furniture terhapus dari keranjang", { icon: '🗑️' })
+                toast.success("Peripheral kamu terhapus dari keranjang", { icon: '🗑️' })
                 updateLocalCart(deleteCartItem)
                 window.dispatchEvent(new Event('local-cart-updated'))
             }, 1000)
@@ -30,7 +30,7 @@ const DeleteCartButton = ({ detailSlug, toast, detailLocalSlug, updateLocalCart 
             if (deleteCart.data.status === 200) {
                 toast.loading("Tunggu...", { duration: 1000 })
                 setTimeout(() => {
-                    toast.success("Furniture terhapus dari keranjang", { icon: '🗑️' })
+                    toast.success("Peripheral kamu terhapus dari keranjang", { icon: '🗑️' })
                     router.refresh()
                 }, 1000)
                 const getCartItem = JSON.parse(localStorage.getItem("local-cart")) || []

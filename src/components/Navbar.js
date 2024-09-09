@@ -143,7 +143,7 @@ const Navbar = ({authUser, countCart}) => {
                     </div>
                     <button onClick={clickToCart} className="cart-driver relative flex gap-1 items-center h-10  py-1 px-3 border-[1px] shadow border-color-accent border-opacity-15 rounded-full hover:bg-color-grey hover:bg-opacity-5">
                         <ShoppingCartSimple size={17} />
-                        {/* <p className="font-medium text-sm">{authUser ? countCart : countCartLocal}</p> */}
+                        <p className="font-medium text-sm">{authUser ? countCart : countCartLocal}</p>
                     </button>
 
                     <AuthButton authUser={authUser}/>
