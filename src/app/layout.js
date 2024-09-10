@@ -9,7 +9,7 @@ const poppins = Poppins({ subsets: ['latin'], weight: ['100', '200', '300', '400
 
 export const metadata = {
   title: 'Setup-in',
-  description: 'Memberikan layanan konsultasi gratis kepada setiap pelanggan untuk memahami kebutuhan dan preferensi mereka terhadap ruangan interior yang ingin dibuat.',
+  description: 'Memberikan layanan konsultasi gratis kepada setiap pelanggan untuk memahami kebutuhan dan preferensi mereka terhadap setup yang ingin dibuat.',
 }
 
 
@@ -21,9 +21,9 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
-      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
-      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+      <link rel="apple-touch-icon" sizes="180x180" href="/navbar.ico"/>
+      <link rel="icon" type="image/png" sizes="32x32" href="/navbar.ico"/>
+      <link rel="icon" type="image/png" sizes="16x16" href="/navbar.ico"/>
       </head>
       <body className={poppins.className}>
         <NavbarWrapper authUser={authUser} countCart={countCart}/>

@@ -10,78 +10,78 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model DeskProduct {
-  id               Int                @id @default(autoincrement())
-  nama_deskproduct String             @db.VarChar(255)
-  slug             String             @unique
-  deskripsi        String             @db.Text
-  harga            Float
-  categories       String             @db.VarChar(155)
-  image            String?            @db.Text
-  store_id         Int
-  Store            Store?             @relation(fields: [store_id], references: [id])
-  created_at       DateTime           @default(now())
-  updated_at       DateTime           @updatedAt
-  OrderDeskProduct OrderDeskProduct[]
+model Peripherals {
+  id              Int               @id @default(autoincrement())
+  nama_peripheral String            @db.VarChar(255)
+  slug            String            @unique
+  deskripsi       String            @db.Text
+  harga           Float
+  categories      String            @db.VarChar(155)
+  image           String?           @db.Text
+  store_id        Int
+  Store           Store?            @relation(fields: [store_id], references: [id])
+  created_at      DateTime          @default(now())
+  updated_at      DateTime          @updatedAt
+  OrderPeripheral OrderPeripheral[]
 
-  @@index([store_id, nama_deskproduct, slug])
+  @@index([store_id, nama_peripheral, slug])
 }
 
 model Cart {
-  id               Int     @id @default(autoincrement())
-  id_deskproduct   Int
-  user_email       String? @db.VarChar(255)
-  nama_deskproduct String  @db.VarChar(255)
-  slug             String
-  harga            Float
-  categories       String  @db.VarChar(155)
-  image            String? @db.Text
+  id              Int     @id @default(autoincrement())
+  id_peripherals  Int
+  user_email      String  @db.VarChar(255)
+  nama_peripheral String  @db.VarChar(255)
+  slug            String
+  harga           Float
+  categories      String  @db.VarChar(155)
+  image           String? @db.Text
 
   @@unique([slug, user_email])
 }
 
 model Store {
-  id               Int                @id @default(autoincrement())
-  nama_toko        String
-  slug             String?            @unique
-  deskripsi        String?            @db.Text
-  telp             String?
-  user_email       String             @db.VarChar(255)
-  DeskProduct      DeskProduct[]
-  created_at       DateTime           @default(now())
-  updated_at       DateTime           @updatedAt
-  OrderDeskProduct OrderDeskProduct[]
+  id              Int               @id @default(autoincrement())
+  nama_toko       String
+  slug            String?           @unique
+  deskripsi       String?           @db.Text
+  telp            String?
+  user_email      String            @db.VarChar(255)
+  Peripherals     Peripherals[]
+  created_at      DateTime          @default(now())
+  updated_at      DateTime          @updatedAt
+  OrderPeripheral OrderPeripheral[]
 
   @@index([user_email, slug])
 }
 
 model Orders {
-  id               String             @id
-  user_email       String
-  total_harga      Float
-  token            String
-  status           String
-  created_at       DateTime           @default(now())
-  updated_at       DateTime           @updatedAt
-  OrderDeskProduct OrderDeskProduct[]
+  id              String            @id
+  user_email      String
+  total_harga     Float
+  token           String
+  status          String
+  created_at      DateTime          @default(now())
+  updated_at      DateTime          @updatedAt
+  OrderPeripheral OrderPeripheral[]
 
   @@index([user_email])
 }
 
-model OrderDeskProduct {
-  id            Int         @id @default(autoincrement())
-  orderId       String
-  deskproductId Int
-  storeId       Int
-  orders        Orders      @relation(fields: [orderId], references: [id])
-  DeskProduct   DeskProduct @relation(fields: [deskproductId], references: [id])
-  store         Store       @relation(fields: [storeId], references: [id])
-  created_at    DateTime    @default(now())
-  updated_at    DateTime    @updatedAt
+model OrderPeripheral {
+  id           Int         @id @default(autoincrement())
+  orderId      String
+  peripheralId Int
+  storeId      Int
+  orders       Orders      @relation(fields: [orderId], references: [id])
+  Peripherals  Peripherals @relation(fields: [peripheralId], references: [id])
+  store        Store       @relation(fields: [storeId], references: [id])
+  created_at   DateTime    @default(now())
+  updated_at   DateTime    @updatedAt
 
-  @@index([orderId, deskproductId, storeId])
+  @@index([orderId, peripheralId, storeId])
 }

@@ -146,6 +146,11 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
@@ -197,7 +202,7 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "mysql",
+  "activeProvider": "postgresql",
   "inlineDatasources": {
     "db": {
       "url": {
@@ -206,8 +211,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// // This is your Prisma schema file,\n// // learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Peripherals {\n  id              Int               @id @default(autoincrement())\n  nama_peripheral String            @db.VarChar(255)\n  slug            String            @unique\n  deskripsi       String            @db.Text\n  harga           Float\n  categories      String            @db.VarChar(155)\n  image           String?           @db.Text\n  store_id        Int\n  Store           Store?            @relation(fields: [store_id], references: [id])\n  created_at      DateTime          @default(now())\n  updated_at      DateTime          @updatedAt\n  OrderPeripheral OrderPeripheral[]\n\n  @@index([store_id, nama_peripheral, slug])\n}\n\nmodel Cart {\n  id              Int     @id @default(autoincrement())\n  id_peripherals  Int\n  user_email      String  @db.VarChar(255)\n  nama_peripheral String  @db.VarChar(255)\n  slug            String\n  harga           Float\n  categories      String  @db.VarChar(155)\n  image           String? @db.Text\n\n  @@unique([slug, user_email])\n}\n\nmodel Store {\n  id              Int               @id @default(autoincrement())\n  nama_toko       String\n  slug            String?           @unique\n  deskripsi       String?           @db.Text\n  telp            String?\n  user_email      String            @db.VarChar(255)\n  Peripherals     Peripherals[]\n  created_at      DateTime          @default(now())\n  updated_at      DateTime          @updatedAt\n  OrderPeripheral OrderPeripheral[]\n\n  @@index([user_email, slug])\n}\n\nmodel Orders {\n  id              String            @id\n  user_email      String\n  total_harga     Float\n  token           String\n  status          String\n  created_at      DateTime          @default(now())\n  updated_at      DateTime          @updatedAt\n  OrderPeripheral OrderPeripheral[]\n\n  @@index([user_email])\n}\n\nmodel OrderPeripheral {\n  id           Int         @id @default(autoincrement())\n  orderId      String\n  peripheralId Int\n  storeId      Int\n  orders       Orders      @relation(fields: [orderId], references: [id])\n  Peripherals  Peripherals @relation(fields: [peripheralId], references: [id])\n  store        Store       @relation(fields: [storeId], references: [id])\n  created_at   DateTime    @default(now())\n  updated_at   DateTime    @updatedAt\n\n  @@index([orderId, peripheralId, storeId])\n}\n",
-  "inlineSchemaHash": "0246d68c3071084daee51ed54f7f67bd68b291a86514c35527f34433d8461cc3",
+  "inlineSchema": "// // This is your Prisma schema file,\n// // learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Peripherals {\n  id              Int               @id @default(autoincrement())\n  nama_peripheral String            @db.VarChar(255)\n  slug            String            @unique\n  deskripsi       String            @db.Text\n  harga           Float\n  categories      String            @db.VarChar(155)\n  image           String?           @db.Text\n  store_id        Int\n  Store           Store?            @relation(fields: [store_id], references: [id])\n  created_at      DateTime          @default(now())\n  updated_at      DateTime          @updatedAt\n  OrderPeripheral OrderPeripheral[]\n\n  @@index([store_id, nama_peripheral, slug])\n}\n\nmodel Cart {\n  id              Int     @id @default(autoincrement())\n  id_peripherals  Int\n  user_email      String  @db.VarChar(255)\n  nama_peripheral String  @db.VarChar(255)\n  slug            String\n  harga           Float\n  categories      String  @db.VarChar(155)\n  image           String? @db.Text\n\n  @@unique([slug, user_email])\n}\n\nmodel Store {\n  id              Int               @id @default(autoincrement())\n  nama_toko       String\n  slug            String?           @unique\n  deskripsi       String?           @db.Text\n  telp            String?\n  user_email      String            @db.VarChar(255)\n  Peripherals     Peripherals[]\n  created_at      DateTime          @default(now())\n  updated_at      DateTime          @updatedAt\n  OrderPeripheral OrderPeripheral[]\n\n  @@index([user_email, slug])\n}\n\nmodel Orders {\n  id              String            @id\n  user_email      String\n  total_harga     Float\n  token           String\n  status          String\n  created_at      DateTime          @default(now())\n  updated_at      DateTime          @updatedAt\n  OrderPeripheral OrderPeripheral[]\n\n  @@index([user_email])\n}\n\nmodel OrderPeripheral {\n  id           Int         @id @default(autoincrement())\n  orderId      String\n  peripheralId Int\n  storeId      Int\n  orders       Orders      @relation(fields: [orderId], references: [id])\n  Peripherals  Peripherals @relation(fields: [peripheralId], references: [id])\n  store        Store       @relation(fields: [storeId], references: [id])\n  created_at   DateTime    @default(now())\n  updated_at   DateTime    @updatedAt\n\n  @@index([orderId, peripheralId, storeId])\n}\n",
+  "inlineSchemaHash": "62d766fdf64cd7aeb8f670772f0d57f02a98a83a190944651f223f19d1f72fd3",
   "copyEngine": true
 }
 config.dirname = '/'

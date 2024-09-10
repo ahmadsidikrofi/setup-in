@@ -114,16 +114,16 @@ const Navbar = ({authUser, countCart}) => {
                                 <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
                                 <NavigationMenuContent>
                                     <ul className='grid w-[400px] gap-3 p-6 md:w-[500px] md:grid-cols-2'>
-                                        <ListItem onClick={() => handleKeywordCategories('Keyboards')} title='Festival Keyboards'>
+                                        <ListItem onClick={() => handleKeywordCategories('keyboard')} title='Festival Keyboards'>
                                             Browse our stylish Keyboard collection
                                         </ListItem>
-                                        <ListItem onClick={() => handleKeywordCategories('Mouses')} title='Festival Mouses'>
+                                        <ListItem onClick={() => handleKeywordCategories('mouse')} title='Festival Mouses'>
                                             Discover cozy Mouse essentials
                                         </ListItem>
-                                        <ListItem onClick={() => handleKeywordCategories('Deskmate')} title='Deskmate'>
+                                        <ListItem onClick={() => handleKeywordCategories('deskmat')} title='Deskmat'>
                                             Find perfect Deskmate solutions
                                         </ListItem>
-                                        <ListItem onClick={() => handleKeywordCategories('Deskself')} title='Deskself'>
+                                        <ListItem onClick={() => handleKeywordCategories('deskshelf')} title='Deskshelf'>
                                             Elevate your Deskself experience
                                         </ListItem>
                                     </ul>

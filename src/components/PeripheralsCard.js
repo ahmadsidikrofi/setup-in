@@ -76,7 +76,7 @@ const PeripheralsCard = ({ peripherals, authUser }) => {
                 {isLoading ? <FurnitureSkeleton setIsLoading={setIsLoading}/> :
                     // /furnitures/edit/${furniture.slug}
                     <div>
-                        <Link href={`/peripherals/${peripheral.slug}`}>
+                        <Link href={`/on-your-desk/${peripheral.slug}`}>
                             <div className="p-2 border-color-accent border-[1px] text-color-secondary rounded-[23px] shadow-xl hover:shadow-2xl transition-all ease-linear">
                                 <Image src={peripheral.image || ''} width={768} height={768} alt="..." className="w-full object-cover xl:h-64 md:h-64 h-96 rounded-[20px] hover:transition-all hover:scale-[1.08]" />
                                 <div className="p-2">

@@ -108,10 +108,10 @@ const FormNewProduct = ({ storeId, slugStore }) => {
                                             <SelectValue placeholder="Pilih kategori" />
                                         </SelectTrigger>
                                         <SelectContent>
-                                            <SelectItem value="Keyboard">Keyboard</SelectItem>
-                                            <SelectItem value="Mouse">Mouse</SelectItem>
-                                            <SelectItem value="Deskmate">Deskmate</SelectItem>
-                                            <SelectItem value="Deskself">Deskself</SelectItem>
+                                            <SelectItem value="keyboard">Keyboard</SelectItem>
+                                            <SelectItem value="mouse">Mouse</SelectItem>
+                                            <SelectItem value="deskmate">Deskmate</SelectItem>
+                                            <SelectItem value="deskself">Deskself</SelectItem>
                                         </SelectContent>
                                     </Select>
                                 </FormControl>

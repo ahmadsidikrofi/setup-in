@@ -110,10 +110,10 @@ const FormUpdatePeripheral = ({ storeId, slugStore, dataPeripheral }) => {
                                         <SelectValue placeholder="Pilih kategori" />
                                     </SelectTrigger>
                                     <SelectContent>
-                                        <SelectItem value="Keyboard">Keyboard</SelectItem>
-                                        <SelectItem value="Mouse">Mouse</SelectItem>
-                                        <SelectItem value="Deskmate">Kamar mandi</SelectItem>
-                                        <SelectItem value="Deskself">Deskself</SelectItem>
+                                        <SelectItem value="keyboard">Keyboard</SelectItem>
+                                        <SelectItem value="mouse">Mouse</SelectItem>
+                                        <SelectItem value="deskmate">Kamar mandi</SelectItem>
+                                        <SelectItem value="deskself">Deskself</SelectItem>
                                     </SelectContent>
                                 </Select>
                             </FormControl>

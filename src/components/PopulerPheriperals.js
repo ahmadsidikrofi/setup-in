@@ -13,9 +13,9 @@ const PopulerPeripherals = async () => {
         <main className="mt-24 populer-peripherals">
             <HeaderSection 
                 titleHeader="Populer Peripherals"
-                descHeader="Explore all interior furniture we offer from"
-                linkContent="Shop the peripherals"
-                linkHeader="/peripherals"
+                descHeader="Explore all desk peripheral we offer from"
+                linkContent="For your desk"
+                linkHeader="/on-your-desk"
             />
             <PeripheralsCard peripherals={peripherals} authUser={authUser} cartData={cartData}/>
         </main> 

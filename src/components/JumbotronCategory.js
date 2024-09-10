@@ -23,8 +23,8 @@ const JumbotronCategory = ({ decodeKeyword, countResult }) => {
                         height={2160}
                         alt={decodeKeyword}
                     />
-                    <h3 className="absolute bottom-0 top-56 left-0 right-0 mx-auto mb-4 font-bold text-5xl max-sm:text-[20px]  text-color-accent md:text-4xl sm:text-2xl text-center">Furnitures ~ {decodeKeyword} ({countResult}) </h3>
-                    <p className="absolute top-64 left-0 right-0 mx-auto text-sm max-sm:text-lg text-center font-normal text-color-primary py-2">Get to know to our interior future furniture we offer</p>
+                    <h3 className="absolute bottom-0 top-56 left-0 right-0 mx-auto mb-4 font-bold text-5xl max-sm:text-[20px]  text-color-accent md:text-4xl sm:text-2xl text-center">Setup ~ {decodeKeyword} ({countResult}) </h3>
+                    <p className="absolute top-64 left-0 right-0 mx-auto text-sm max-sm:text-lg text-center font-normal text-color-primary py-2">Get to know to our setup future peripheral we offer</p>
                 </div>
             }
         </>

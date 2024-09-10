@@ -49,7 +49,7 @@ const SearchPeripheral = ({ setIsSearchOpen }) => {
         return acc;
     }, {})
     const handleDetailPeripheral = (slug) => {
-        router.push(`/peripherals/${slug}`)
+        router.push(`/on-your-desk/${slug}`)
     }
     return (
         <>
@@ -61,7 +61,7 @@ const SearchPeripheral = ({ setIsSearchOpen }) => {
                 transition={{ type: 'spring', duration: 1 }}
             >
                 <Command className="rounded-lg border shadow-md md:w-[85vh] max-sm:w-[40vh] sm:w-[40vh]">
-                    <CommandInput onValueChange={(value) => setSearchValue(value)} placeholder="Cari furniturmu" />
+                    <CommandInput onValueChange={(value) => setSearchValue(value)} placeholder="Cari gear gamingmu" />
                     <CommandList>
                         {isLoading ? <SearchSkeleton /> : (
                             Object.keys(groupedResults).length > 0 ? (
