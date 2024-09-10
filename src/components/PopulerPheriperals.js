@@ -4,7 +4,7 @@ import { authUserGithub } from "@/libs/auth";
 import PeripheralsCard from "./PeripheralsCard";
 
 const PopulerPeripherals = async () => {
-    const peripherals = await prisma?.peripherals.findMany()
+    const peripherals = await prisma.Peripherals.findMany()
     const authUser = await authUserGithub()
     const cartData = await prisma?.cart.findMany({
         where: { user_email: authUser?.email }

@@ -25,7 +25,7 @@ export async function POST (request) {
     const orderId = `${prefix}-${dateOrder}-${nanoid(3)}-${uniqueId}`
     const itemDetails = peripheralItem.map((peripheral) => ({
         id: peripheral.id.toString(),
-        name: peripheral.nama_peripheral,
+        name: peripheral.nama_peripheral.slice(0, 30),
         quantity: quantity,
         price: parseInt(peripheral.harga),
     }))

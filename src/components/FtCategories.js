@@ -7,10 +7,7 @@ import { authUserGithub } from "@/libs/auth"
 
 const FtCategories = async() => {
     const authUser = await authUserGithub()
-    const categories = await prisma?.peripherals.groupBy({
-        select: {
-            categories: true,
-        },
+    const categories = await prisma?.Peripherals.groupBy({
         by: ["categories"],
         _count: {
             _all: true

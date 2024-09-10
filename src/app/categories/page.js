@@ -2,7 +2,7 @@ import CategoriesCard from "@/components/CategoriesCard"
 import prisma from "@/libs/prisma"
 
 const Categories = async () => {
-    const categories = await prisma?.peripherals.groupBy({
+    const categories = await prisma?.Peripherals.groupBy({
         select: {
             categories: true
         },

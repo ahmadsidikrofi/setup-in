@@ -21,6 +21,7 @@ const Navbar = ({authUser, countCart}) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
     const [isSearchOpen, setIsSearchOpen] = useState(false)
     const [countCartLocal, setCountCartLocal] = useState(0)
+    const [isLoading, setIsLoading] = useState(true)
     const router = useRouter()
 
     const clickToCart = () => {
@@ -62,6 +63,10 @@ const Navbar = ({authUser, countCart}) => {
         return () => {
             window.removeEventListener('local-cart-updated', handleLocalCartUpdate)
         }
+    }, [])
+
+    useEffect(() => {
+        setTimeout((setIsLoading(false)), 1000)
     }, [])
 
     return ( 

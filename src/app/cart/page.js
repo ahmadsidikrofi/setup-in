@@ -25,6 +25,7 @@ const CartPage = async () => {
     const nama_peripheral = cartUsers.map((cartUser) => cartUser.nama_peripheral)
     const ids = cartUsers.map((cartUser) =>  cartUser.id_peripherals.toString())
     const harga = parseInt(totalHarga)
+    console.log(authUser.email)
     return (
         <main>
             <Toaster />
@@ -56,7 +57,7 @@ const CartPage = async () => {
                                 </div>
                         : <LocalCart />}
                     </div>
-                    <div className={`mt-12 bg-color-grey bg-opacity-5 rounded-lg p-8 ${cartUsers.length < 1 ? 'lg:w-[35vw]' : 'lg:w-[50vw]'} sm:w-full max-sm:w-full`}>
+                    <div className={`mt-12 bg-color-grey bg-opacity-5 rounded-lg p-8 ${cartUsers.length < 1 ? 'lg:w-[35vw]' : 'lg:w-[80vw]'} sm:w-full max-sm:w-full`}>
                         <h3 className="text-lg font-medium text-color-accent mb-6">Order Summary</h3>
                         <hr className="w-full opacity-15 border-color-grey" />
                         <div className="flex justify-between mt-4">
