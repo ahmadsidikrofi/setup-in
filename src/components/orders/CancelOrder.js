@@ -24,7 +24,7 @@ const CancelOrder = ({ canceledOrders }) => {
         }
         groups[date].push(order)
         return groups
-    }, {});
+    }, {})
     return (
         <>
             <Toaster />
@@ -33,7 +33,7 @@ const CancelOrder = ({ canceledOrders }) => {
                 {Object.keys(groupedOrders).map((date) => (
                     <div key={date} className="mb-6">
                         {groupedOrders[date].map((canceledOrder) => {
-                            const totalHarga = canceledOrder.OrderFurniture.reduce((total, orderFurniture) => total + orderFurniture.furnitures.harga, 0)
+                            const totalHarga = canceledOrder.OrderPeripheral.reduce((total, orderPeripheral) => total + orderPeripheral.Peripherals.harga, 0)
                             return (
                                 <div key={canceledOrder.id} className="border p-4 rounded-xl my-6">
                                     <div className="flex items-center justify-between">
@@ -65,25 +65,25 @@ const CancelOrder = ({ canceledOrders }) => {
                                     <h3 className="text-sm font-medium mt-1">{date}</h3>
                                     <Separator className="mt-6" />
 
-                                    {canceledOrder.OrderFurniture.map((orderFurniture, i) => (
+                                    {canceledOrder.OrderPeripheral.map((orderPeripheral, i) => (
                                         <div key={i}>
                                             <div className="flex items-start gap-3 my-4">
                                                 <Image
                                                     width={768}
                                                     height={768}
-                                                    src={orderFurniture.furnitures.image}
+                                                    src={orderPeripheral.Peripherals.image}
                                                     className="rounded-[15px] object-cover w-60 h-60 max-sm:w-36 max-sm:h-36"
-                                                    alt={orderFurniture.furnitures.nama_furniture}
+                                                    alt={orderPeripheral.Peripherals.nama_furniture}
                                                 />
                                                 <div className="flex gap-2 mt-1 text-lg">
                                                     <div className="flex flex-col">
-                                                        <p className="text-color-secondary font-bold">{orderFurniture.furnitures.nama_furniture}</p>
-                                                        <p className="text-color-grey font-light max-sm:text-sm">{orderFurniture.store.nama_toko}</p>
-                                                        <p className="text-sky-500 text-sm font-medium md:hidden">Rp {orderFurniture.furnitures.harga.toLocaleString("id-ID", { minimumFractionDigits: 2 })}</p>
+                                                        <p className="text-color-secondary font-bold">{orderPeripheral.Peripherals.nama_furniture}</p>
+                                                        <p className="text-color-grey font-light max-sm:text-sm">{orderPeripheral.store.nama_toko}</p>
+                                                        <p className="text-sky-500 text-sm font-medium md:hidden">Rp {orderPeripheral.Peripherals.harga.toLocaleString("id-ID", { minimumFractionDigits: 2 })}</p>
                                                     </div>
                                                 </div>
                                                 <div className="ml-auto mt-2 max-sm:hidden sm:hidden md:block">
-                                                    <p className="text-sky-500 font-medium">Rp {orderFurniture.furnitures.harga.toLocaleString("id-ID", { minimumFractionDigits: 2 })}</p>
+                                                    <p className="text-sky-500 font-medium">Rp {orderPeripheral.Peripherals.harga.toLocaleString("id-ID", { minimumFractionDigits: 2 })}</p>
                                                 </div>
                                             </div>
                                             <Separator />

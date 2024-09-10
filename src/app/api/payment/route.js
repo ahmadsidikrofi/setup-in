@@ -11,23 +11,23 @@ let snap = new Midtrans.Snap({
 
 export async function POST (request) {
     const authUser = await authUserGithub()
-    const { ids, harga, quantity, nama_furniture } = await request.json()
-    const furnitureItem = await prisma.furnitures.findMany({
+    const { ids, harga, quantity, nama_peripheral } = await request.json()
+    const peripheralItem = await prisma.Peripherals.findMany({
         where: {
             id: {
                 in: ids.map(id => parseInt(id))
             }
         }
     })
-    const prefix = 'FURN'
+    const prefix = 'SETUP'
     const dateOrder = new Date().toISOString().slice(0, 10).replace(/-/g, '')
     const uniqueId = nanoid(10)
     const orderId = `${prefix}-${dateOrder}-${nanoid(3)}-${uniqueId}`
-    const itemDetails = furnitureItem.map((furniture) => ({
-        id: furniture.id.toString(),
-        name: furniture.nama_furniture,
+    const itemDetails = peripheralItem.map((peripheral) => ({
+        id: peripheral.id.toString(),
+        name: peripheral.nama_peripheral,
         quantity: quantity,
-        price: parseInt(furniture.harga),
+        price: parseInt(peripheral.harga),
     }))
     // let grossAmount = itemDetails.reduce((acc, item) => acc + (item.price * item.quantity), 0)
     let parameterMidtrans = {
@@ -61,14 +61,14 @@ export async function POST (request) {
         }
     })
 
-    for (let furniture of furnitureItem) {
-        await prisma.OrderFurniture.create({
+    for (let peripheral of peripheralItem) {
+        await prisma.OrderPeripheral.create({
             data: {
                 orderId: createOrder.id,
-                furnitureId: furniture.id, 
-                storeId: furniture.store_id, 
+                peripheralId: peripheral.id, 
+                storeId: peripheral.store_id, 
             }
-        });
+        })
     }
     console.log(createToken, parameterMidtrans)
     if ( !createToken ) return Response.json({ status: 500, isCreated: false })

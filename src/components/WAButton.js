@@ -12,7 +12,7 @@ const WAButton = ({ waLink, detailData }) => {
         <>
             <div className="fixed bottom-8 right-8 gap-3">
                 <HoverCard>
-                    <HoverCardTrigger href={waLink} target="_blank" className="flex items-center text-md bg-color-accent2 text-white rounded-full p-3"> 
+                    <HoverCardTrigger href={waLink} target="_blank" className="flex items-center text-md bg-emerald-700 text-white rounded-full p-3"> 
                         <WhatsappLogo className="h-10 w-10" />
                     </HoverCardTrigger>
                     <HoverCardContent className="w-80">

@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 import toast, { LoaderIcon } from "react-hot-toast"
 
-const CheckoutButton = ({ ids, harga, cartUsers, nama_furniture }) => {
+const CheckoutButton = ({ ids, harga, cartUsers, nama_peripheral }) => {
     const [quantity, setQuantity] = useState(1)
     const router = useRouter()
     const [isLoading, setIsLoading] = useState(false)
@@ -27,7 +27,7 @@ const CheckoutButton = ({ ids, harga, cartUsers, nama_furniture }) => {
     const handleCheckout = async () => {
         const data = {
             ids: ids,
-            name: nama_furniture,
+            name: nama_peripheral,
             harga: harga,
             quantity: quantity,
         }

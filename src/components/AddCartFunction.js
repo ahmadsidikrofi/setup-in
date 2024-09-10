@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from 'react-hot-toast';
 
-const AddCartFunction = ( {nama_furniture, harga, categories, image, id_furniture, slug, authUser} ) => {
+const AddCartFunction = ( {nama_peripheral, harga, categories, image, id_peripherals, slug, authUser} ) => {
     const router = useRouter()
     const [localCart, setLocalCart] = useState([])
     useEffect(() => {
@@ -15,32 +15,34 @@ const AddCartFunction = ( {nama_furniture, harga, categories, image, id_furnitur
     }, [])
 
     const handleAddCart = async () => {
-        const isLocalFurnitureExists = localCart.some((item) => item.slug === slug)
+        const isLocalPeripheralExist = localCart.some((item) => item.slug === slug)
         if (!authUser) {
-            if (isLocalFurnitureExists) {
-                toast.success("Furniture sudah berada dalam keranjang")
+            if (isLocalPeripheralExist) {
+                toast.success("Peripheral sudah berada dalam keranjang")
                 return
             }
         }
-        const data = { nama_furniture, harga, categories, image, id_furniture, slug, user_email:authUser?.email }
+        const data = { nama_peripheral, harga, categories, image, id_peripherals, slug, user_email:authUser?.email }
         if (authUser) {    
             await axios.post("/api/v1/cart", data)
             .then((res) => {
                 if (res.data.status === 200) {
                     toast.loading("Tunggu...", { duration: 1000 })
                     setTimeout(() => {
-                        toast.success("Furniture berhasil masuk keranjang")
+                        toast.success("Peripheral berhasil masuk keranjang")
                         router.refresh()
                     }, 1000)
+                } else if (res.data.status === 500) {
+                    toast.error("Peripheral menolak masuk ke keranjang")
                 } else {
-                    toast.success("Furniture sudah tersedia dalam keranjang")
-                    console.error("Gagal menambahkan furniture ke keranjang")
+                    toast.success("Peripheral sudah tersedia dalam keranjang")
+                    console.error("Gagal menambahkan Peripheral ke keranjang")
                 }
             }).catch(() => {
                 toast.error("Sepertinya jangan beli barang ini dulu ya🙏")
             })
         } else {
-            toast.success("Furniture berhasil masuk keranjang")
+            toast.success("Peripheral berhasil masuk keranjang")
             const isLocalCartSorted = [...localCart, data ]
             setLocalCart(isLocalCartSorted)
             localStorage.setItem("local-cart", JSON.stringify(isLocalCartSorted))

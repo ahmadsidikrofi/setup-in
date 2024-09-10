@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import SidebarMenu from "../components/Sidebar"
-import SearchFurnitems from "./SearchFurnitems";
 import { ListItem } from "@/components/ui/ListItem"
+import SearchPeripheral from "./SearchPeripheral";
 import {
     NavigationMenu,
     NavigationMenuContent,
@@ -72,14 +72,14 @@ const Navbar = ({authUser, countCart}) => {
                 null
             }
             {isSearchOpen ?
-                <SearchFurnitems setIsSearchOpen={setIsSearchOpen}/> : null
+                <SearchPeripheral setIsSearchOpen={setIsSearchOpen}/> : null
             }
             <div className="sticky top-0 bg-white z-10 flex items-center py-3 px-4 gap-10 shadow-md">
                 <button onClick={miniMenuNavbar} className="p-[6px] visible lg:hidden xl:hidden hover:bg-color-accent hover:bg-opacity-10 hover:rounded-full transition-all ease-in-out">
                     <List size={24} />
                 </button>
                 <Link href={'/'} className="text-color-accent2 text-lg font-bold hidden lg:flex items-center gap-2 mx-2">
-                    <Image className="w-[30px] h-[30px]" width={768} height={768} src="/icon.png" alt="Setup-in Logo" />
+                    <Image className="w-[50px] h-[50px]" width={768} height={768} src="/navbar.png" alt="Setup-in Logo" />
                     <p>Setup-in</p>
                 </Link>
                 <div className="hidden lg:flex lg:items-center xl:flex xl:items-center">
@@ -92,7 +92,7 @@ const Navbar = ({authUser, countCart}) => {
                                         <li className='row-span-3'>
                                             <NavigationMenuLink asChild>
                                                 <Link className='flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md' href='/'>
-                                                    <Image className="w-[50px] h-[50px]" width={768} height={768} src="/icon.png" alt="Setup-in Logo"  />
+                                                    <Image className="w-[70px] h-[70px]" width={768} height={768} src="/navbar.png" alt="Setup-in Logo"  />
                                                     <div className='mb-2 mt-4 text-lg font-medium'>Setup-in</div>
                                                     <p className='text-sm leading-tight text-muted-foreground'>Discover cutting-edge Setup-in shopping, powered by Next.js technology. Shop smarter, live better!</p>
                                                 </Link>

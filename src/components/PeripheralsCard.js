@@ -81,9 +81,9 @@ const PeripheralsCard = ({ peripherals, authUser }) => {
                                 <Image src={peripheral.image || ''} width={768} height={768} alt="..." className="w-full object-cover xl:h-64 md:h-64 h-96 rounded-[20px] hover:transition-all hover:scale-[1.08]" />
                                 <div className="p-2">
                                     <p className="font-normal text-sm py-2">{peripheral.categories}</p>
-                                    <p className="font-semibold text-xl mb-5">
+                                    <p className="font-semibold text-lg mb-5">
                                         {peripheral.nama_peripheral.length > 19 ? 
-                                            peripheral.nama_peripheral.substring(0, 15) + "..." 
+                                            peripheral.nama_peripheral.substring(0, 40) + "..." 
                                             : peripheral.nama_peripheral
                                         }
                                     </p>

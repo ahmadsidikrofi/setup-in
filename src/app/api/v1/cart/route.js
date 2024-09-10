@@ -9,14 +9,16 @@ export async function POST( request ) {
         harga: parseFloat(harga),
         slug: slugify(nama_peripheral, { lower: true, strict: true, replacement: "-" })
     }
-    console.log("Data yang dikirim ke Prisma:", data)
     try {
+        console.log("Data yang dikirim ke Prisma:", data)
         const addItem = await prisma.cart.create({data})
         return Response.json({ status: 200, isCreated: true })
     } catch (err) {
         if (err.code === "P2002") {
             console.log("Peripheral sudah dalam keranjang kamu")
             return Response.json({ status: 409, isCreated: false, message: "Peripheral sudah ada dalam keranjang" })
+        } else {
+            return Response.json({ status: 500, isCreated: false, message: "Peripheral menolak untuk ke keranjang" })
         }
     }
 }

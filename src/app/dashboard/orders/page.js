@@ -12,9 +12,9 @@ const OrdersPage = async () => {
     const pendingOrders = await prisma.Orders.findMany({
         where: { status: "PENDING", user_email: authUser?.email },
         include: { 
-            OrderFurniture: {
+            OrderPeripheral: {
                 include: {
-                    furnitures: true,
+                    Peripherals: true,
                     store: true
                 }
             }
@@ -26,9 +26,9 @@ const OrdersPage = async () => {
     const canceledOrders = await prisma.Orders.findMany({
         where: { status: "CANCELED", user_email: authUser?.email },
         include: {
-            OrderFurniture: {
+            OrderPeripheral: {
                 include: {
-                    furnitures: true,
+                    Peripherals: true,
                     store: true
                 }
             }
@@ -40,9 +40,9 @@ const OrdersPage = async () => {
     const settleOrder = await prisma.Orders.findMany({
         where: { status: "SETTLEMENT", user_email: authUser?.email },
         include: {
-            OrderFurniture: {
+            OrderPeripheral: {
                 include: {
-                    furnitures: true,
+                    Peripherals: true,
                     store: true
                 }
             }

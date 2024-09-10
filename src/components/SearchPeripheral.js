@@ -19,7 +19,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import SearchSkeleton from "./skeleton/SearchSkeleton"
   
-const SearchFurnitems = ({ setIsSearchOpen }) => {
+const SearchPeripheral = ({ setIsSearchOpen }) => {
     const router = useRouter()
     const [closeSearchbar, setCloseSearchbar] = useState(false)
     const [searchValue, setSearchValue] = useState('')
@@ -48,8 +48,8 @@ const SearchFurnitems = ({ setIsSearchOpen }) => {
         acc[item.categories].push(item);
         return acc;
     }, {})
-    const handleDetailFurniture = (slug) => {
-        router.push(`/furnitures/${slug}`)
+    const handleDetailPeripheral = (slug) => {
+        router.push(`/peripherals/${slug}`)
     }
     return (
         <>
@@ -69,8 +69,8 @@ const SearchFurnitems = ({ setIsSearchOpen }) => {
                                     <div key={index}>
                                         <CommandGroup heading={category}>
                                             {groupedResults[category].map((result, i) => (
-                                                <div className="hover:bg-accent hover:text-accent-foreground" onClick={() => handleDetailFurniture(result.slug)} key={i}>
-                                                    <CommandItem>{result.nama_furniture}</CommandItem>
+                                                <div className="hover:bg-accent hover:text-accent-foreground" onClick={() => handleDetailPeripheral(result.slug)} key={i}>
+                                                    <CommandItem>{result.nama_peripheral}</CommandItem>
                                                 </div>
                                             ))}
                                         </CommandGroup>
@@ -82,21 +82,9 @@ const SearchFurnitems = ({ setIsSearchOpen }) => {
                         )}
                     </CommandList>
                 </Command>
-                {/* <motion.div className="p-3  max-sm:w-[100%] md:w-[80vh] shadow-lg flex justify-between items-center rounded-lg text-color-primary"
-                    initial={{ y: -500, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ type: 'spring', duration: 1 }}
-                >
-                    <div className="flex items-center gap-2 w-[60vh]">
-
-                        <MagnifyingGlass size={23}  className="font-medium"/>
-                        <input value={searchValue} onChange={(e) => setSearchValue(e.target.value)} className="bg-color-accent2 placeholder-color-primary outline-none" type="text" placeholder="Cari / Search Furnitems..." />
-                    </div>
-                    <button onClick={handleCloseSearchbar}><XCircle size={28} /></button>
-                </motion.div> */}
             </motion.div>
         </div>
         </>
     )
 }
-export default SearchFurnitems
+export default SearchPeripheral
