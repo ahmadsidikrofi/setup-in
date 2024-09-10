@@ -7,7 +7,7 @@ export async function GET(request) {
         where: {
             nama_peripheral: {
                 contains: query,
-                // mode: 'insensitive'
+                mode: 'insensitive'
             }
         }
     })
