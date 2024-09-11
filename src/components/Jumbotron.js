@@ -1,12 +1,25 @@
 'use client'
-
 import Image from "next/image"
 import Link from "next/link"
 import JumbotronCarousel from "./JumbotronCarousel"
 import HomeTour from "./drivers/HomeTour"
 
 const Jumbotron = ({ authUser }) => {
-    // const checkTour = localStorage.getItem("")
+    const handleMouseMove = (e) => {
+        const imageJumbotron = e.currentTarget;
+        const rect = imageJumbotron.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2
+        const y = e.clientY - rect.top - rect.height / 2
+
+        const rotateX = -y / 10
+        const rotateY = x / 10
+
+        imageJumbotron.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(80px)`
+    }
+    const handleMouseLeave = (e) => {
+        const imageJumbotron = e.currentTarget
+        imageJumbotron.style.transform = 'rotateX(0) rotateY(0) rotateZ(0)'
+    }
     return (
         <div>
             {authUser === true ? null : <HomeTour />}
@@ -23,13 +36,20 @@ const Jumbotron = ({ authUser }) => {
                     <h1 className="leading-[5vw] max-sm:leading-[7vw] tracking-tight">Unleash Your Setup Potential alongside <span className="text-color-accent2">Setup-in</span> by Rofi</h1>
                     <p className="text-[2vw] max-sm:text-[3vw] max-sm:font-medium text-color-secondary opacity-65 font-light my-5">Discover and shop unique setup pieces from independent brands and stores around the globe!</p>
                     <div className="max-sm:pb-4 flex max-sm:justify-center max-sm:items-center gap-4 text-sm font-medium items-center text-center">
-                        <Link href={'/on-your-desk'} className="max-sm:w-[100%] py-3 px-4 text-color-primary bg-color-accent2 rounded-full hover:shadow-lg sm:hidden md:block shop-now">Shop Now</Link> 
+                        <Link href={'/on-your-desk'} className="text-nowrap max-sm:w-[100%] py-3 px-4 max-sm:p-2 text-color-primary bg-color-accent2 rounded-full hover:shadow-lg sm:hidden md:block shop-now">Shop Now</Link> 
                         <p className="font-semibold sm:hidden md:block">or</p>
-                        <Link href={'/dashboard/stores'} className="max-sm:w-[100%] py-3 px-4 border-[1px] border-color-grey border-opacity-15 rounded-full hover:shadow-xl sm:hidden md:block sell-now">Cash in today</Link>
+                        <Link href={'/dashboard/stores'} className="text-nowrap max-sm:w-[100%] py-3 px-4 max-sm:p-2 border-[1px] border-color-grey border-opacity-15 rounded-full hover:shadow-xl sm:hidden md:block sell-now">Cash in today</Link>
                     </div>
                 </div>
-                <div className="max-sm:order-last flex justify-center">
-                    <Image src="/jumbotron.png" className="h-[100%] w-[100%] p-5 bg-blend-lighten rounded-full hover:-rotate-180 transition-all ease-linear hover:-translate-x-[500px] duration-1000" width={768} height={768} alt="Dining Jumbotron" />
+                {/* <Image src="/jumbotron.png" className="h-[100%] w-[100%] p-5 rounded-full hover:-rotate-180 transition-all ease-linear hover:-translate-x-[500px] duration-1000" width={768} height={768} alt="Dining Jumbotron" /> */}
+                <div className="card-container">
+                    <div className="card flex justify-center"
+                        onMouseMove={handleMouseMove}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        {/* <p className="text-3d text-white">Text</p> */}
+                        <Image src="/jumbotron.png" className="image-3d h-[80%] w-[80%] p-5 rounded-full transition-all ease-linear duration-1000" width={768} height={768} alt="Your Setup" />
+                    </div>
                 </div>
             </div>
             <div className="pb-20 lg:px-28 sm:px-14 max-sm:px-14">

@@ -68,17 +68,37 @@ const PeripheralsCard = ({ peripherals, authUser }) => {
         }
     }
 
+    const handleMouseMove = (e) => {
+        const cardImage = e.currentTarget;
+        const rect = cardImage.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2
+        const y = e.clientY - rect.top - rect.height / 2
+
+        const rotateX = -y / 10
+        const rotateY = x / 10
+
+        cardImage.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(80px)`
+    }
+    const handleMouseLeave = (e) => {
+        const cardImage = e.currentTarget
+        cardImage.style.transform = 'rotateX(0) rotateY(0) rotateZ(0)'
+    }
+
     return (
         <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 my-12">
             <Toaster />
             {peripherals?.map((peripheral) => (
                 <div key={peripheral.id}>
                 {isLoading ? <FurnitureSkeleton setIsLoading={setIsLoading}/> :
-                    // /furnitures/edit/${furniture.slug}
                     <div>
                         <Link href={`/on-your-desk/${peripheral.slug}`}>
                             <div className="p-2 border-color-accent border-[1px] text-color-secondary rounded-[23px] shadow-xl hover:shadow-2xl transition-all ease-linear">
-                                <Image src={peripheral.image || ''} width={768} height={768} alt="..." className="w-full object-cover xl:h-64 md:h-64 h-96 rounded-[20px] hover:transition-all hover:scale-[1.08]" />
+                                <div className="card"
+                                    onMouseMove={handleMouseMove}
+                                    onMouseLeave={handleMouseLeave}
+                                >
+                                    <Image src={peripheral.image || ''} width={768} height={768} alt="..." className="w-full object-cover xl:h-64 md:h-64 h-96 rounded-[15px] hover:shadow-md hover:transition-all" />
+                                </div>
                                 <div className="p-2">
                                     <p className="font-normal text-sm py-2">{peripheral.categories}</p>
                                     <p className="font-semibold text-lg mb-5">
