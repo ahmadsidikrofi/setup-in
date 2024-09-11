@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import JumbotronCategorySkeleton from "./skeleton/JumbotronCategorySkeleton";
+import CategoryImages from "@/libs/getImageCategories";
 
 const JumbotronCategory = ({ decodeKeyword, countResult }) => {
     const [isLoading, setIsLoading] = useState(true)
@@ -18,7 +19,7 @@ const JumbotronCategory = ({ decodeKeyword, countResult }) => {
                     <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 rounded-xl"></div>
                     <Image
                         className={`object-cover w-full h-[480px] rounded-xl mt-10 mb-20`}
-                        src={decodeKeyword ? `/${decodeKeyword}.jpg` : '/default.jpg'}
+                        src={CategoryImages[decodeKeyword] || '/default.jpg'}
                         width={2160}
                         height={2160}
                         alt={decodeKeyword}
