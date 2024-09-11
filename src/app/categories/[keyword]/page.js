@@ -5,7 +5,7 @@ import axios from "axios"
 const FurnitureKeyword = async ({params}) => {
     const { keyword } = params
     const decodeKeyword = decodeURI(keyword)
-    const res = await axios.get(`http://localhost:3000/api/v1/categories/${decodeKeyword}`)
+    const res = await axios.get(`https://setup-in.vercel.app/api/v1/categories/${decodeKeyword}`)
     const resultPeripheralKeyword = res.data.data || []
     const countResult = resultPeripheralKeyword.length
     return (
