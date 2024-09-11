@@ -14,7 +14,7 @@ export async function POST (request) {
     const order = await prisma.orders.findUnique({
         where: { id: orderId }
     })
-    const prefix = 'FURN'
+    const prefix = 'SETUP'
     const dateOrder = new Date().toISOString().slice(0, 10).replace(/-/g, '')
     const uniqueId = nanoid(10)
     const newOrderId = `${prefix}-${dateOrder}-${nanoid(3)}-${uniqueId}`
