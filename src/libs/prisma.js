@@ -1,6 +1,6 @@
-// import { PrismaClient } from '../../prisma/generated/client'
+import { PrismaClient } from '../../prisma/generated/client'
 
-import { PrismaClient } from "../../prisma/node_modules/@prisma/client"
+// import { PrismaClient } from "../../prisma/node_modules/@prisma/client"
 
 let prisma = global.prisma || new PrismaClient()
 console.log(prisma)
