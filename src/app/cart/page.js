@@ -57,12 +57,17 @@ const CartPage = async () => {
                                 </div>
                         : <LocalCart />}
                     </div>
-                    <div className={`mx-10 mt-12 bg-color-grey bg-opacity-5 rounded-lg p-8 lg:w-full`}>
+                    <div className={`lg:mx-10 mt-12 bg-color-grey bg-opacity-5 rounded-lg p-8 w-full`}>
                         <h3 className="text-lg font-medium text-color-accent mb-6">Order Summary</h3>
                         <hr className="w-full opacity-15 border-color-grey" />
                         <div className="flex justify-between mt-4">
                             <p className="font-medium">Order total</p>
-                            <p className="font-normal">{authUser ? "Rp" + formatTotHarga : <span><Badge className="rounded-full bg-color-accent2">Sign-in</Badge></span>}</p>
+                            <div>
+                                {authUser ? "Rp" + formatTotHarga : 
+                                <Link href={"/sign-in"}>
+                                    <Badge className="rounded-full bg-color-accent2">Sign-in</Badge>
+                                </Link>}
+                            </div>
                         </div>
                         <CheckoutButton ids={ids} harga={harga} cartUsers={cartUsers} nama_peripheral={nama_peripheral}/>
                     </div>
