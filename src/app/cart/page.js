@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { authUserGithub } from "@/libs/auth";
 import LocalCart from "@/components/LocalCart";
 import Link from "next/link";
+import { Badge } from "@/components/ui/Badge";
 
 const CartPage = async () => {
     const authUser = await authUserGithub()
@@ -25,7 +26,6 @@ const CartPage = async () => {
     const nama_peripheral = cartUsers.map((cartUser) => cartUser.nama_peripheral)
     const ids = cartUsers.map((cartUser) =>  cartUser.id_peripherals.toString())
     const harga = parseInt(totalHarga)
-    console.log(authUser.email)
     return (
         <main>
             <Toaster />
@@ -38,10 +38,10 @@ const CartPage = async () => {
                                 cartUsers.map((cartUser) => (
                                     <div key={cartUser.id}>
                                         <div className="xl:grid xl:grid-cols-4 lg:grid lg:grid-cols-4 md:flex md:flex-row sm:flex sm:flex-row max-sm:grid max-sm:grid-cols-4 my-5 lg:gap-x-4 md:gap-x-4 sm:gap-x-4 max-sm:gap-x-4 items-start w-full">
-                                            <Image src={cartUser.image} alt="..." width={768} height={768} className="xl:w-full lg:w-full md:w-full sm:w-full max-sm:w-full xl:h-40 lg:h-40 md:h-40 sm:h-24 max-sm:h-24 rounded-lg object-cover" />
+                                            <Image src={cartUser.image} alt="..." layout="fixed" width={150} height={150} className="sm:w-full max-sm:w-full sm:h-40  max-sm:h-24 rounded-lg object-cover" />
                                             <div className="flex flex-col gap-1">
-                                                <Link href={`/peripherals/${cartUser.slug}`}>
-                                                    <p className="font-semibold max-sm:text-[13px] lg:text-lg sm:text-md max-sm:text-md sm:text-wrap max-sm:text-wrap">{cartUser.nama_peripheral}</p>
+                                                <Link href={`/on-your-desk/${cartUser.slug}`}>
+                                                    <p className="font-semibold max-sm:text-[13px] lg:text-lg sm:text-md sm:text-wrap max-sm:text-wrap">{cartUser.nama_peripheral}</p>
                                                 </Link>
                                                 <p className="text-md max-sm:text-[13px] sm:text-nowrap max-sm:text-nowrap">Rp {cartUser.harga.toLocaleString("id-ID", { minimumFractionDigits: 2 })} </p>
                                             </div>
@@ -57,12 +57,12 @@ const CartPage = async () => {
                                 </div>
                         : <LocalCart />}
                     </div>
-                    <div className={`mt-12 bg-color-grey bg-opacity-5 rounded-lg p-8 ${cartUsers.length < 1 ? 'lg:w-[35vw]' : 'lg:w-[80vw]'} sm:w-full max-sm:w-full`}>
+                    <div className={`mx-10 mt-12 bg-color-grey bg-opacity-5 rounded-lg p-8 lg:w-full`}>
                         <h3 className="text-lg font-medium text-color-accent mb-6">Order Summary</h3>
                         <hr className="w-full opacity-15 border-color-grey" />
                         <div className="flex justify-between mt-4">
                             <p className="font-medium">Order total</p>
-                            <p className="font-normal">{authUser ? "Rp" + formatTotHarga : "Sign-in to see your total"}</p>
+                            <p className="font-normal">{authUser ? "Rp" + formatTotHarga : <span><Badge className="rounded-full bg-color-accent2">Sign-in</Badge></span>}</p>
                         </div>
                         <CheckoutButton ids={ids} harga={harga} cartUsers={cartUsers} nama_peripheral={nama_peripheral}/>
                     </div>
