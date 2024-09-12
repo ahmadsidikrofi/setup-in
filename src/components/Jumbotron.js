@@ -47,7 +47,7 @@ const Jumbotron = ({ authUser }) => {
                         onMouseMove={handleMouseMove}
                         onMouseLeave={handleMouseLeave}
                     >
-                        <p className="text-3d text-white">Text</p>
+                        {/* <p className="text-3d text-white">Text</p> */}
                         <Image src="/jumbotron.png" className="image-3d h-[80%] w-[80%] p-5 rounded-full transition-all ease-linear duration-1000" width={768} height={768} alt="Your Setup" />
                     </div>
                 </div>
