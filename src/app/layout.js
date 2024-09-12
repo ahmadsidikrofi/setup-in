@@ -2,8 +2,8 @@ import { Poppins } from 'next/font/google'
 import "./globals.css";
 import NavbarWrapper from '@/components/NavbarWrapper';
 import { authUserGithub } from '@/libs/auth';
-import Footer from '@/components/Footer';
 import prisma from '@/libs/prisma';
+import LoadingTop from '@/components/LoadingTop';
 // import 'react-loading-skeleton/dist/skeleton.css'
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'] })
@@ -27,10 +27,11 @@ export default async function RootLayout({ children }) {
       <link rel="icon" type="image/png" sizes="16x16" href="/navbar.ico"/>
       </head>
       <body className={poppins.className}>
+        <LoadingTop />
         <NavbarWrapper authUser={authUser} countCart={countCart}/>
         {children}
         {/* <Footer /> */}
       </body>
     </html>
-  );
+  )
 }

@@ -41,8 +41,8 @@ const Jumbotron = ({ authUser }) => {
                         <Link href={'/dashboard/stores'} className="text-nowrap max-sm:w-[100%] py-3 px-4 max-sm:p-2 border-[1px] border-color-grey border-opacity-15 rounded-full hover:shadow-xl sm:hidden md:block sell-now">Cash in today</Link>
                     </div>
                 </div>
-                <Image src="/jumbotron.png" className="h-[100%] w-[100%] p-5 rounded-full hover:-rotate-180 transition-all ease-linear hover:-translate-x-[500px] duration-1000" width={768} height={768} alt="Dining Jumbotron" />
-                {/* <div className="card-container">
+                {/* <Image src="/jumbotron.png" className="h-[100%] w-[100%] p-5 rounded-full hover:-rotate-180 transition-all ease-linear hover:-translate-x-[500px] duration-1000" width={768} height={768} alt="Dining Jumbotron" /> */}
+                <div className="card-container">
                     <div className="card flex justify-center"
                         onMouseMove={handleMouseMove}
                         onMouseLeave={handleMouseLeave}
@@ -50,7 +50,7 @@ const Jumbotron = ({ authUser }) => {
                         <p className="text-3d text-white">Text</p>
                         <Image src="/jumbotron.png" className="image-3d h-[80%] w-[80%] p-5 rounded-full transition-all ease-linear duration-1000" width={768} height={768} alt="Your Setup" />
                     </div>
-                </div> */}
+                </div>
             </div>
             <div className="pb-20 lg:px-28 sm:px-14 max-sm:px-14">
                 <JumbotronCarousel />
