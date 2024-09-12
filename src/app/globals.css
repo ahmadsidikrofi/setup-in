@@ -81,3 +81,18 @@
   transform: translateZ(200px);
   transition: transform 0.1s ease;
 }
+
+
+/* .image-container {
+  position: relative;
+  overflow: hidden;
+  Pastikan gambar tidak melebihi batas kontainer
+}
+
+.image-content {
+  transition: transform 0.3s ease-in-out; 
+}
+
+.image-container:hover .image-content {
+  transform: scale(1.1); Isi gambar yang akan membesar, bukan gambar itu sendiri
+} */

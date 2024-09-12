@@ -29,11 +29,16 @@ const JumbotronCarousel = () => {
     ];
 
     return (
-        <>
-            <Carousel>
-                <CarouselContent>
+        <div className='mt-20 mb-14'>
+            <Carousel 
+                  opts={{
+                    align: "start",
+                  }}
+                  orientation="vertical"
+            >
+                <CarouselContent className="max-sm:h-[200px] h-[500px] rounded-[20px]">
                     {carouselItems.map((item) => (
-                        <CarouselItem key={item.id}>
+                        <CarouselItem key={item.id} className="pt-1 md:basis-1/2">
                             <Image 
                                 className={`object-cover w-full ${isMobile ? 'h-[50vh]' : 'h-[80vh]'} rounded-[20px]`} 
                                 src={isMobile ? item.mobile : item.desktop} 
@@ -47,7 +52,7 @@ const JumbotronCarousel = () => {
                 <CarouselPrevious />
                 <CarouselNext />
             </Carousel>
-        </>
+        </div>
     );
 };
 
