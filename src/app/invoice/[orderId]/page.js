@@ -15,9 +15,9 @@ const Invoice = async ({ params }) => {
     const invoiceData = await prisma.Orders.findUnique({
         where: { id: orderId },
         include: {
-            OrderFurniture: {
+            OrderPeripheral: {
                 include: {
-                    furnitures: true,
+                    Peripherals: true,
                     store: true
                 }
             }
@@ -29,13 +29,13 @@ const Invoice = async ({ params }) => {
         <main className=" p-5">
             <div className="border rounded-2xl py-5 px-4">
                 <div className="flex justify-between items-center">
-                    <h1 className="text-color-accent2 font-bold text-2xl mb-4">FurniCraft</h1>
+                    <h1 className="text-color-accent2 font-bold text-2xl mb-4">Setup-in</h1>
                     <DownloadInvoice invoiceData={invoiceData}/>
                 </div>
                 <h3 className="text-color-secondary font-semibold text-lg">Detail Payment</h3>
                 <p className="font-medium">Order ID: <span className="font-normal">{invoiceData.id}</span></p>
                 <p className="font-medium">Order Date: <span className="font-normal">{invoiceDate}</span></p>
-                <h3 className="font-medium my-7">Purchased Furniture</h3>
+                <h3 className="font-medium my-7">Purchased Peripheral</h3>
                 <Table className="p-3">
                     <TableHeader>
                         <TableRow className="font-medium">
@@ -46,13 +46,13 @@ const Invoice = async ({ params }) => {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {invoiceData.OrderFurniture.map((item, i) => {
+                        {invoiceData.OrderPeripheral.map((item, i) => {
                             return (
                                 <TableRow key={i}>
-                                    <TableCell className="font-medium">{item.furnitures.nama_furniture}</TableCell>
+                                    <TableCell className="font-medium">{item.Peripherals.nama_peripheral}</TableCell>
                                     <TableCell>{item.store.nama_toko}</TableCell>
                                     <TableCell>1</TableCell>
-                                    <TableCell className="text-right">Rp {item.furnitures.harga.toLocaleString('id-ID', {minimumFractionDigits: 2})}</TableCell>
+                                    <TableCell className="text-right">Rp {item.Peripherals.harga.toLocaleString('id-ID', {minimumFractionDigits: 2})}</TableCell>
                                 </TableRow>
                             )
                         })}

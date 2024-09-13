@@ -39,7 +39,7 @@ const SettlementOrder = ({ settleOrder }) => {
                                         <h2 className="text-color-accent2 text-lg">Your Orders</h2>
                                     </div>
                                     <div className="flex items-center justify-end gap-2">
-                                        <p><Badge className="rounded-full text-emerald-600 bg-emerald-200">Settlement</Badge></p>
+                                        <Badge className="rounded-full text-emerald-600 bg-emerald-200">Settlement</Badge>
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
                                                 <Button variant="ghost" className="h-8 w-8 p-0 font-bold">

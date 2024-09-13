@@ -74,7 +74,7 @@ const OrdersPage = async () => {
                         {pendingOrders < 1 ? null : 
                             <PendingOrder pendingOrders={pendingOrders}/>
                         }
-                        {SettlementOrder < 1 ? null :
+                        {settleOrder < 1 ? null :
                             <SettlementOrder settleOrder={settleOrder} />
                         }
                         {canceledOrders < 1 ? null : 

@@ -111,7 +111,7 @@ const FormNewProduct = ({ storeId, slugStore }) => {
                                             <SelectItem value="keyboard">Keyboard</SelectItem>
                                             <SelectItem value="mouse">Mouse</SelectItem>
                                             <SelectItem value="deskmate">Deskmate</SelectItem>
-                                            <SelectItem value="deskshelf">Deskself</SelectItem>
+                                            <SelectItem value="deskshelf">Deskshelf</SelectItem>
                                         </SelectContent>
                                     </Select>
                                 </FormControl>
