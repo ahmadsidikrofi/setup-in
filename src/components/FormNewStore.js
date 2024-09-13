@@ -29,7 +29,10 @@ const FormNewStore = ({ email }) => {
         nama_toko: yup.string().required("Nama toko wajib diisi."),
         telp: yup
         .string()
-        .matches(/^[1-9][0-9]*$/, "Nomor telepon tidak boleh diawali dengan 0.")
+        // .matches(/^[0-9]+$/, "Nomor telepon hanya boleh berisi angka.")
+        .matches(/^[1-9][0-9]*$/, "Nomor telepon tidak boleh diawali dengan 0 dan Nomor telepon hanya boleh berisi angka.")
+        .min(10, "Nomor telepon harus minimal 10 digit.")
+        .max(13, "Nomor telepon tidak boleh lebih dari 15 digit.")
         .required("Nomor telepon wajib diisi."),
     })
     const form = useForm({
@@ -81,7 +84,7 @@ const FormNewStore = ({ email }) => {
                                             +62
                                         </p>
                                         <FormControl>
-                                            <Input placeholder="Input your number phone here" {...field} type='number' className='pl-10' />
+                                            <Input placeholder="Input your number phone here" {...field} type='text' className='pl-10' />
                                         </FormControl>
                                     </div>
                                     <FormMessage />

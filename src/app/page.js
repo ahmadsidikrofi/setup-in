@@ -11,7 +11,7 @@ export default async function Home() {
       <Jumbotron authUser={authUser}/>
       <section className='xl:px-16 sm:px-4 max-sm:px-4'>
           <FtCategories />
-          <PopulerPeripherals />
+          <PopulerPeripherals authUser={authUser}/>
       </section>
     </main>
   );

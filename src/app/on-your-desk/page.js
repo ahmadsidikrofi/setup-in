@@ -3,7 +3,7 @@ import { authUserGithub } from "@/libs/auth"
 import prisma from "@/libs/prisma"
 import Link from "next/link"
 
-const Peripherals = async () => {
+const OnYourDeskPage = async () => {
     const authUser = await authUserGithub()
     const peripherals = await prisma?.peripherals.findMany()
     const countFurniture = await prisma?.peripherals.count()
@@ -16,8 +16,8 @@ const Peripherals = async () => {
                     <p className="text-sm font-normal text-color-grey py-2">Get to know to our interior future furniture we offer</p>
                 </div>
             </div>
-            <PeripheralsCard peripherals={peripherals} email={email}/>
+            <PeripheralsCard authUser={authUser} peripherals={peripherals} email={email}/>
         </main>
     )
 }
-export default Peripherals
+export default OnYourDeskPage

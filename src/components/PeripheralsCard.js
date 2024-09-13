@@ -19,8 +19,12 @@ const PeripheralsCard = ({ peripherals, authUser }) => {
         const storedCart = JSON.parse(localStorage.getItem('local-cart')) || []
         setLocalCart(storedCart)
     }, [])
+    useEffect(() => {
+        console.log("AuthUser on /on-your-desk:", authUser);
+      }, [authUser])
 
     const addToCart = async (peripherals, e) => {
+        console.log(authUser)
         e.preventDefault()
         const isLocalPeripheralsExists = localCart.some((item) => item.slug === peripherals.slug)
         if (!authUser) {
@@ -58,7 +62,7 @@ const PeripheralsCard = ({ peripherals, authUser }) => {
                 console.error("Gagal menambahkan furnitur ke keranjang", error);
                 toast.success("Peripheral sudah tersedia dalam keranjang");
             }
-        } else {
+        } else if (!authUser) {
             // Jika user tidak login, hanya tampilkan pesan sukses
             toast.success("Peripheral berhasil masuk keranjang")
             const updatedLocalCart = [...localCart, data]
