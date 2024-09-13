@@ -4,7 +4,7 @@ import { authUserGithub } from "@/libs/auth"
 import axios from "axios"
 
 const FurnitureKeyword = async ({params}) => {
-    const authUser = authUserGithub()
+    const authUser = await authUserGithub()
     const { keyword } = params
     const decodeKeyword = decodeURI(keyword)
     const res = await axios.get(`https://setup-in.vercel.app/api/v1/categories/${decodeKeyword}`)

@@ -77,7 +77,7 @@ const DetailPeripheralPage = async ({ params }) => {
                                 </CardHeader>
                                 <CardContent className='grid gap-2.5 p-4'>
                                     <p className="font-normal text-sm">{related.categories}</p>
-                                    <p className="font-semibold text-xl">{related.nama_peripheral.length > 19 ? related.nama_peripheral.substring(0, 26) + "..." : related.nama_peripheral}</p>
+                                    <p className="font-semibold text-sm">{related.nama_peripheral.length > 19 ? related.nama_peripheral.substring(0, 45) + "..." : related.nama_peripheral}</p>
                                     <p className="border border-color-accent2 px-2 text-[10px] text-color-accent2 w-1/2">Pilihan terbaik</p>
                                 </CardContent>
                                 <CardFooter className='px-4'>
